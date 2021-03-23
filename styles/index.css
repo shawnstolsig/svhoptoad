@@ -1,6 +1,11 @@
 @tailwind base;
 
 /* Write your own custom base styles here */
+.cooper-black {
+    font-family: cooper-black-std, serif;
+    font-weight: 400;
+    font-style: normal;
+}
 
 /* Start purging... */
 @tailwind components;
