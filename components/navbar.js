@@ -1,5 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import {useState} from 'react';
+
+import logo from '../public/pippi.svg';
 
 function NavbarButton({text, link = '#', active = false, dropdown = false}) {
     // small screen sizes:
@@ -13,11 +16,11 @@ function NavbarButton({text, link = '#', active = false, dropdown = false}) {
     return dropdown ? (
         <Link href={link}>
             {active ? (
-                <a className={"bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"}>
+                <a className={"bg-gray-900 text-white block px-3 py-2 rounded-md text-themeLightBlue font-medium"}>
                     {text}
                 </a>
             ) : (
-                <a className={"text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"}>
+                <a className={"text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-themeLightBlue font-medium"}>
                     {text}
                 </a>
             )}
@@ -44,7 +47,7 @@ const Navbar = () => {
     const [userMenuOpen, setUserMenuOpen] = useState(false);
 
     return (
-        <header className="bg-themeDarkBlue">
+        <header className="bg-themeDarkBlue shadow-lg">
             <nav className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex items-center justify-between h-16">
 
@@ -90,21 +93,21 @@ const Navbar = () => {
 
                             {/*Menu open: "block", Menu closed: "hidden"*/}
 
-                            <svg
-                                className="hidden h-6 w-6"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
-                            </svg>
+                            {/*<svg*/}
+                            {/*    className="hidden h-6 w-6"*/}
+                            {/*    xmlns="http://www.w3.org/2000/svg"*/}
+                            {/*    fill="none"*/}
+                            {/*    viewBox="0 0 24 24"*/}
+                            {/*    stroke="currentColor"*/}
+                            {/*    aria-hidden="true"*/}
+                            {/*>*/}
+                            {/*    <path*/}
+                            {/*        stroke-linecap="round"*/}
+                            {/*        stroke-linejoin="round"*/}
+                            {/*        stroke-width="2"*/}
+                            {/*        d="M6 18L18 6M6 6l12 12"*/}
+                            {/*    />*/}
+                            {/*</svg>*/}
                         </button>
                     </div>
 
@@ -115,18 +118,19 @@ const Navbar = () => {
                         <div className="flex-shrink-0 flex items-center">
 
                             {/*logo only for medium screen size*/}
-                            <img
-                                className="block lg:hidden h-8 w-auto"
-                                src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                                alt="Workflow"
-                            />
+                            {/*<img*/}
+                            {/*    className="block lg:hidden h-8 w-auto"*/}
+                            {/*    src={logo}*/}
+                            {/*    alt="Workflow"*/}
+                            {/*/>*/}
+                            <Image src={logo} width={80} height={50}/>
                             {/*logo and title for large+ screen size*/}
                             {/*<img*/}
                             {/*    className="hidden lg:block h-8 w-auto"*/}
                             {/*    src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"*/}
                             {/*    alt="Workflow"*/}
                             {/*/>*/}
-                            <h1 className={'hidden lg:block cooper-black text-2xl text-themeKhaki'}>
+                            <h1 className={'hidden lg:block cooper-black text-2xl text-themeLightBlue'}>
                                 SV Hoptoad
                             </h1>
 
