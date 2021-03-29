@@ -6,12 +6,10 @@ export default function Home() {
 
             <Head>
                 <title>SV Hoptoad | Home</title>
-                <link rel="icon" href="/favicon.ico"/>
-                <link rel="stylesheet" href="https://use.typekit.net/ydp7jcv.css"/>
             </Head>
 
             <div>
-                Content
+                Home Content
             </div>
         </>
     );
