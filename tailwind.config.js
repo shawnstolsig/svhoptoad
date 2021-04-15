@@ -12,6 +12,12 @@ module.exports = {
                 themeKhaki: '#FBEEAC',
                 themeDarkBlue: '#383E56',
                 themeOrange: '#FF6015',
+            },
+            fontFamily: {
+                cooperBlack: ['cooper-black-std']
+            },
+            borderRadius: {
+                'xl': '50px'
             }
         }
     }

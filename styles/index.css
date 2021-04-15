@@ -5,17 +5,11 @@
 
 /* Write your own custom base styles here */
 
-
 /* Start purging... */
 @tailwind components;
 /* Stop purging. */
 
 /* Write you own custom component styles here */
-.cooper-black {
-    font-family: cooper-black-std, serif;
-    font-weight: 400;
-    font-style: normal;
-}
 
 /* Start purging... */
 @tailwind utilities;

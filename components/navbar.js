@@ -12,7 +12,7 @@ const StyledLink = ({text, path}) => {
         <Link href={path}>
             <a className={clsx(
                 `p-2`,
-                `cooper-black text-xl`,
+                `text-xl font-bold`,
                 router.pathname === path && 'text-themeOrange',
                 router.pathname !== path && 'text-themeDarkBlue',
             )}>{text}</a>
@@ -32,14 +32,14 @@ const Navbar = () => {
         <nav className={clsx(
             `py-3 px-5 m-3`,
             `flex justify-between items-center`,
-            `shadow-xl rounded-full`,
+            `shadow-xl rounded-xl`,
             `bg-gradient-to-br from-themeLightBlue to-themeLightGreen`,
         )}>
             <div className={`flex items-center`}>
                 <Image src={logo} height={60} width={90}/>
                 <h1 className={clsx(
                     `ml-2`,
-                    `cooper-black text-4xl`,
+                    `font-cooperBlack text-4xl`,
                     `invisible md:visible`
                 )}>SV Hoptoad</h1>
             </div>

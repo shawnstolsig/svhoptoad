@@ -10,7 +10,12 @@ const Layout = ({children}) => {
             `bg-themeDarkBlue`
         )}>
         <Navbar/>
-        <main className={'flex-grow text-center'}>
+        <main className={clsx(
+            'mx-4',
+            `bg-gradient-to-br from-themeLightBlue to-themeLightGreen`,
+            'flex-grow text-center h-auto',
+            'rounded-xl',
+        )}>
             {children}
         </main>
         <Footer/>
