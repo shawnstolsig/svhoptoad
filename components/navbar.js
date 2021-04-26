@@ -14,7 +14,7 @@ const StyledLink = ({text, path}) => {
                 `p-2`,
                 `text-xl font-bold`,
                 router.pathname === path && 'text-themeOrange',
-                router.pathname !== path && 'text-themeDarkBlue',
+                router.pathname !== path && 'text-black',
             )}>{text}</a>
         </Link>
     );
@@ -33,7 +33,7 @@ const Navbar = () => {
             `py-3 px-5 m-3`,
             `flex justify-between items-center`,
             `shadow-xl rounded-xl`,
-            `bg-gradient-to-br from-themeLightBlue to-themeLightGreen`,
+            'bg-blue-200',   // `bg-themeLightBlue`,
         )}>
             <div className={`flex items-center`}>
                 <Image src={logo} height={60} width={90}/>

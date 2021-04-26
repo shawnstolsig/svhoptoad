@@ -6,19 +6,19 @@ import Footer from './footer';
 const Layout = ({children}) => {
     return (
         <body className={clsx(
-            `flex flex-col min-h-screen`,
-            `bg-themeDarkBlue`
+        `flex flex-col min-h-screen`,
+        `bg-blue-900`   //`bg-themeDarkBlue`
         )}>
-        <Navbar/>
-        <main className={clsx(
-            'mx-4',
-            `bg-gradient-to-br from-themeLightBlue to-themeLightGreen`,
-            'flex-grow text-center h-auto',
-            'rounded-xl',
-        )}>
+            <Navbar/>
+            <main className={clsx(
+                'mx-4',
+                `bg-blue-200`,   // `bg-themeLightBlue`,
+                'flex-grow text-center h-auto',
+                'rounded-xl shadow-xl',
+            )}>
             {children}
-        </main>
-        <Footer/>
+            </main>
+            <Footer/>
         </body>
     );
 }
