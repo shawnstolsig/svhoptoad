@@ -6,11 +6,7 @@ import CardActions from './card-actions';
 
 export default function Card({children}){
     return (
-        <div className={clsx(
-            `p-4`,
-            `rounded-xl shadow-xl`,
-            `border-2`
-        )}>
+        <div className={`p-4 rounded-md shadow-lg border m-4`}>
             {children}
         </div>
     )
