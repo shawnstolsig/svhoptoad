@@ -4,7 +4,7 @@ import {useRouter} from 'next/router';
 import clsx from "clsx";
 
 import Border from "./border";
-import logo from '../public/pippi.svg'
+import logo from '../public/world-logo.svg'
 
 const StyledLink = ({text, path}) => {
     const router = useRouter();
