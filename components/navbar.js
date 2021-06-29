@@ -18,12 +18,6 @@ import Border from "./border";
 import logo from '../public/world-logo.svg';
 import logoWithText from '../public/world-with-text-logo.svg';
 
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
-
 const StyledLink = ({text, path, icon: Icon}) => {
     const router = useRouter();
 
