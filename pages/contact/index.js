@@ -8,11 +8,9 @@ const Contact = () => {
             <Head>
                 <title>SV Hoptoad | Contact</title>
             </Head>
-            <Border sides={'all'}>
-                <div className={'bg-white p-2'}>
-                    hi
-                </div>
-            </Border>
+            <div>
+                Contact page
+            </div>
         </>
     );
 }
