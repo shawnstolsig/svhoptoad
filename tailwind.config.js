@@ -28,7 +28,14 @@ module.exports = {
             //     'xl': '50px'
             // }
         }
-    }
+    },
+    variants: {
+        extend: {
+            backgroundColor: ['disabled'],
+            cursor: ['disabled'],
+            textColor: ['disabled'],
+        }
+    },
 };
 
 // themeLightBlue: '#D0E8F2',
