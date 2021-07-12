@@ -20,8 +20,8 @@ const StyledLink = ({text, path, icon: Icon}) => {
 
     return (
         <div className={clsx(
-            'flex items-center mx-2',
-            router.pathname === path && 'border-b-2 border-cyan-900'
+            'flex items-center mx-2 nav-hover',
+            router.pathname === path && 'border-b-2 border-cyan-900 scale-110'
         )}>
             <Link href={path}>
                 <Icon className={'h-6 w-6 cursor-pointer'}/>

@@ -8,7 +8,7 @@ const Contact = () => {
             <Head>
                 <title>SV Hoptoad | Contact</title>
             </Head>
-            <div>
+            <div className={''}>
                 Contact page
             </div>
         </>
