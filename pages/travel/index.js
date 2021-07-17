@@ -14,22 +14,35 @@ const Travel = () => {
             <Head>
                 <title>SV Hoptoad | Travel</title>
             </Head>
-            <div className={`grid grid-cols-5 gap-4`}>
-                {aboardHoptoads.map(({title, path}, index) => (
-                    <Card key={index}>
-                        <Card.Title>
-                            {title}
-                        </Card.Title>
-                        <Card.Content>
-                            <a
-                                href={path}
-                            >
-                                Read now...
-                            </a>
-                        </Card.Content>
-                    </Card>
-                ))}
-            </div>
+
+            {/*Aboard Hoptoad Section*/}
+            <section className={`flex flex-col items-center border-2 p-2 w-10/12 rounded m-auto`}>
+                <h1 className={`text-3xl font-cooperBlack`}>
+                    Aboard Hoptoad
+                </h1>
+
+                <p className={``}>
+                    A series of newsletters written by our kids (Jeff and Shawn) during our circumnavigation, between ages 10 and 15.
+                </p>
+
+                <div className={`flex flex-wrap justify-center`}>
+                    {aboardHoptoads.map(({title, path}, index) => (
+                        <Card key={index} classes={`w-full md:w-60`}>
+                            <Card.Title>
+                                {title}
+                            </Card.Title>
+                            <Card.Content>
+                                <a
+                                    href={path}
+                                    target={`_blank`}
+                                >
+                                    Read...
+                                </a>
+                            </Card.Content>
+                        </Card>
+                    ))}
+                </div>
+            </section>
         </>
     );
 }
