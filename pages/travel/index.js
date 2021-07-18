@@ -1,14 +1,15 @@
 import Head from "next/head";
-import Card from "../../components/card";
+import Image from "next/image";
+
+import {
+    ExternalLinkIcon,
+} from '@heroicons/react/outline';
+
+import {
+    aboardHoptoadArticles
+} from "../../content/travel";
 
 const Travel = () => {
-    const aboardHoptoads = [
-        {title: 'September 5, 1997', path: 'https://storage.cloud.google.com/svhoptoad-media/aboard-hoptoad/5-sep-1997.pdf'},
-        {title: 'November 30, 1997', path: 'https://storage.cloud.google.com/svhoptoad-media/aboard-hoptoad/30-nov-1997.pdf'},
-        {title: 'December 8, 1998', path: 'https://storage.cloud.google.com/svhoptoad-media/aboard-hoptoad/8-dec-1998.pdf'},
-        {title: 'July 15, 1999', path: 'https://storage.cloud.google.com/svhoptoad-media/aboard-hoptoad/15-jul-1999.pdf'},
-        {title: 'December 6, 1999', path: 'https://storage.cloud.google.com/svhoptoad-media/aboard-hoptoad/6-dec-1999.pdf'},
-    ]
     return (
         <>
             <Head>
@@ -16,35 +17,38 @@ const Travel = () => {
             </Head>
 
             {/*Aboard Hoptoad Section*/}
-            <section className={`flex flex-col items-center border-2 p-2 w-10/12 rounded m-auto`}>
-                <h1 className={`text-3xl font-cooperBlack`}>
-                    Aboard Hoptoad
-                </h1>
+            <section className={`card m-4 md:w-10/12 md:m-auto grid grid-cols-1 md:grid-cols-3 gap-2 text-center`}>
 
-                <p className={``}>
-                    A series of newsletters written by our kids (Jeff and Shawn) during our circumnavigation, between ages 10 and 15.
-                </p>
+                <div className={`col-span-2 m-2`}>
+                    <h1 className={`text-3xl font-cooperBlack`}>
+                        {aboardHoptoadArticles.title}
+                    </h1>
 
-                <div className={`flex flex-wrap justify-center`}>
-                    {aboardHoptoads.map(({title, path}, index) => (
-                        <Card key={index} classes={`w-full md:w-60`}>
-                            <Card.Title>
-                                {title}
-                            </Card.Title>
-                            <Card.Content>
-                                <a
-                                    href={path}
-                                    target={`_blank`}
-                                >
-                                    Read...
-                                </a>
-                            </Card.Content>
-                        </Card>
-                    ))}
+                    <p>
+                        {aboardHoptoadArticles.description}
+                    </p>
+
+                    <div className={`flex flex-wrap justify-center`}>
+                        {aboardHoptoadArticles.articles.map(({title, path}, index) => (
+                            <a href={path} target={`_blank`} className={`m-2 w-full md:w-60`} key={index}>
+                                <button className={`button w-full`}>
+                                    <p>{title}</p>
+                                    <ExternalLinkIcon className={'w-5 h-5 text-gray-500 ml-2'}/>
+                                </button>
+                            </a>
+                        ))}
+                    </div>
+
                 </div>
+
+                <div className={`relative hidden md:block`}>
+                    <Image src={aboardHoptoadArticles.previewImage} layout={'fill'} objectFit={`cover`}/>
+                </div>
+
             </section>
+
         </>
     );
-}
+};
 
 export default Travel;

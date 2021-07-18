@@ -9,6 +9,25 @@
 
 /* Start purging... */
 @tailwind components;
+
+.card {
+    @apply rounded-md shadow-lg border overflow-hidden
+}
+.card-title {
+    @apply font-cooperBlack text-xl mb-1
+}
+.card-content {
+    @apply my-1
+}
+.card-actions {
+    @apply mt-1
+}
+
+.button {
+    @apply p-2 rounded-md border text-center font-cooperBlack hover:shadow flex items-center justify-center hover:bg-cyan-100
+}
+
+
 /* Stop purging. */
 
 /* Write you own custom component styles here */
