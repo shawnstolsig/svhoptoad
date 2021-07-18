@@ -12,7 +12,7 @@ class MyDocument extends Document {
                 <Head>
                     <link rel="icon" href="/favicon.ico"/>
                 </Head>
-                <body>
+                <body className={'overflow-auto'}>
                 <Main />
                 <NextScript />
                 </body>
