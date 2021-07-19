@@ -10,6 +10,10 @@
 /* Start purging... */
 @tailwind components;
 
+.page {
+    @apply max-w-7xl m-auto
+}
+
 .card {
     @apply rounded-md shadow-lg border overflow-hidden
 }
