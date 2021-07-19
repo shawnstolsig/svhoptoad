@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 import {
     XIcon,
 } from '@heroicons/react/outline';
@@ -10,7 +10,7 @@ import {
     aboardHoptoadArticles
 } from "../../content/travel";
 
-function AboardHoptoadArticle({title,imageSource}) {
+function AboardHoptoadArticle({title,imageSource,pageCount}) {
     const [isOpen, setIsOpen] = useState(false)
 
     const closeModal = () => setIsOpen(false)
@@ -22,58 +22,39 @@ function AboardHoptoadArticle({title,imageSource}) {
                 <p>{title}</p>
             </button>
 
-            <Transition appear show={isOpen} as={Fragment}>
+            <Transition
+                show={isOpen}
+                enter="transition duration-100 ease-out"
+                enterFrom="transform scale-95 opacity-0"
+                enterTo="transform scale-100 opacity-100"
+                leave="transition duration-75 ease-out"
+                leaveFrom="transform scale-100 opacity-100"
+                leaveTo="transform scale-95 opacity-0"
+            >
                 <Dialog
-                    as="div"
-                    className="fixed inset-0 z-10 overflow-y-auto"
+                    as={`div`}
+                    className={`fixed inset-0 overflow-y-auto`}
                     onClose={closeModal}
                 >
-                    <div className="min-h-screen min-w-screen px-4 text-center">
-                        <Transition.Child
-                            as={Fragment}
-                            enter="ease-out duration-300"
-                            enterFrom="opacity-0"
-                            enterTo="opacity-100"
-                            leave="ease-in duration-200"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                        >
-                            <Dialog.Overlay className="fixed inset-0" />
-                        </Transition.Child>
+                    <div className="text-center flex flex-col">
 
-                        {/* This element is to trick the browser into centering the modal contents. */}
-                        {/*<span*/}
-                        {/*    className="inline-block h-screen align-middle"*/}
-                        {/*    aria-hidden="true"*/}
-                        {/*>*/}
-                        {/*  &#8203;*/}
-                        {/*</span>*/}
+                        <Dialog.Overlay className={`fixed inset-0 z-10 bg-black opacity-50`}/>
 
-                        <Transition.Child
-                            as={Fragment}
-                            enter="ease-out duration-300"
-                            enterFrom="opacity-0 scale-95"
-                            enterTo="opacity-100 scale-100"
-                            leave="ease-in duration-200"
-                            leaveFrom="opacity-100 scale-100"
-                            leaveTo="opacity-0 scale-95"
-                        >
-                            <div className="relative w-full min-h-screen p-6 my-8 text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl overflow-auto">
-                               <div className={`flex justify-between`}>
-                                    <Dialog.Title
-                                        as="h3"
-                                        className="text-lg font-medium leading-6 text-gray-900"
-                                    >
-                                        {title}
-                                    </Dialog.Title>
-                                    <button onClick={closeModal} className={'bg-gray-200'}>
-                                        close
-                                        {/*<XIcon className={`w-5 h-5`} />*/}
-                                    </button>
-                               </div>
-                                <Image src={imageSource} layout={'fill'} objectFit={'fill'} />
+                        <div className={`m-auto w-full sm:w-5/6 lg:w-4/6 sm:h-4/6 bg-cyan-300 rounded p-4 z-20 sm:mt-4`}>
+                            <div className={`flex justify-between items-center mb-4`}>
+                                <div className={`flex items-end`}>
+                                    <Dialog.Title className={`hidden`}>Aboard Hoptoad</Dialog.Title>
+                                    <Dialog.Description className={`text-xl font-cooperBlack`}>{title}</Dialog.Description>
+                                </div>
+                                <button onClick={closeModal} className={'button h-10 w-10'}>
+                                    <XIcon className={`h-5 w-5`} />
+                                </button>
                             </div>
-                        </Transition.Child>
+                            <div className={`text-center`}>
+                                <Image src={imageSource} layout={'intrinsic'} width={1200} height={pageCount*1584}/>
+                            </div>
+                        </div>
+
                     </div>
                 </Dialog>
             </Transition>
@@ -102,8 +83,8 @@ const Travel = () => {
                     </p>
 
                     <div className={`flex flex-wrap justify-center`}>
-                        {aboardHoptoadArticles.articles.map(({title, path}, index) => (
-                            <AboardHoptoadArticle title={title} imageSource={path} key={index} />
+                        {aboardHoptoadArticles.articles.map(({title, path, pages}, index) => (
+                            <AboardHoptoadArticle title={title} imageSource={path} pageCount={pages} key={index} />
                         ))}
                     </div>
 
