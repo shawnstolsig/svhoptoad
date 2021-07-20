@@ -43,7 +43,7 @@ const Navbar = () => {
     ];
 
     return (
-        <Border sides={'b'} margins={`mb-2`}>
+        <Border sides={'b'} margins={`mb-4`}>
             <nav className={`py-3 px-2 shadow-lg bg-gradient-to-br from-cyan-200 to-cyan-100`}>
 
                 {/* Small screen sizes */}
