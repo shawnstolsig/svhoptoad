@@ -5,4 +5,5 @@ export const contactForm = {
     email: `svhoptoad@___.com`,
     instagramLink: `https://www.instagram.com/svhoptoad/`,
     facebookLink: `https://www.facebook.com/margie.stolsig`,
+    maxMessageLength: 500,
 }

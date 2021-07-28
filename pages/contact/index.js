@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MailIcon, MenuIcon, PhoneIcon, XIcon } from '@heroicons/react/outline'
 import emailjs from 'emailjs-com';
@@ -9,18 +9,41 @@ import {
 } from '../../content/contact'
 
 function ContactForm() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [boat, setBoat] = useState('');
+    const [message, setMessage] = useState('');
+    const [subject, setSubject] = useState('');
+
+    const clearForm = () => {
+        setName('')
+        setEmail('')
+        setPhone('')
+        setBoat('')
+        setMessage('')
+        setSubject('')
+    }
 
     const sendEmail = async (event) => {
         event.preventDefault();
-        console.log(`sending email`)
         try {
-            const result = await emailjs.sendForm(
+            const result = await emailjs.send(
                 process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
                 'multiuse_template',
-                event.target,
+                {
+                    name,
+                    email,
+                    phone,
+                    boat,
+                    message,
+                    subject,
+                    website: 'svhoptoad.com'
+                },
                 process.env.NEXT_PUBLIC_EMAILJS_USER_ID
             );
-            // TODO: clear form, show success message
+            alert(`Success, clearing form`)
+            clearForm()
         } catch (error) {
             console.log(`Error sending email:`,error);
         }
@@ -31,6 +54,7 @@ function ContactForm() {
             <div className="relative bg-white shadow-xl rounded overflow-hidden">
 
                 <div className="grid grid-cols-1 lg:grid-cols-3">
+
                     {/* Contact Form Sidebar */}
                     <div className="relative overflow-hidden py-10 px-6 bg-gradient-to-b from-cyan-500 to-cyan-600 sm:px-10 xl:p-12">
                         {/* Decorative angle backgrounds */}
@@ -196,6 +220,8 @@ function ContactForm() {
                                         id="name"
                                         autoComplete="name"
                                         className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-cyan-500 focus:border-cyan-500 border-warm-gray-300 rounded-md"
+                                        onChange={event => setName(event.target.value)}
+                                        value={name}
                                     />
                                 </div>
                             </div>
@@ -215,6 +241,8 @@ function ContactForm() {
                                         id="boat"
                                         className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-cyan-500 focus:border-cyan-500 border-warm-gray-300 rounded-md"
                                         aria-describedby="boat-optional"
+                                        onChange={event => setBoat(event.target.value)}
+                                        value={boat}
                                     />
                                 </div>
                             </div>
@@ -229,6 +257,8 @@ function ContactForm() {
                                         type="email"
                                         autoComplete="email"
                                         className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-cyan-500 focus:border-cyan-500 border-warm-gray-300 rounded-md"
+                                        onChange={event => setEmail(event.target.value)}
+                                        value={email}
                                     />
                                 </div>
                             </div>
@@ -249,6 +279,8 @@ function ContactForm() {
                                         autoComplete="tel"
                                         className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-teal-500 focus:border-teal-500 border-warm-gray-300 rounded-md"
                                         aria-describedby="phone-optional"
+                                        onChange={event => setPhone(event.target.value)}
+                                        value={phone}
                                     />
                                 </div>
                             </div>
@@ -262,6 +294,8 @@ function ContactForm() {
                                         name="subject"
                                         id="subject"
                                         className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-cyan-500 focus:border-cyan-500 border-warm-gray-300 rounded-md"
+                                        onChange={event => setSubject(event.target.value)}
+                                        value={subject}
                                     />
                                 </div>
                             </div>
@@ -270,34 +304,43 @@ function ContactForm() {
                                     <label htmlFor="message" className="block text-sm font-medium text-warm-gray-900">
                                         Message
                                     </label>
-                                    <span id="message-max" className="text-sm text-warm-gray-500">
-                                      Max. 500 characters
-                                    </span>
+                                    {message.length === 0 &&
+                                        <span id="message-max" className="text-sm text-warm-gray-500">
+                                            Max. {contactForm.maxMessageLength} characters
+                                        </span>
+                                    }
+                                    {message.length > 0 && message.length < contactForm.maxMessageLength &&
+                                        <span id="message-max" className="text-sm text-warm-gray-500">
+                                            {contactForm.maxMessageLength - message.length} remaining
+                                        </span>
+                                    }
+                                    {message.length === contactForm.maxMessageLength &&
+                                    <span id="message-max" className="text-sm text-red-500">
+                                            0 remaining
+                                        </span>
+                                    }
                                 </div>
                                 <div className="mt-1">
-                                    {/*TODO: enforce character limit*/}
                                     <textarea
                                         id="message"
                                         name="message"
                                         rows={4}
                                         className="py-3 px-4 block w-full shadow-sm text-warm-gray-900 focus:ring-cyan-500 focus:border-cyan-500 border border-warm-gray-300 rounded-md"
                                         aria-describedby="message-max"
-                                        defaultValue={''}
+                                        onChange={event => {
+                                            if(event.target.value.length > 500) return;
+                                            setMessage(event.target.value)
+                                        }}
+                                        value={message}
                                     />
                                 </div>
                             </div>
-                            <input
-                                type="text"
-                                name="website"
-                                id="website"
-                                defaultValue={`svhoptoad.com`}
-                                className="hidden"
-                            />
                             <div className="sm:col-span-2 sm:flex sm:justify-end">
-                                {/*TODO: disable submit until all required fields met.  add form validation. */}
+                                {/*TODO: add popup with missing fields? */}
                                 <button
                                     type="submit"
-                                    className="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-cyan-500 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 sm:w-auto"
+                                    className="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-cyan-500 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 sm:w-auto disabled:bg-gray-300"
+                                    disabled={!name || !email || !subject || !message}
                                 >
                                     Submit
                                 </button>
