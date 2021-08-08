@@ -40,7 +40,7 @@ function AboardHoptoadArticle({title,imageSource,pageCount}) {
 
                         <Dialog.Overlay className={`fixed inset-0 z-10 bg-black opacity-50`}/>
 
-                        <div className={`m-auto w-full sm:w-5/6 lg:w-4/6 sm:h-4/6 bg-cyan-300 rounded p-4 z-20 sm:mt-4`}>
+                        <div className={`m-auto w-full sm:w-5/6 lg:w-4/6 sm:h-4/6 bg-cyan-200 rounded p-4 z-20 sm:mt-4`}>
                             <div className={`flex justify-between items-center mb-4`}>
                                 <div className={`flex items-end`}>
                                     <Dialog.Title className={`hidden`}>Aboard Hoptoad</Dialog.Title>

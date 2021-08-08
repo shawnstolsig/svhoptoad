@@ -1,20 +1,22 @@
-import Head from "next/head";
-import { Fragment, useState } from 'react'
-import { Popover, Transition } from '@headlessui/react'
-import { MailIcon, MenuIcon, PhoneIcon, XIcon } from '@heroicons/react/outline'
-import emailjs from 'emailjs-com';
+import Head from "next/head"
+import { useRouter } from "next/router"
+import { useState } from 'react'
+import { MailIcon, PhoneIcon } from '@heroicons/react/outline'
+import emailjs from 'emailjs-com'
 
 import {
     contactForm
 } from '../../content/contact'
 
 function ContactForm() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [boat, setBoat] = useState('');
-    const [message, setMessage] = useState('');
-    const [subject, setSubject] = useState('');
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
+    const [boat, setBoat] = useState('')
+    const [message, setMessage] = useState('')
+    const [subject, setSubject] = useState('')
+
+    const router = useRouter()
 
     const clearForm = () => {
         setName('')
@@ -42,8 +44,9 @@ function ContactForm() {
                 },
                 process.env.NEXT_PUBLIC_EMAILJS_USER_ID
             );
-            alert(`Success, clearing form`)
+            alert(`Message sent!`)
             clearForm()
+            await router.push('/')
         } catch (error) {
             console.log(`Error sending email:`,error);
         }
@@ -361,7 +364,7 @@ const Contact = () => {
             </Head>
             <ContactForm />
         </>
-    );
+    )
 }
 
-export default Contact;
+export default Contact

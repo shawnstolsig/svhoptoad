@@ -27,7 +27,7 @@ export default function NavMenu({links}) {
             >
 
                 <Menu.Items
-                    className="absolute right-0 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    className="absolute right-0 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
                 >
                     <div className="p-1">
 
