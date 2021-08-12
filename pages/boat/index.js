@@ -3,7 +3,13 @@ import Image from "next/image"
 import { useRouter } from 'next/router'
 import clsx from "clsx"
 import { useState } from 'react'
+import { Disclosure } from '@headlessui/react'
+import {
+    MinusSmIcon,
+    PlusSmIcon,
+} from '@heroicons/react/outline'
 import { CameraIcon } from '@heroicons/react/solid'
+
 
 import { boats } from "../../content/boat"
 
@@ -90,21 +96,86 @@ function BoatSpecCard({boat}) {
 
     return (
         <div className="bg-white border shadow overflow-hidden sm:rounded-lg">
-            <div className="px-4 py-5 sm:px-6">
+            <div className="py-5 px-6">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">Specifications</h3>
                 {/*<p className="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>*/}
             </div>
             <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
-                <dl className="sm:divide-y sm:divide-gray-200">
+                <dl className="divide-y divide-gray-200">
                     {specs.map(({label, content}) => (
-                        <div className="py-1 sm:py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">{label}</dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{content}</dd>
+                        <div className="py-3 grid grid-cols-3 gap-4 px-6">
+                            <dt className="text-sm font-medium text-cyan-600">{label}</dt>
+                            <dd className="text-sm text-gray-900 mt-0 col-span-2">{content}</dd>
                         </div>
                     ))}
                 </dl>
             </div>
         </div>
+    )
+}
+
+function BoatGear({gear}){
+    return (
+        <>
+            {/*Gear heading*/}
+            <div className="pb-5 border-b border-gray-200 px-4 sm:px-20 md:px-40">
+                <h3 className="text-lg leading-6 font-medium text-gray-900">Equipment</h3>
+                <p className="mt-2 max-w-4xl text-sm text-gray-500">
+                    Information about some of the most important (or favorite!) pieces of gear on Hoptoad.
+                </p>
+            </div>
+
+            {/*Gear accordions*/}
+            <div className="border-t divide-y divide-gray-200">
+                {gear.map(({type, name, description, url, image}) => (
+                    <Disclosure as="div" key={type}>
+                        {({ open }) => (
+                            <>
+                                <h3>
+                                    <Disclosure.Button className={"group relative w-full py-6 px-4 sm:px-20 md:px-40 flex justify-between items-center text-left hover:bg-gray-100"}>
+                                        <span
+                                            className={clsx(
+                                                open ? 'text-cyan-600' : 'text-gray-900',
+                                                'text-sm font-medium'
+                                            )}
+                                        >
+                                          {type}
+                                        </span>
+                                        <span className="ml-6 flex items-center">
+                                            {open ? (
+                                                <MinusSmIcon
+                                                    className="block h-6 w-6 text-cyan-400 group-hover:text-cyan-500"
+                                                    aria-hidden="true"
+                                                />
+                                            ) : (
+                                                <PlusSmIcon
+                                                    className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                                    aria-hidden="true"
+                                                />
+                                            )}
+                                        </span>
+                                    </Disclosure.Button>
+                                </h3>
+                                <Disclosure.Panel as="div" className={"pb-6 prose prose-sm mx-auto"}>
+                                    <div className="sm:flex">
+                                        <div className="mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
+                                           <Image src={image} height={250} width={250} className={'rounded'}/>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-lg font-bold">{name}</h4>
+                                            <p className="mt-1">
+                                                {description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Disclosure.Panel>
+                            </>
+                        )}
+                    </Disclosure>
+                ))}
+            </div>
+
+        </>
     )
 }
 
@@ -237,17 +308,25 @@ function BoatDetails({boat}){
                             {/*    pellentesque. Blandit amet, sed aenean erat arcu morbi.*/}
                             {/*</p>*/}
                         </div>
+
                     </div>
-
                 </div>
-
             </div>
-            <div className={`max-w-5xl mx-auto my-4`}>
+
+            {/*Boat specs*/}
+            <div className={`max-w-xl mx-auto my-4`}>
                 <BoatSpecCard boat={boat} />
+            </div>
+
+            {/*Gear (if available)*/}
+            <div className={`mx-auto my-4`}>
+                {boat.gear && <BoatGear gear={boat.gear} />}
             </div>
         </div>
     )
 }
+
+
 
 const Boat = () => {
     const router = useRouter()
