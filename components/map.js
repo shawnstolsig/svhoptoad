@@ -70,7 +70,5 @@ function Map(){
         </div>
     );
 }
-//test
-
 
 export default Map
