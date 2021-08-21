@@ -38,7 +38,7 @@ const Navbar = () => {
         {text: 'Home', path: '/', icon: HomeIcon},
         {text: 'Boat', path: '/boat', icon: IdentificationIcon},
         {text: 'Travel', path: '/travel', icon: GlobeIcon},
-        {text: 'Blog', path: '/blog', icon: NewspaperIcon},
+        // {text: 'Blog', path: '/blog', icon: NewspaperIcon},
         {text: 'Contact', path: '/contact', icon: AtSymbolIcon},
     ];
 

@@ -13,8 +13,8 @@ export default function Home() {
             </Head>
 
             <section className="lg:relative">
-                <div className="mx-auto max-w-7xl w-full pt-16 pb-20 text-center lg:py-36 lg:text-left">
-                    <div className="px-4 lg:w-1/2 sm:px-8 xl:pr-16">
+                <div className="mx-auto w-full pt-16 pb-20 text-center lg:py-36 lg:text-left">
+                    <div className="px-8 lg:w-1/2 sm:px-8 xl:pr-16">
                         <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
                             <span className="block">{intro.title1}</span>{' '}
                             <span className="block text-cyan-600 ">{intro.title2}</span>

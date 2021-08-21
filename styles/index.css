@@ -18,7 +18,7 @@
     @apply rounded-md shadow-lg border overflow-hidden
 }
 .card-title {
-    @apply font-cooperBlack text-xl mb-1
+    @apply text-xl mb-1
 }
 .card-content {
     @apply my-1
@@ -28,7 +28,7 @@
 }
 
 .button {
-    @apply p-2 rounded-md border text-center font-cooperBlack hover:shadow flex items-center justify-center hover:bg-cyan-100
+    @apply p-2 rounded-md border text-center hover:shadow flex items-center justify-center hover:bg-cyan-100
 }
 
 

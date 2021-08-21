@@ -10,3 +10,7 @@ export const aboardHoptoadArticles = {
         {title: 'December 6, 1999', pages: 2, path: 'https://res.cloudinary.com/svhoptoad/image/upload/v1628738902/travel/aboard-hoptoad/6-dec-1999_acm6p8.jpg'},
     ]
 }
+
+export const tripDetails = {
+
+}
