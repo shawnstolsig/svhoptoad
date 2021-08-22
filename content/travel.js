@@ -12,5 +12,5 @@ export const aboardHoptoadArticles = {
 }
 
 export const tripDetails = {
-
+    mapCaption: `Our circumnavigation route from 1997 - 2002`
 }

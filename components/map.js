@@ -2,6 +2,7 @@ import mapboxgl from 'mapbox-gl'
 import { useRef, useState, useEffect } from 'react'
 import { PlusIcon as PlusIconSolid, MinusIcon as MinusIconSolid } from '@heroicons/react/solid'
 
+import circumnavigation from '../content/circumnavigation.json'
 
 function Map(){
     const mapContainer = useRef(null);
@@ -20,6 +21,23 @@ function Map(){
             center: [lng, lat],
             zoom: zoom,
             attributionControl: false
+        });
+        // add circumnavigation path
+        map.current.on('load', () => {
+            map.current.addSource('route', circumnavigation );
+            map.current.addLayer({
+                'id': 'route',
+                'type': 'line',
+                'source': 'route',
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': 'rgb(255,100,100)',
+                    'line-width': 2
+                }
+            });
         });
     });
 

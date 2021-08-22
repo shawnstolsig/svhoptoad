@@ -7,7 +7,8 @@ import {
 } from '@heroicons/react/outline';
 
 import {
-    aboardHoptoadArticles
+    aboardHoptoadArticles,
+    tripDetails
 } from "../../content/travel";
 import Map from '../../components/map'
 
@@ -227,7 +228,7 @@ const Travel = () => {
                             {/*    height={873}*/}
                             {/*/>*/}
                             <Map />
-                            <figcaption>Sagittis scelerisque nulla cursus in enim consectetur quam.</figcaption>
+                            <figcaption>{tripDetails.mapCaption}</figcaption>
                         </figure>
                         <h2>Everything you need to get up and running</h2>
                         <p>
