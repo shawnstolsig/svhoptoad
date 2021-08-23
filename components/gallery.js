@@ -1,11 +1,16 @@
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
-import { XIcon, CheckIcon } from "@heroicons/react/outline";
+import {
+    XIcon,
+    CheckIcon,
+    ChevronRightIcon,
+    ChevronLeftIcon
+} from "@heroicons/react/outline";
 import { Fragment, useState } from 'react'
 
 function Gallery({files, className}){
     const [isOpen, setIsOpen] = useState(false)
-    const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(1)
+    const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0)
 
     const closeModal = () => {
         setIsOpen(false)
@@ -13,6 +18,14 @@ function Gallery({files, className}){
     const openModal = (index) => {
         setSelectedPhotoIndex(index)
         setIsOpen(true)
+    }
+
+    const nextPhoto = () => {
+        selectedPhotoIndex === files.length-1 ? setSelectedPhotoIndex(0) : setSelectedPhotoIndex(selectedPhotoIndex + 1)
+    }
+
+    const prevPhoto = () => {
+        selectedPhotoIndex === 0 ? setSelectedPhotoIndex(files.length-1) : setSelectedPhotoIndex(selectedPhotoIndex - 1)
     }
 
     return (
@@ -94,6 +107,12 @@ function Gallery({files, className}){
 
                         <button onClick={closeModal} className={'absolute button h-10 w-10 z-50 top-4 right-4'}>
                             <XIcon className={`h-5 w-5`} />
+                        </button>
+                        <button onClick={prevPhoto} className={'absolute button h-10 w-10 z-50 top-1/2 left-4'}>
+                            <ChevronLeftIcon className={`h-5 w-5`} />
+                        </button>
+                        <button onClick={nextPhoto} className={'absolute button h-10 w-10 z-50 top-1/2 right-4'}>
+                            <ChevronRightIcon className={`h-5 w-5`} />
                         </button>
 
                         {/*Dialog Content*/}
