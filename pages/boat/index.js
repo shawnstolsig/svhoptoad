@@ -12,6 +12,7 @@ import { CameraIcon } from '@heroicons/react/solid'
 
 
 import { boats } from "../../content/boat"
+import Gallery from "../../components/gallery";
 
 function BoatSelector({ boat, setBoat }) {
     // const router = useRouter()
@@ -184,6 +185,7 @@ function BoatDetails({boat}){
         header,
         description,
         photos,
+        gallery,
         years: {
             start,
             end
@@ -312,6 +314,9 @@ function BoatDetails({boat}){
                     </div>
                 </div>
             </div>
+
+            {/*Gallery*/}
+            {gallery && <Gallery files={gallery} className={'px-4'}/>}
 
             {/*Boat specs*/}
             <div className={`max-w-xl mx-auto my-4`}>
