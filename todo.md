@@ -1,5 +1,7 @@
 - [ ] create a floating [banner](https://tailwindui.com/components/marketing/elements/banners) component, use this for confirming when an email is sent
-- [ ] create cards for the most recent instagram posts
-- [ ] route map for previous trip
+- [ ] create instagram feed
+- [x] route map for previous trip
+- [ ] route map for future trip
 - [ ] predict winds map/placeholder
-- [ ] photo gallery
+- [x] photo gallery
+- [ ] add in gear

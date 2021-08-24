@@ -7,9 +7,9 @@ import { Disclosure } from '@headlessui/react'
 import {
     MinusSmIcon,
     PlusSmIcon,
+    ExternalLinkIcon
 } from '@heroicons/react/outline'
 import { CameraIcon } from '@heroicons/react/solid'
-
 
 import { boats } from "../../content/boat"
 import Gallery from "../../components/gallery";
@@ -19,24 +19,24 @@ function BoatSelector({ boat, setBoat }) {
 
     return (
         <div className={'max-w-5xl mx-auto'}>
-            <div className="sm:hidden">
-                <label htmlFor="boat-tabs" className="sr-only">
-                    Select a tab
-                </label>
-                <select
-                    id="boat-tabs"
-                    name="boat-tabs"
-                    className="block w-3/4 focus:ring-cyan-500 focus:border-cyan-500 border-gray-300 rounded-md mx-auto"
-                    onChange={(event) => setBoat(event.target.value)}
-                    value={boat}
-                >
-                    {boats.map(({design, href}) => (
-                        <option key={design} value={href}>{design}</option>
-                    ))}
-                </select>
-            </div>
-            <div className="hidden sm:block">
-                <nav className="relative z-0 rounded-lg shadow flex divide-x divide-gray-200" aria-label="Boat Tabs">
+            {/*<div className="sm:hidden">*/}
+            {/*    <label htmlFor="boat-tabs" className="sr-only">*/}
+            {/*        Select a tab*/}
+            {/*    </label>*/}
+            {/*    <select*/}
+            {/*        id="boat-tabs"*/}
+            {/*        name="boat-tabs"*/}
+            {/*        className="block w-3/4 focus:ring-cyan-500 focus:border-cyan-500 border-gray-300 rounded-md mx-auto"*/}
+            {/*        onChange={(event) => setBoat(event.target.value)}*/}
+            {/*        value={boat}*/}
+            {/*    >*/}
+            {/*        {boats.map(({design, href}) => (*/}
+            {/*            <option key={design} value={href}>{design}</option>*/}
+            {/*        ))}*/}
+            {/*    </select>*/}
+            {/*</div>*/}
+            <div>
+                <nav className="relative z-0 lg:rounded-lg shadow flex divide-x divide-gray-200" aria-label="Boat Tabs">
                     {boats.map(({design, href}, tabIdx) => (
                         <button
                             key={design}
@@ -91,8 +91,8 @@ function BoatSpecCard({boat}) {
         { label: 'Length', content: `${length} ft`},
         { label: 'Beam', content: `${beam} ft`},
         { label: 'Draft', content: `${draft} ft`},
-        { label: 'Cruising Speed', content: `${cruising} knots (${(cruising * 1.15).toFixed(1)} mph)`},
-        { label: 'Max Speed', content: `${max} knots (${(max * 1.15).toFixed(1)} mph)`},
+        { label: 'Cruising Speed', content: `${cruising}`},
+        { label: 'Max Speed', content: `${max}`},
     ]
 
     return (
@@ -104,7 +104,7 @@ function BoatSpecCard({boat}) {
             <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
                 <dl className="divide-y divide-gray-200">
                     {specs.map(({label, content}) => (
-                        <div className="py-3 grid grid-cols-3 gap-4 px-6">
+                        <div className="py-3 grid grid-cols-3 gap-4 px-6" key={label}>
                             <dt className="text-sm font-medium text-cyan-600">{label}</dt>
                             <dd className="text-sm text-gray-900 mt-0 col-span-2">{content}</dd>
                         </div>
@@ -119,10 +119,10 @@ function BoatGear({gear}){
     return (
         <>
             {/*Gear heading*/}
-            <div className="pb-5 border-b border-gray-200 px-4 sm:px-20 md:px-40">
+            <div className="pb-5 border-b border-gray-200 px-4 sm:px-20 md:px-40 mt-4">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">Equipment</h3>
                 <p className="mt-2 max-w-4xl text-sm text-gray-500">
-                    Information about some of the most important (or favorite!) pieces of gear on Hoptoad.
+                    The most important (or favorite!) pieces of gear on Hoptoad.
                 </p>
             </div>
 
@@ -133,7 +133,7 @@ function BoatGear({gear}){
                         {({ open }) => (
                             <>
                                 <h3>
-                                    <Disclosure.Button className={"group relative w-full py-6 px-4 sm:px-20 md:px-40 flex justify-between items-center text-left hover:bg-gray-100"}>
+                                    <Disclosure.Button className={"group relative w-full py-4 px-4 sm:px-20 md:px-40 flex justify-between items-center text-left hover:bg-gray-100"}>
                                         <span
                                             className={clsx(
                                                 open ? 'text-cyan-600' : 'text-gray-900',
@@ -157,16 +157,18 @@ function BoatGear({gear}){
                                         </span>
                                     </Disclosure.Button>
                                 </h3>
-                                <Disclosure.Panel as="div" className={"pb-6 prose prose-sm mx-auto"}>
-                                    <div className="sm:flex">
-                                        <div className="mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
-                                           <Image src={image} height={250} width={250} className={'rounded'}/>
-                                        </div>
-                                        <div>
-                                            <h4 className="text-lg font-bold">{name}</h4>
-                                            <p className="mt-1">
+                                <Disclosure.Panel as="div" className={"py-2 mx-auto"}>
+                                    <div className="flex justify-center">
+                                       <Image src={image} className={'rounded'} height={300} width={300} objectFit={'contain'}/>
+                                        <div className={'flex flex-col justify-center ml-4'}>
+                                            <h4 className="text-xl font-bold mt-0">{name}</h4>
+                                            <p>
                                                 {description}
                                             </p>
+                                            <a href={url} className={'align-middle text-cyan-600'}>
+                                                more info
+                                                <ExternalLinkIcon className={'inline h-4 w-4 ml-1 '} />
+                                            </a>
                                         </div>
                                     </div>
                                 </Disclosure.Panel>
@@ -193,26 +195,26 @@ function BoatDetails({boat}){
     } = boat
     return (
         <div className="bg-white overflow-hidden mt-4">
-            <div className="relative max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div className="relative max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
 
                 {/*Gray rectangle behind photo*/}
                 <div className="hidden lg:block bg-gray-50 absolute top-0 bottom-0 left-3/4 w-screen" />
 
-                {/*Headers*/}
-                <div className="mx-auto text-base max-w-prose lg:grid lg:grid-cols-2 lg:gap-8 lg:max-w-none">
-                    <div>
-                        <h2 className="text-base text-cyan-600 font-semibold tracking-wide uppercase">{header}</h2>
-                        <h3 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                            {start} - {end}
-                        </h3>
-                    </div>
-                </div>
-
                 {/*Description text and photo*/}
                 <div className="mt-8 lg:grid lg:grid-cols-2 lg:gap-8">
 
+                    {/*Headers*/}
+                    <div className="text-base max-w-prose ">
+                        <div>
+                            <h2 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl uppercase">
+                                {header}
+                            </h2>
+                            <h3 className="text-lg text-cyan-600 font-semibold tracking-wide uppercase">{start} - {end}</h3>
+                        </div>
+                    </div>
+
                     {/*Photo*/}
-                    <div className="relative lg:row-start-1 lg:col-start-2">
+                    <div className="relative lg:row-start-1 lg:row-span-5 lg:col-start-2">
                         <svg
                             className="hidden lg:block absolute top-0 right-0 -mt-20 -mr-20"
                             width={404}
@@ -270,45 +272,12 @@ function BoatDetails({boat}){
 
                     {/*Description Text Paragraphs*/}
                     <div className="mt-8 lg:mt-0">
-                        {/*<div className="text-base max-w-prose mx-auto lg:max-w-none">*/}
-                        {/*    <p className="text-lg text-gray-500">*/}
-                        {/*        Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique*/}
-                        {/*        pellentesque. Blandit amet, sed aenean erat arcu morbi.*/}
-                        {/*    </p>*/}
-                        {/*</div>*/}
-                        <div className="mt-5 prose prose-cyan text-gray-500 mx-auto lg:max-w-none lg:row-start-1 lg:col-start-1">
-                            {description.map(paragraph => (
-                                <p>
+                        <div className="mt-5 prose prose-cyan text-gray-500 mx-auto lg:max-w-none lg:row-start-2 lg:col-start-1 ">
+                            {description.map((paragraph,index) => (
+                                <p key={index}>
                                     {paragraph}
                                 </p>
                             ))}
-                            {/*<p>*/}
-                            {/*    Bibendum eu nulla feugiat justo, elit adipiscing. Ut tristique sit nisi lorem pulvinar. Urna, laoreet*/}
-                            {/*    fusce nibh leo. Dictum et et et sit. Faucibus sed non gravida lectus dignissim imperdiet a.*/}
-                            {/*</p>*/}
-                            {/*<p>*/}
-                            {/*    Dictum magnis risus phasellus vitae quam morbi. Quis lorem lorem arcu, metus, egestas netus cursus. In.*/}
-                            {/*</p>*/}
-                            {/*<ul>*/}
-                            {/*    <li>Quis elit egestas venenatis mattis dignissim.</li>*/}
-                            {/*    <li>Cras cras lobortis vitae vivamus ultricies facilisis tempus.</li>*/}
-                            {/*    <li>Orci in sit morbi dignissim metus diam arcu pretium.</li>*/}
-                            {/*</ul>*/}
-                            {/*<p>*/}
-                            {/*    Rhoncus nisl, libero egestas diam fermentum dui. At quis tincidunt vel ultricies. Vulputate aliquet*/}
-                            {/*    velit faucibus semper. Pellentesque in venenatis vestibulum consectetur nibh id. In id ut tempus*/}
-                            {/*    egestas. Enim sit aliquam nec, a. Morbi enim fermentum lacus in. Viverra.*/}
-                            {/*</p>*/}
-                            {/*<h3>How we helped</h3>*/}
-                            {/*<p>*/}
-                            {/*    Tincidunt integer commodo, cursus etiam aliquam neque, et. Consectetur pretium in volutpat, diam.*/}
-                            {/*    Montes, magna cursus nulla feugiat dignissim id lobortis amet. Laoreet sem est phasellus eu proin massa,*/}
-                            {/*    lectus. Diam rutrum posuere donec ultricies non morbi. Mi a platea auctor mi.*/}
-                            {/*</p>*/}
-                            {/*<p>*/}
-                            {/*    Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique*/}
-                            {/*    pellentesque. Blandit amet, sed aenean erat arcu morbi.*/}
-                            {/*</p>*/}
                         </div>
 
                     </div>
@@ -331,9 +300,7 @@ function BoatDetails({boat}){
     )
 }
 
-
-
-const Boat = () => {
+function Boat(){
     const router = useRouter()
     const [boat, setBoat] = useState(router.query.boat ? router.query.boat : boats[0].href)
     return (

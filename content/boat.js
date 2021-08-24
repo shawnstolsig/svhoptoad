@@ -5,17 +5,17 @@ export const boats = [
         href: `moody-46`,
         header: `Our current boat`,
         length: 46,
-        beam: 12,
-        draft: 7,
+        beam: 12.5,
+        draft: 6,
         speed: {
-            max: 9,
-            cruising: 6
+            cruising: `6 knots (6.9 mph)`,
+            max: `8.5 knots (9.8 mph)`,
         },
         material: `Fiberglass`,
         rig: `Ketch`,
         years: {
-            built: 1976,
-            start: 2004,
+            built: 1974,
+            start: 2003,
             end: `Present`
         },
         photos: [
@@ -26,8 +26,9 @@ export const boats = [
             },
         ],
         description: [
-            `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis nibh vehicula, fermentum sapien id, tempor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean ultricies, orci non semper gravida, neque libero vestibulum dolor, at ultrices quam velit nec diam. Morbi mattis molestie nisi, vitae placerat est imperdiet in. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse bibendum, sem eget eleifend convallis, lacus risus finibus ipsum, ut elementum enim metus ut libero. `,
-            `Morbi non tristique ante, nec molestie felis. Donec luctus quis arcu non ullamcorper. Fusce id ante at diam dapibus rutrum eu eget mauris. Vestibulum viverra mi vitae posuere laoreet. Mauris id libero luctus lorem bibendum dignissim et quis purus. Suspendisse aliquam quis turpis non euismod. Nullam egestas ornare eros id eleifend. Pellentesque mi augue, condimentum et odio eleifend, porttitor pulvinar velit. Vivamus non dui purus.\nCurabitur finibus facilisis suscipit. Sed ut magna arcu. Aenean ultricies, velit at gravida sollicitudin, augue arcu ultrices mi, sit amet molestie neque elit id arcu. Vestibulum accumsan dolor mi, vulputate sagittis sapien suscipit vitae. Curabitur in augue nisi. Curabitur pretium, est at dignissim eleifend, sapien mauris cursus enim, id blandit urna dui quis mi. Sed volutpat ornare nunc, accumsan tristique dolor eleifend at. Nunc tincidunt rhoncus quam, at convallis enim tempor quis. Pellentesque scelerisque elementum neque, eget malesuada sapien iaculis ac. Etiam fermentum finibus diam sed pulvinar.`,
+            `Our Moody 46 was designed by Laurent Giles. Originally Giles’s design was a 44' sailing yacht, later extended by 2 feet. A total of 32 Carbineers (44s and 46s) were built in Southampton, England by the Moody Brothers in the early to mid 70s.`,
+            `We carry 230 gallons of diesel, 200 gallons of fresh water powered by a 356 Perkins. She weighs approximately 40,000 pounds loaded and is ready to go cruising.`,
+            `She is our 3rd sailboat by this name which comes from the children’s story book Pippi Longstock, by Astrid Lindgren. The Pippi stories were a popular favorite back when the boys were young sailors.`,
         ],
         gallery: [
             {
@@ -53,43 +54,110 @@ export const boats = [
         ],
         gear: [
             {
-                type: 'Windvane',
-                name: 'Scanmar Monitor Windvane',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1628738670/boat/gear/placeholder-windvane_qutbfl.jpg',
-                url: 'https://www.scanmarinternational.com/monitor-windvance-hp'
+                type: 'AIS',
+                name: 'Vesper Cortex AIS',
+                description: 'Functionality',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629769229/boat/gear/ais_pbpvyj.jpg',
+                url: 'https://www.vespermarine.com/cortex/ais'
             },
             {
-                type: 'Internet and Email',
-                name: 'Iridium GO',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1628739798/boat/gear/placehold-iridium-go_svlwk8.png',
+                type: 'Anchor',
+                name: 'Bruce 44 lbs',
+                description: 'Good Holding',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629771755/boat/gear/anchor_d4z0xv.jpg',
+                url: 'https://www.westmarine.com/buy/lewmar--high-tensile-steel-claw-anchors--P005_153_002_004'
+            },
+            {
+                type: 'Autopilot',
+                name: 'Raymarine',
+                description: 'Gets along with other instruments',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629771129/boat/gear/autopilot_ncxtr9.jpg',
+                url: 'https://www.raymarine.com/autopilot/'
+            },
+            {
+                type: 'Drogue',
+                name: 'Jordon Series Drogue',
+                description: 'Because we are scared and smart',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629771330/boat/gear/drogue_c6b7fh.gif',
+                url: 'https://www.jordanseriesdrogue.com/'
+            },
+            {
+                type: 'Generator & Watermaker',
+                name: 'AquaMarine',
+                description: '',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629770856/boat/gear/generator-watermaker_zln412.jpg',
+                url: 'https://www.aquamarineinc.net/index.php'
+            },
+            {
+                type: 'GPS',
+                name: 'Garmin GPS 740',
+                description: 'Was a gift',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629769009/boat/gear/gps_d87vyg.jpg',
+                url: 'https://buy.garmin.com/en-US/US/p/37721'
+            },
+            {
+                type: 'HAM Radio',
+                name: 'ICOM 735',
+                description: 'From previous Hoptoad',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629770087/boat/gear/ham-radio_e62uar.jpg',
+                url: 'https://www.universal-radio.com/catalog/hamhf/735.html'
+            },
+            {
+                type: 'Ice Maker',
+                name: 'Avalon Bay AB-ICE26B',
+                description: 'Counter top icemaker, because we like rum and coke with ice',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629772506/boat/gear/ice-maker_adliiu.jpg',
+                url: 'https://www.amazon.com/gp/product/B00IY7B5CS/'
+            },
+            {
+                type: 'Internet',
+                name: 'Iridium GO!',
+                description: 'Best available for the price',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1628739798/boat/gear/iridium-go_svlwk8.png',
                 url: 'https://www.iridium.com/products/iridium-go/'
 
             },
             {
-                type: 'Autopilot',
-                name: 'GARMIN–Reactor 40',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1628739900/boat/gear/placeholder-autopilot_yv2h3a.jpg',
-                url: 'https://buy.garmin.com/en-US/US/p/599938'
-
+                type: 'Multifunction Display',
+                name: 'Raymarine Axiom 9+',
+                description: 'Wanted a display behind the outside steering station',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629769853/boat/gear/multifunction-display_o3tovr.png',
+                url: 'https://www.raymarine.com/multifunction-displays/axiom/axiom9.html'
+            },
+            {
+                type: 'Solar Panels',
+                name: 'SunPower Flex 110',
+                description: 'Power density, price point',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629770315/boat/gear/solar-panel_e4zaim.jpg',
+                url: 'https://us.sunpower.com/sites/default/files/110w-flexible-panel-spec-sheet.pdf'
+            },
+            {
+                type: 'Solar Panel Controller',
+                name: 'Solar Boost 1524iX',
+                description: '24 Volt, MFPT',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629770373/boat/gear/solar-controller_lohxku.png',
+                url: 'https://sunforgellc.com/solar-boost-1524ix/'
             },
             {
                 type: 'Tender',
-                name: 'Zodiac Cadet RIB',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1628740157/boat/gear/placeholder-tender_z7hxba.jpg',
-                url: 'https://www.zodiac-nautic.com/en-us/shop/produits/equipment-en-us/tenders-en-us/cadet-rib-alu-dl/'
-
+                name: 'Achilles Inflatable Dinghy HB 310',
+                description: 'Liked the folding transom and Hypalon construction material',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629771411/boat/gear/tender_roeut6.jpg',
+                url: 'https://www.achillesboats.com/boatmodels.php/rigidhulls/hb/?page=boatmodels.php&class=rigidhulls&series=hb'
             },
             {
-                type: 'Liferaft',
-                name: 'REVERE SURVIVAL',
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1628740241/boat/gear/placeholder-liferaft_ewz9ur.jpg',
-                url: 'https://www.westmarine.com/buy/revere-survival--coastal-commander-2-0-life-raft-6-person-valise--16167355?recordNum=1'
-
+                type: 'VHF Radio',
+                name: 'Sailor VHF',
+                description: 'Came with the boat, it’s cool and it works, circa 1974',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629769467/boat/gear/vhf_t7wtfg.jpg',
+                url: 'https://www.radiomuseum.org/r/sp_radio_sailor_rt144b_wand_geraet.html'
+            },
+            {
+                type: 'Windvane',
+                name: 'Monitor Top Hat',
+                description: 'New TopHat Monitor because we wanted to keep our davits',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629770697/boat/gear/windvane_ahtra3.jpg',
+                url: 'https://www.scanmarinternational.com/monitor-windvance-hp'
             },
         ]
     },
@@ -99,18 +167,18 @@ export const boats = [
         href: `roberts-38`,
         header: `A veteran circumnavigator`,
         length: 38,
-        beam: 8,
-        draft: 5,
+        beam: 12,
+        draft: 5.5,
         speed: {
-            max: 6,
-            cruising: 4
+            cruising: `4 knots (4.6 mph)`,
+            max: `6.5 knots (7.5 mph)`,
         },
         material: `Steel`,
         rig: `Cutter`,
         years: {
-            built: 1976,
-            start: 1996,
-            end: 2004
+            built: '?',
+            start: 1994,
+            end: 2003
         },
         photos: [
             {
@@ -120,8 +188,11 @@ export const boats = [
             },
         ],
         description: [
-            `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis nibh vehicula, fermentum sapien id, tempor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean ultricies, orci non semper gravida, neque libero vestibulum dolor, at ultrices quam velit nec diam. Morbi mattis molestie nisi, vitae placerat est imperdiet in. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse bibendum, sem eget eleifend convallis, lacus risus finibus ipsum, ut elementum enim metus ut libero. `,
-            `Morbi non tristique ante, nec molestie felis. Donec luctus quis arcu non ullamcorper. Fusce id ante at diam dapibus rutrum eu eget mauris. Vestibulum viverra mi vitae posuere laoreet. Mauris id libero luctus lorem bibendum dignissim et quis purus. Suspendisse aliquam quis turpis non euismod. Nullam egestas ornare eros id eleifend. Pellentesque mi augue, condimentum et odio eleifend, porttitor pulvinar velit. Vivamus non dui purus.\nCurabitur finibus facilisis suscipit. Sed ut magna arcu. Aenean ultricies, velit at gravida sollicitudin, augue arcu ultrices mi, sit amet molestie neque elit id arcu. Vestibulum accumsan dolor mi, vulputate sagittis sapien suscipit vitae. Curabitur in augue nisi. Curabitur pretium, est at dignissim eleifend, sapien mauris cursus enim, id blandit urna dui quis mi. Sed volutpat ornare nunc, accumsan tristique dolor eleifend at. Nunc tincidunt rhoncus quam, at convallis enim tempor quis. Pellentesque scelerisque elementum neque, eget malesuada sapien iaculis ac. Etiam fermentum finibus diam sed pulvinar.`,
+            `After reading all the classic sailing book of sailing around the world we were convinced we need a metal sailboat to venture out on our first blue water adventure.`,
+            `We purchased this home built steel Roberts 38 out of Bellingham, WA. She needed a ton of work!!`,
+            `Sonny went to town gutting the interior painting and insulating the haul. Most of gear was bought at a bargain at the Fisheries bi-annual swap meets.`,
+            `A 38 foot steel sailboat proved to be reliable but SLOW. Powered by a 20 HP tractor diesel motor made in China.`,
+            `We would count on 100 mile days at sea and it occasionally met our expectations.  From then on we often say, “Friends don’t let friends buy steel boats."`,
         ],
         gallery: [
             {
@@ -152,18 +223,18 @@ export const boats = [
         href: `cal-3-30`,
         header: `The original Hoptoad`,
         length: 30,
-        beam: 6,
-        draft: 4,
+        beam: 10,
+        draft: 5.5,
         speed: {
-            max: 6,
-            cruising: 4
+            cruising: `6 knots (6.9 mph)`,
+            max: `8 knots (9.2 mph)`,
         },
         material: `Fiberglass`,
         rig: `Sloop`,
         years: {
-            built: '?',
-            start: '?',
-            end: '?'
+            built: `Early '70s`,
+            start: '1989',
+            end: '2004'
         },
         photos: [
             {
@@ -173,8 +244,9 @@ export const boats = [
             },
         ],
         description: [
-            `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis nibh vehicula, fermentum sapien id, tempor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean ultricies, orci non semper gravida, neque libero vestibulum dolor, at ultrices quam velit nec diam. Morbi mattis molestie nisi, vitae placerat est imperdiet in. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse bibendum, sem eget eleifend convallis, lacus risus finibus ipsum, ut elementum enim metus ut libero. `,
-            `Morbi non tristique ante, nec molestie felis. Donec luctus quis arcu non ullamcorper. Fusce id ante at diam dapibus rutrum eu eget mauris. Vestibulum viverra mi vitae posuere laoreet. Mauris id libero luctus lorem bibendum dignissim et quis purus. Suspendisse aliquam quis turpis non euismod. Nullam egestas ornare eros id eleifend. Pellentesque mi augue, condimentum et odio eleifend, porttitor pulvinar velit. Vivamus non dui purus.\nCurabitur finibus facilisis suscipit. Sed ut magna arcu. Aenean ultricies, velit at gravida sollicitudin, augue arcu ultrices mi, sit amet molestie neque elit id arcu. Vestibulum accumsan dolor mi, vulputate sagittis sapien suscipit vitae. Curabitur in augue nisi. Curabitur pretium, est at dignissim eleifend, sapien mauris cursus enim, id blandit urna dui quis mi. Sed volutpat ornare nunc, accumsan tristique dolor eleifend at. Nunc tincidunt rhoncus quam, at convallis enim tempor quis. Pellentesque scelerisque elementum neque, eget malesuada sapien iaculis ac. Etiam fermentum finibus diam sed pulvinar.`,
+            `Our Original Hoptoad was a Cal 330 built in the early 70s.`,
+            `A Bill Lapworth design was an awesome boat. We have lots of fond memories cruising the San Juan’s the Canadian Gulf Islands and Barkley Sound.`,
+            `A solid fast sailing vessel with 50% ballast to displacement ratio.  This means ½ the weight of the boat was in the keel. `,
         ],
     },
     {
@@ -183,18 +255,18 @@ export const boats = [
         href: `san-juan-23`,
         header: `First family sailboat`,
         length: 23,
-        beam: 5,
-        draft: 3,
+        beam: 8,
+        draft: 4.75,
         speed: {
-            max: 5,
-            cruising: 4
+            cruising: `5 knots (5.8 mph)`,
+            max: `65 mph (on the trailer)`,
         },
         material: `Fiberglass`,
         rig: `Sloop`,
         years: {
-            built: '?',
-            start: '?',
-            end: '?'
+            built: `Late '70s`,
+            start: '1987',
+            end: '1989'
         },
         photos: [
             {
@@ -204,8 +276,8 @@ export const boats = [
             },
         ],
         description: [
-            `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis nibh vehicula, fermentum sapien id, tempor diam. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean ultricies, orci non semper gravida, neque libero vestibulum dolor, at ultrices quam velit nec diam. Morbi mattis molestie nisi, vitae placerat est imperdiet in. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse bibendum, sem eget eleifend convallis, lacus risus finibus ipsum, ut elementum enim metus ut libero. `,
-            `Morbi non tristique ante, nec molestie felis. Donec luctus quis arcu non ullamcorper. Fusce id ante at diam dapibus rutrum eu eget mauris. Vestibulum viverra mi vitae posuere laoreet. Mauris id libero luctus lorem bibendum dignissim et quis purus. Suspendisse aliquam quis turpis non euismod. Nullam egestas ornare eros id eleifend. Pellentesque mi augue, condimentum et odio eleifend, porttitor pulvinar velit. Vivamus non dui purus.\nCurabitur finibus facilisis suscipit. Sed ut magna arcu. Aenean ultricies, velit at gravida sollicitudin, augue arcu ultrices mi, sit amet molestie neque elit id arcu. Vestibulum accumsan dolor mi, vulputate sagittis sapien suscipit vitae. Curabitur in augue nisi. Curabitur pretium, est at dignissim eleifend, sapien mauris cursus enim, id blandit urna dui quis mi. Sed volutpat ornare nunc, accumsan tristique dolor eleifend at. Nunc tincidunt rhoncus quam, at convallis enim tempor quis. Pellentesque scelerisque elementum neque, eget malesuada sapien iaculis ac. Etiam fermentum finibus diam sed pulvinar.`,
+            `This is where is all began. Jeff 2 years old and Shawn 2 months old, we decided to buy a 23 foot sailboat on a trailer. The San Juan 23 was a perfect starter boat. The San Juan 23s were designed with a swing keel built by the Clark Boat Company in Kent, WA.`,
+            `First thing we did is join the San Juan 23 Fleet Club. We did many trips from West Seattle to Blake Island but also towed her with our 1965 Dodge van to Lake Chelan, up to Nanaimo, BC and many trips launching at Washington Park in Anacortes, WA to explore the San Juan Islands.`,
         ],
     },
 ]
