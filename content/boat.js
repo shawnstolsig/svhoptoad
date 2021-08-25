@@ -37,13 +37,13 @@ export const boats = [
                 source: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629668057/boat/boats/moody-46-1_h9vjf2.jpg',
             },
             {
-                title: 'Caption #2',
-                subtitle: 'Location?',
+                title: 'Anchored in the San Juans',
+                subtitle: 'San Juan Islands, WA',
                 source: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629671173/boat/boats/moody-46-2_dzlly2.jpg',
             },
             {
-                title: 'On the hard',
-                subtitle: 'Location?',
+                title: 'New Bottom Paint March 2021',
+                subtitle: 'Canal Boat Yard, Seattle WA',
                 source: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629671173/boat/boats/moody-46-3_wuzrvq.jpg',
             },
             {
@@ -202,13 +202,13 @@ export const boats = [
             },
             {
                 title: 'A much needed sandblasting',
-                subtitle: 'Vuda Marina Fiji',
+                subtitle: 'Vuda Marina, Fiji',
                 source: 'https://res.cloudinary.com/svhoptoad/image/upload/v1628743341/boat/boats/roberts-38-2_v6yaf1.jpg',
             },
             {
-                title: 'Laundry day',
-                subtitle: '',
-                source: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629669925/boat/boats/roberts-38-3_xkbpgu.jpg',
+                title: 'An uncommon glamor shot',
+                subtitle: 'San Blas Islands, Panama',
+                source: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629863836/boat/boats/roberts-38-3_cjsmfo.jpg',
             },
             {
                 title: 'Quarantined upon arrival',
@@ -271,7 +271,7 @@ export const boats = [
         photos: [
             {
                 url: `https://res.cloudinary.com/svhoptoad/image/upload/v1628740977/boat/boats/san-juan-portrait_au79dz.jpg`,
-                title: `Staying out of trouble`,
+                title: `Keeping out of trouble in Elliott Bay, Seattle`,
                 alt: `Portrait photo of Hoptoad: San Juan 23`
             },
         ],

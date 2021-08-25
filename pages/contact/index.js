@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
 import { useState } from 'react'
-import { MailIcon, PhoneIcon } from '@heroicons/react/outline'
+import { MailIcon, AtSymbolIcon } from '@heroicons/react/outline'
 import emailjs from 'emailjs-com'
 
 import {
@@ -165,21 +165,28 @@ function ContactForm() {
                         </p>
                         <dl className="mt-8 space-y-6">
                             <dt>
-                                <span className="sr-only">Phone number</span>
-                            </dt>
-                            <dd className="flex text-base text-cyan-50">
-                                <PhoneIcon className="flex-shrink-0 w-6 h-6 text-cyan-200" aria-hidden="true" />
-                                <span className="ml-3">{contactForm.phone}</span>
-                            </dd>
-                            <dt>
                                 <span className="sr-only">Email</span>
                             </dt>
                             <dd className="flex text-base text-cyan-50">
-                                <MailIcon className="flex-shrink-0 w-6 h-6 text-cyan-200" aria-hidden="true" />
+                                <AtSymbolIcon className="flex-shrink-0 w-6 h-6 text-cyan-200" aria-hidden="true" />
                                 <span className="ml-3">{contactForm.email}</span>
                             </dd>
+                            <dt>
+                                <span className="sr-only">Address</span>
+                            </dt>
+                            <dd className="flex text-base text-cyan-50">
+                                <MailIcon className="flex-shrink-0 w-6 h-6 text-cyan-200" aria-hidden="true" />
+                                <div className="ml-3">
+                                    {contactForm.address[0]}
+                                    <br/>
+                                    {contactForm.address[1]}
+                                    <br/>
+                                    {contactForm.address[2]}
+                                </div>
+                                {/*<span className="ml-3">{contactForm.address}</span>*/}
+                            </dd>
                         </dl>
-                        <ul className="mt-8 flex space-x-12" role="list">
+                        <ul className="mt-8 flex justify-center space-x-12" role="list">
                             <li>
                                 <a className="text-cyan-200 hover:text-cyan-100" href={contactForm.instagramLink} target={`_blank`}>
                                     <span className="sr-only">Instagram</span>

@@ -1,7 +1,9 @@
 - [ ] create a floating [banner](https://tailwindui.com/components/marketing/elements/banners) component, use this for confirming when an email is sent
 - [ ] create instagram feed
+- [ ] privacy policy and data delete link/platform setup?
 - [x] route map for previous trip
 - [ ] route map for future trip
 - [ ] predict winds map/placeholder
 - [x] photo gallery
-- [ ] add in gear
+- [x] add in gear
+- 
