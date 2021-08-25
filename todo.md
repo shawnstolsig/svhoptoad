@@ -6,4 +6,6 @@
 - [ ] predict winds map/placeholder
 - [x] photo gallery
 - [x] add in gear
-- 
+- [ ] boat icon for nav header 
+- [ ] check on large screen size?  veritcal centering?
+- [ ] roberts build year

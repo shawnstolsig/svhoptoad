@@ -156,7 +156,7 @@ export const boats = [
                 type: 'Windvane',
                 name: 'Monitor Top Hat',
                 description: 'New TopHat Monitor because we wanted to keep our davits',
-                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629770697/boat/gear/windvane_ahtra3.jpg',
+                image: 'https://res.cloudinary.com/svhoptoad/image/upload/v1629880391/boat/gear/windvane_dsflw5.jpg',
                 url: 'https://www.scanmarinternational.com/monitor-windvance-hp'
             },
         ]
