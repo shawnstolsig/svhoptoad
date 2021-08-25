@@ -8,7 +8,8 @@ import {
 
 import {
     aboardHoptoadArticles,
-    tripDetails
+    trips,
+
 } from "../../content/travel";
 import Map from '../../components/map'
 
@@ -94,6 +95,244 @@ function AboardHoptoadCard(){
     )
 }
 
+/* This example requires Tailwind CSS v2.0+ */
+const directory = {
+    A: [
+        {
+            id: 1,
+            name: 'Leslie Abbott',
+            role: 'Co-Founder / CEO',
+            imageUrl:
+                'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 2,
+            name: 'Hector Adams',
+            role: 'VP, Marketing',
+            imageUrl:
+                'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 3,
+            name: 'Blake Alexander',
+            role: 'Account Coordinator',
+            imageUrl:
+                'https://images.unsplash.com/photo-1520785643438-5bf77931f493?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 4,
+            name: 'Fabricio Andrews',
+            role: 'Senior Art Director',
+            imageUrl:
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+    ],
+    B: [
+        {
+            id: 5,
+            name: 'Angela Beaver',
+            role: 'Chief Strategy Officer',
+            imageUrl:
+                'https://images.unsplash.com/photo-1501031170107-cfd33f0cbdcc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 6,
+            name: 'Yvette Blanchard',
+            role: 'Studio Artist',
+            imageUrl:
+                'https://images.unsplash.com/photo-1506980595904-70325b7fdd90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 7,
+            name: 'Lawrence Brooks',
+            role: 'Content Specialist',
+            imageUrl:
+                'https://images.unsplash.com/photo-1513910367299-bce8d8a0ebf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+    ],
+    C: [
+        {
+            id: 8,
+            name: 'Jeffrey Clark',
+            role: 'Senior Art Director',
+            imageUrl:
+                'https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 9,
+            name: 'Kathryn Cooper',
+            role: 'Associate Creative Director',
+            imageUrl:
+                'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+    ],
+    E: [
+        {
+            id: 10,
+            name: 'Alicia Edwards',
+            role: 'Junior Copywriter',
+            imageUrl:
+                'https://images.unsplash.com/photo-1509783236416-c9ad59bae472?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 11,
+            name: 'Benjamin Emerson',
+            role: 'Director, Print Operations',
+            imageUrl:
+                'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 12,
+            name: 'Jillian Erics',
+            role: 'Designer',
+            imageUrl:
+                'https://images.unsplash.com/photo-1504703395950-b89145a5425b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 13,
+            name: 'Chelsea Evans',
+            role: 'Human Resources Manager',
+            imageUrl:
+                'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+    ],
+    G: [
+        {
+            id: 14,
+            name: 'Michael Gillard',
+            role: 'Co-Founder / CTO',
+            imageUrl:
+                'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 15,
+            name: 'Dries Giuessepe',
+            role: 'Manager, Business Relations',
+            imageUrl:
+                'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+    ],
+    M: [
+        {
+            id: 16,
+            name: 'Jenny Harrison',
+            role: 'Studio Artist',
+            imageUrl:
+                'https://images.unsplash.com/photo-1507101105822-7472b28e22ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 17,
+            name: 'Lindsay Hatley',
+            role: 'Front-end Developer',
+            imageUrl:
+                'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 18,
+            name: 'Anna Hill',
+            role: 'Partner, Creative',
+            imageUrl:
+                'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+    ],
+    S: [
+        {
+            id: 19,
+            name: 'Courtney Samuels',
+            role: 'Designer',
+            imageUrl:
+                'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 20,
+            name: 'Tom Simpson',
+            role: 'Director, Product Development',
+            imageUrl:
+                'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+    ],
+    T: [
+        {
+            id: 21,
+            name: 'Floyd Thompson',
+            role: 'Principal Designer',
+            imageUrl:
+                'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 22,
+            name: 'Leonard Timmons',
+            role: 'Senior Designer',
+            imageUrl:
+                'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 23,
+            name: 'Whitney Trudeau',
+            role: 'Copywriter',
+            imageUrl:
+                'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+    ],
+    W: [
+        {
+            id: 24,
+            name: 'Kristin Watson',
+            role: 'VP, Human Resources',
+            imageUrl:
+                'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+        {
+            id: 25,
+            name: 'Emily Wilson',
+            role: 'VP, User Experience',
+            imageUrl:
+                'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+    ],
+    Y: [
+        {
+            id: 26,
+            name: 'Emma Young',
+            role: 'Senior Front-end Developer',
+            imageUrl:
+                'https://images.unsplash.com/photo-1505840717430-882ce147ef2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        },
+    ],
+}
+
+function CountryList() {
+    return (
+        <nav className="h-full overflow-y-auto" aria-label="Directory">
+            {Object.keys(trips.previousTrip.countries).map((year) => (
+                <div key={year} className="relative">
+                    <div className="z-10 sticky top-0 border-t border-b border-gray-200 bg-gray-50 px-6 py-1 text-sm font-medium text-gray-500">
+                        <h3>{year}</h3>
+                    </div>
+                    <ul role="list" className="relative z-0 divide-y divide-gray-200">
+                        {trips.previousTrip.countries[year].map((country) => (
+                            <li key={country} className="bg-white">
+                                <div className="relative px-6 py-5 flex items-center space-x-3 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+                                    {/*<div className="flex-shrink-0">*/}
+                                    {/*    <img className="h-10 w-10 rounded-full" src={} alt="" />*/}
+                                    {/*</div>*/}
+                                    <div className="flex-1 min-w-0">
+                                        <a href="#" className="focus:outline-none">
+                                            {/* Extend touch target to entire panel */}
+                                            <span className="absolute inset-0" aria-hidden="true" />
+                                            <p className="text-sm font-medium text-gray-900">{country}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
+        </nav>
+    )
+}
+
 const Travel = () => {
     return (
         <>
@@ -102,6 +341,8 @@ const Travel = () => {
             </Head>
 
             <div className="relative py-16 bg-white overflow-hidden">
+
+                {/*Gray background graphics*/}
                 <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
                     <div className="relative h-full text-lg max-w-prose mx-auto" aria-hidden="true">
                         <svg
@@ -169,84 +410,57 @@ const Travel = () => {
                         </svg>
                     </div>
                 </div>
+
                 <div className="relative px-4 sm:px-6 lg:px-8">
+
+                    {/*Current trip content*/}
                     <div className="text-lg max-w-prose mx-auto">
                         <h1>
-            <span className="block text-base text-center text-cyan-600 font-semibold tracking-wide uppercase">
-              Introducing
-            </span>
+                            <span className="block text-base text-center text-cyan-600 font-semibold tracking-wide uppercase">
+                                {trips.currentTrip.subtitle}
+                            </span>
                             <span className="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-              JavaScript for Beginners
-            </span>
+                                {trips.currentTrip.title}
+                            </span>
                         </h1>
-                        <p className="mt-8 text-xl text-gray-500 leading-8">
-                            Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget
-                            aliquam. Quisque id at vitae feugiat egestas ac. Diam nulla orci at in viverra scelerisque eget. Eleifend
-                            egestas fringilla sapien.
-                        </p>
                     </div>
                     <div className="mt-6 prose prose-cyan prose-lg text-gray-500 mx-auto">
-                        <p>
-                            Faucibus commodo massa rhoncus, volutpat. <strong>Dignissim</strong> sed <strong>eget risus enim</strong>.
-                            Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra
-                            tellus varius sit neque erat velit. Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim.{' '}
-                            <a href="#">Mattis mauris semper</a> sed amet vitae sed turpis id.
-                        </p>
-                        <ul role="list">
-                            <li>Quis elit egestas venenatis mattis dignissim.</li>
-                            <li>Cras cras lobortis vitae vivamus ultricies facilisis tempus.</li>
-                            <li>Orci in sit morbi dignissim metus diam arcu pretium.</li>
-                        </ul>
-                        <p>
-                            Quis semper vulputate aliquam venenatis egestas sagittis quisque orci. Donec commodo sit viverra aliquam
-                            porttitor ultrices gravida eu. Tincidunt leo, elementum mattis elementum ut nisl, justo, amet, mattis. Nunc
-                            purus, diam commodo tincidunt turpis. Amet, duis sed elit interdum dignissim.
-                        </p>
-                        <h2>From beginner to expert in 30 days</h2>
-                        <p>
-                            Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam consequat in. Convallis arcu ipsum urna nibh.
-                            Pharetra, euismod vitae interdum mauris enim, consequat vulputate nibh. Maecenas pellentesque id sed tellus
-                            mauris, ultrices mauris. Tincidunt enim cursus ridiculus mi. Pellentesque nam sed nullam sed diam turpis
-                            ipsum eu a sed convallis diam.
-                        </p>
-                        <blockquote>
-                            <p>
-                                Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique
-                                pellentesque. Blandit amet, sed aenean erat arcu morbi.
-                            </p>
-                        </blockquote>
-                        <p>
-                            Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae
-                            sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit.
-                        </p>
+                        <p>{trips.currentTrip.paragraphs[0]}</p>
+                        <p>{trips.currentTrip.paragraphs[1]}</p>
+                        <p>{trips.currentTrip.paragraphs[2]}</p>
+                        <p>{trips.currentTrip.paragraphs[3]}</p>
+                        <p>{trips.currentTrip.paragraphs[4]}</p>
+                        <h3>The Plan</h3>
+                        <p>{trips.currentTrip.paragraphs[5]}</p>
+                        <p>{trips.currentTrip.paragraphs[6]}</p>
+                    </div>
+
+                    {/*Previous trip content*/}
+                    <div className="text-lg max-w-prose mx-auto mt-4">
+                        <h1>
+                            <span className="block text-base text-center text-cyan-600 font-semibold tracking-wide uppercase">
+                                {trips.previousTrip.subtitle}
+                            </span>
+                            <span className="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                                {trips.previousTrip.title}
+                            </span>
+                        </h1>
+                    </div>
+                    <div className="mt-6 prose prose-cyan prose-lg text-gray-500 mx-auto">
                         <figure>
-                            {/*<img*/}
-                            {/*    className="w-full rounded-lg"*/}
-                            {/*    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&w=1310&h=873&q=80&facepad=3"*/}
-                            {/*    alt=""*/}
-                            {/*    width={1310}*/}
-                            {/*    height={873}*/}
-                            {/*/>*/}
                             <Map />
-                            <figcaption>{tripDetails.mapCaption}</figcaption>
+                            <figcaption>{trips.mapCaption}</figcaption>
                         </figure>
-                        <h2>Everything you need to get up and running</h2>
-                        <p>
-                            Purus morbi dignissim senectus mattis <a href="#">adipiscing</a>. Amet, massa quam varius orci dapibus
-                            volutpat cras. In amet eu ridiculus leo sodales cursus tristique. Tincidunt sed tempus ut viverra ridiculus
-                            non molestie. Gravida quis fringilla amet eget dui tempor dignissim. Facilisis auctor venenatis varius nunc,
-                            congue erat ac. Cras fermentum convallis quam.
-                        </p>
-                        <p>
-                            Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae
-                            sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit.
-                        </p>
+                        <p>{trips.previousTrip.paragraphs[0]}</p>
+                        <p>{trips.previousTrip.paragraphs[1]}</p>
+                        <p>{trips.previousTrip.paragraphs[2]}</p>
+                    </div>
+                    <h5 className={'mx-auto text-center text-gray-500 mt-2'}>Country List</h5>
+                    <div className={'w-80 h-80 mx-auto rounded border overflow-y-scroll shadow'}>
+                        <CountryList />
                     </div>
                 </div>
             </div>
-
-
-
         </>
     );
 };

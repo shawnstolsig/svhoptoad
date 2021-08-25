@@ -7,9 +7,9 @@ import circumnavigation from '../content/circumnavigation.json'
 function Map(){
     const mapContainer = useRef(null);
     const map = useRef(null);
-    const [lng, setLng] = useState(-122.4);
-    const [lat, setLat] = useState(47.67);
-    const [zoom, setZoom] = useState(0);
+    const [lng, setLng] = useState(-106.5);
+    const [lat, setLat] = useState(23.2);
+    const [zoom, setZoom] = useState(.2);
 
     mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 

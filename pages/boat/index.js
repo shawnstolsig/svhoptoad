@@ -188,7 +188,7 @@ function BoatDetails({boat}){
                     {/*Headers*/}
                     <div className="text-base max-w-prose ">
                         <div>
-                            <h2 className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl uppercase">
+                            <h2 className="mt-2 text-2xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl uppercase">
                                 {header}
                             </h2>
                             <h3 className="text-lg text-cyan-600 font-semibold tracking-wide uppercase">{start} - {end}</h3>
