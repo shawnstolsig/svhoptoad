@@ -29,7 +29,7 @@ function BoatSelector({ boat, setBoat }) {
                             href === boat ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
                             tabIdx === 0 ? 'lg:rounded-l-lg' : '',
                             tabIdx === boats.length - 1 ? 'lg:rounded-r-lg' : '',
-                            'group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-xs sm:text-sm font-medium text-center hover:bg-gray-50 focus:z-10'
+                            'group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-2 sm:px-4 text-xs sm:text-sm font-medium text-center hover:bg-gray-50 focus:z-10'
                         )}
                         aria-current={href === boat ? 'page' : undefined}
                     >
@@ -183,12 +183,12 @@ function BoatDetails({boat}){
                 <div className="hidden lg:block bg-gray-50 absolute top-0 bottom-0 left-3/4 w-screen" />
 
                 {/*Description text and photo*/}
-                <div className="mt-8 lg:grid lg:grid-cols-2 lg:gap-8">
+                <div className="sm:mt-6 lg:grid lg:grid-cols-2 lg:gap-8">
 
                     {/*Headers*/}
                     <div className="text-base max-w-prose ">
                         <div>
-                            <h2 className="mt-2 text-2xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl uppercase">
+                            <h2 className="text-2xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl uppercase">
                                 {header}
                             </h2>
                             <h3 className="text-lg text-cyan-600 font-semibold tracking-wide uppercase">{start} - {end}</h3>
