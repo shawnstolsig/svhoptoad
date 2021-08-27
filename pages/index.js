@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { intro } from '../content/home'
+import PredictWindMap from "../components/predictWindMap"
 
 export default function Home() {
     return (
@@ -51,20 +52,12 @@ export default function Home() {
                     />
                 </div>
             </section>
+            <div className={'max-w-7xl mx-auto my-4'}>
+                <h2 className={'text-2xl text-cyan-600'}>Location Tracker</h2>
+                <p>Check back here for real-time updates on Hoptoad's position, weather conditions, and status updates!</p>
+            <PredictWindMap className={'h-96 mt-2'}/>
+            </div>
 
         </>
     );
 }
-
-// predict winds sample: https://codepen.io/anon/pen/BoPbXp
-// <div className="iframe-wrap">
-//     <iframe src="http://forecast.predictwind.com/tracking/display/Zeebink"></iframe>
-// </div>
-//     .iframe-wrap iframe {
-//     max-width: 100%;
-//     position: absolute;
-//     left: 0px;
-//     top: 0px;
-//     width: 100%;
-//     height: 100%;
-// }
