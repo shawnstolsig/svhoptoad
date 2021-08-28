@@ -2,11 +2,36 @@
 @import url('https://use.typekit.net/ydp7jcv.css');
 
 @tailwind base;
-
 /* Write your own custom base styles here */
+.nav-hover {
+    @apply transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110
+}
 
 /* Start purging... */
 @tailwind components;
+
+.page {
+    @apply max-w-7xl m-auto
+}
+
+.card {
+    @apply rounded-md shadow-lg border overflow-hidden
+}
+.card-title {
+    @apply text-xl mb-1
+}
+.card-content {
+    @apply my-1
+}
+.card-actions {
+    @apply mt-1
+}
+
+.button {
+    @apply p-2 rounded-md border text-center hover:shadow flex items-center justify-center hover:bg-cyan-100
+}
+
+
 /* Stop purging. */
 
 /* Write you own custom component styles here */

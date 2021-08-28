@@ -7,7 +7,7 @@ const Blog = () => {
                 <title>SV Hoptoad | Blog</title>
             </Head>
             <div>
-                Blog content
+                UNDER CONSTRUCTION
             </div>
         </>
     );

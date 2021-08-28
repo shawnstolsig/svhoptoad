@@ -1,0 +1,11 @@
+- [ ] create a floating [banner](https://tailwindui.com/components/marketing/elements/banners) component, use this for confirming when an email is sent
+- [ ] create instagram feed
+- [ ] privacy policy and data delete link/platform setup?
+- [x] route map for previous trip
+- [ ] route map for future trip
+- [ ] predict winds map/placeholder
+- [x] photo gallery
+- [x] add in gear
+- [ ] boat icon for nav header 
+- [ ] check on large screen size?  veritcal centering?
+- [ ] roberts build year

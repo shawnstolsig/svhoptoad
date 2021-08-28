@@ -20,8 +20,8 @@ const StyledLink = ({text, path, icon: Icon}) => {
 
     return (
         <div className={clsx(
-            'flex items-center mx-2',
-            router.pathname === path && 'border-b-2 border-cyan-900'
+            'flex items-center mx-4 nav-hover',
+            router.pathname === path && 'border-b-2 border-cyan-900 scale-110'
         )}>
             <Link href={path}>
                 <Icon className={'h-6 w-6 cursor-pointer'}/>
@@ -38,12 +38,12 @@ const Navbar = () => {
         {text: 'Home', path: '/', icon: HomeIcon},
         {text: 'Boat', path: '/boat', icon: IdentificationIcon},
         {text: 'Travel', path: '/travel', icon: GlobeIcon},
-        {text: 'Blog', path: '/blog', icon: NewspaperIcon},
+        // {text: 'Blog', path: '/blog', icon: NewspaperIcon},
         {text: 'Contact', path: '/contact', icon: AtSymbolIcon},
     ];
 
     return (
-        <Border sides={'b'}>
+        <Border sides={'b'} margins={`mb-4`}>
             <nav className={`py-3 px-2 shadow-lg bg-gradient-to-br from-cyan-200 to-cyan-100`}>
 
                 {/* Small screen sizes */}
