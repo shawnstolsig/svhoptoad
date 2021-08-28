@@ -1,6 +1,6 @@
 export const contactForm = {
-    sidebarTitle: `Contact information`,
-    sidebarDescription: `Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst amet. Sapien tortor lacus arcu.`,
+    sidebarTitle: `Contact Information`,
+    sidebarDescription: `Please reach out via email or this contact form!  You can also send us regular mail at the address below (although, it may be several months before our mail is packaged together and forwarded to us from Seattle).`,
     email: `sailinghoptoad@gmail.com`,
     instagramLink: `https://www.instagram.com/svhoptoad/`,
     facebookLink: `https://www.facebook.com/margie.stolsig`,

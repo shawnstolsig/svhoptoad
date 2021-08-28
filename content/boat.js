@@ -176,7 +176,7 @@ export const boats = [
         material: `Steel`,
         rig: `Cutter`,
         years: {
-            built: '?',
+            built: `Late '80s`,
             start: 1994,
             end: 2003
         },
