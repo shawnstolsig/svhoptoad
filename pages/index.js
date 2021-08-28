@@ -14,7 +14,7 @@ export default function Home() {
             </Head>
 
             <section className="lg:relative">
-                <div className="mx-auto w-full pt-16 pb-20 text-center lg:py-36 lg:text-left">
+                <div className="mx-auto w-full py-8 text-center lg:py-36 lg:text-left">
                     <div className="px-8 lg:w-1/2 sm:px-8 xl:pr-16">
                         <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
                             <span className="block">{intro.title1}</span>{' '}
@@ -52,7 +52,7 @@ export default function Home() {
                     />
                 </div>
             </section>
-            <div className={'max-w-7xl mx-auto my-4'}>
+            <div className={'max-w-7xl mx-auto my-4 p-2'}>
                 <h2 className={'text-2xl text-cyan-600'}>Location Tracker</h2>
                 <p>Check back here for real-time updates on Hoptoad's position, weather conditions, and status updates!</p>
             <PredictWindMap className={'h-96 mt-2'}/>

@@ -12,7 +12,8 @@ import {
 import { CameraIcon } from '@heroicons/react/solid'
 
 import { boats } from "../../content/boat"
-import Gallery from "../../components/gallery";
+import Gallery from "../../components/gallery"
+import * as ga from '../../lib/google-analytics'
 
 function BoatSelector({ boat, setBoat }) {
     // const router = useRouter()
@@ -24,7 +25,15 @@ function BoatSelector({ boat, setBoat }) {
                     <button
                         key={design}
                         // href={`${router.pathname}?boat=${href}`}
-                        onClick={() => setBoat(href)}
+                        onClick={() => {
+                            setBoat(href)
+                            ga.event({
+                                action: "boat-selected",
+                                params : {
+                                    boat: href
+                                }
+                            })
+                        }}
                         className={clsx(
                             href === boat ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
                             tabIdx === 0 ? 'lg:rounded-l-lg' : '',

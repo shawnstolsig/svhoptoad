@@ -8,6 +8,8 @@ import {
 } from "@heroicons/react/outline";
 import { Fragment, useState } from 'react'
 
+import * as ga from '../lib/google-analytics'
+
 function Gallery({files, className}){
     const [isOpen, setIsOpen] = useState(false)
     const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0)
@@ -18,14 +20,32 @@ function Gallery({files, className}){
     const openModal = (index) => {
         setSelectedPhotoIndex(index)
         setIsOpen(true)
+        ga.event({
+            action: "photo-viewed",
+            params : {
+                source: files[index].source
+            }
+        })
     }
 
     const nextPhoto = () => {
         selectedPhotoIndex === files.length-1 ? setSelectedPhotoIndex(0) : setSelectedPhotoIndex(selectedPhotoIndex + 1)
+        ga.event({
+            action: "next-photo-viewed",
+            params : {
+                source: files[selectedPhotoIndex].source
+            }
+        })
     }
 
     const prevPhoto = () => {
         selectedPhotoIndex === 0 ? setSelectedPhotoIndex(files.length-1) : setSelectedPhotoIndex(selectedPhotoIndex - 1)
+        ga.event({
+            action: "prev-photo-viewed",
+            params : {
+                source: files[selectedPhotoIndex].source
+            }
+        })
     }
 
     return (

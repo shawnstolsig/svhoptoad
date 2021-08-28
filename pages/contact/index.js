@@ -7,6 +7,7 @@ import emailjs from 'emailjs-com'
 import {
     contactForm
 } from '../../content/contact'
+import * as ga from '../../lib/google-analytics'
 
 function ContactForm() {
     const [name, setName] = useState('')
@@ -46,9 +47,27 @@ function ContactForm() {
             );
             alert(`Message sent!`)
             clearForm()
+            ga.event({
+                action: "email-success",
+                params : {
+                    name,
+                    email,
+                    boat,
+                    phone
+                }
+            })
             await router.push('/')
         } catch (error) {
             console.log(`Error sending email:`,error);
+            ga.event({
+                action: "email-failure",
+                params : {
+                    name,
+                    email,
+                    boat,
+                    phone
+                }
+            })
         }
     }
 
