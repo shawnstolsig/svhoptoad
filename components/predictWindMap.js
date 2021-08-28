@@ -1,7 +1,7 @@
 function PredictWindMap({props, className}){
     return (
         <div {...props} className={className}>
-            <iframe src="http://forecast.predictwind.com/tracking/display/Hoptoad" className={'w-full h-full'}/>
+            <iframe src="https://forecast.predictwind.com/tracking/display/Hoptoad" className={'w-full h-full'}/>
         </div>
     )
 }
