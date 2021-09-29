@@ -36,7 +36,7 @@ function MyApp({Component, pageProps}) {
         setVisited(null)
     }
     function showMap(){
-        setVisited(null)
+        setVisited(true)
     }
 
     return (
