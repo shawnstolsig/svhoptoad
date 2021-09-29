@@ -1,19 +1,15 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useContext } from 'react'
 
 import { intro } from '../content/home'
 import PredictWindMap from "../components/predictWindMap"
+import VisitedContext from "../context/visted";
 
 export default function Home() {
 
-    // using local storage to see if they've visited the site before
-    const today = new Date()
-    let lastVisit
-    if (typeof window !== "undefined") {  // this is needed to use localStorage with Next.js
-        lastVisit = window.localStorage.getItem('lastVisit')
-        window.localStorage.setItem('lastVisit', today.toString())
-    }
+    const {visited} = useContext(VisitedContext)
 
     return (
         <>
@@ -23,7 +19,7 @@ export default function Home() {
             </Head>
 
             {/*if no previous visit, show full home page*/}
-            {!lastVisit &&
+            {!visited &&
                 <>
                     <section className="lg:relative mt-3">
                         <div className="mx-auto w-full py-8 text-center lg:py-36 lg:text-left">
@@ -69,14 +65,14 @@ export default function Home() {
 
                     <div className={'max-w-7xl mx-auto my-4 p-2'}>
                         <h2 className={'text-2xl text-cyan-600'}>Location Tracker</h2>
-                        <p>Check back here for real-time updates on Hoptoad's position, weather conditions, and status updates!</p>
+                        <p>Check back here for real-time updates on Hoptoad's position, weather conditions, and status updates!  This map will take over the home page after your first visit to this website.</p>
                         <PredictWindMap classes={'h-96 mt-2'}/>
                     </div>
                 </>
             }
 
             {/*if previously visited, just show tracker*/}
-            { lastVisit && <PredictWindMap classes={'responsive-map'}/> }
+            { visited && <PredictWindMap classes={'responsive-map'}/> }
         </>
     );
 }

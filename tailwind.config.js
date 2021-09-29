@@ -34,9 +34,3 @@ module.exports = {
         }
     },
 };
-
-// themeLightBlue: '#D0E8F2',
-// themeLightGreen: '#D9DAB0',
-// themeKhaki: '#FBEEAC',
-// themeDarkBlue: '#383E56',
-// themeOrange: '#FF6015',

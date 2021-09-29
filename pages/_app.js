@@ -1,9 +1,10 @@
 import '../styles/index.css'
-import { useEffect} from "react";
-import { useRouter} from "next/router";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import * as ga from '../lib/google-analytics'
 import Layout from '../components/layout'
+import VisitedContext from '../context/visted'
 
 function MyApp({Component, pageProps}) {
 
@@ -21,18 +22,30 @@ function MyApp({Component, pageProps}) {
         }
     }, [router.events])
 
+    // check localStorage to see if user has visited before
+    const [visited, setVisited] = useState()
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {  // this is needed to use localStorage with Next.js
+            setVisited(window.localStorage.getItem('visited'))
+            window.localStorage.setItem('visited', '1')
+        }
+    },[])
+
+    function hideMap(){
+        setVisited(null)
+    }
+    function showMap(){
+        setVisited(null)
+    }
+
     return (
-        <Layout>
-            <Component {...pageProps}/>
-        </Layout>
+        <VisitedContext.Provider value={{visited,hideMap,showMap}}>
+            <Layout>
+                <Component {...pageProps}/>
+            </Layout>
+        </VisitedContext.Provider>
     )
 }
-
-// import ComingSoon from './comingSoon'                // uncomment below for 'Coming Soon' screen
-// function MyApp({Component, pageProps}) {
-//     return (
-//         <ComingSoon />
-//     )
-// }
 
 export default MyApp;
