@@ -31,6 +31,9 @@
     @apply p-2 rounded-md border text-center hover:shadow flex items-center justify-center hover:bg-cyan-100
 }
 
+.responsive-map {
+    height: calc(100vh - 110px);
+}
 
 /* Stop purging. */
 

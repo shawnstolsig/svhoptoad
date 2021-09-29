@@ -134,7 +134,7 @@ const Travel = () => {
                 <title>SV Hoptoad | Travel</title>
             </Head>
 
-            <div className="relative lg:py-10 bg-white overflow-hidden">
+            <div className="relative lg:py-10 bg-white overflow-hidden mt-3">
 
                 {/*Gray background graphics*/}
                 <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">

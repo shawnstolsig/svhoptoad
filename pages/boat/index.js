@@ -299,8 +299,10 @@ function Boat(){
             <Head>
                 <title>SV Hoptoad | Boat</title>
             </Head>
-            <BoatSelector boat={boat} setBoat={setBoat} />
-            <BoatDetails boat={boats.find(({ href }) => href === boat)} />
+            <div className={'mt-3'}>
+                <BoatSelector boat={boat} setBoat={setBoat} />
+                <BoatDetails boat={boats.find(({ href }) => href === boat)} />
+            </div>
         </>
     );
 }
