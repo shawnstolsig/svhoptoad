@@ -4,9 +4,9 @@ import {
     blog
 } from '../../content/blog'
 
-const Blog = (predictWindPosts) => {
+const Blog = (props) => {
     const { title, subtitle, samplePosts } = blog
-    console.log(predictWindPosts.posts)
+    const { predictWindPosts } = props
 
     return (
         <>
@@ -35,7 +35,7 @@ const Blog = (predictWindPosts) => {
                     <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
 
                         {/*Cards: title, imageUrl, category.href, category.name, description, datetime, date*/}
-                        {predictWindPosts.posts.map(post => {
+                        {predictWindPosts.map(post => {
                             const {
                                 topic_id: id,
                                 title,
