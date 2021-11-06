@@ -1,7 +1,7 @@
 export const blog = {
     title: `The blog`,
     subtitle: `A collection of updates from our satellite-based tracking system, Instagram, monthly videos and more!`,
-    posts: [
+    samplePosts: [
         {
             title: 'Boost your conversion rate',
             href: '#',
