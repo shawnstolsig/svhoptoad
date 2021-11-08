@@ -16,6 +16,8 @@ BLOG:
 - [ ] add blur to overflow on blog posts
 - [ ] create blog post detail page/modal
 - [ ] add vertical spacing/padding to <p> in blog posts
+- [ ] add filter for type of blog post
+- 
 
 
 - [ ] fix predictwinds height on homepage when maximized
@@ -26,4 +28,4 @@ BLOG:
 - [ ] low bandwidth mode??
 - [ ] make it so contact form goes straight to parents
 - [ ] some kinda contact form/link to my website?
-- 
+- [ ] bring in CMS??
