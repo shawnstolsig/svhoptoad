@@ -59,7 +59,7 @@ export function formatPredictWindPosts(data) {
                             {/*Post title and text content*/}
                             <a href={'#'} className="block mt-2">
                                 <p className="text-xl font-semibold text-gray-900">{title}</p>
-                                <p className="mt-3 text-base text-gray-500 h-80 overflow-y-scroll" dangerouslySetInnerHTML={{__html: formattedCooked}}/>
+                                <p className="mt-3 text-base text-gray-500 h-80 overflow-y-scroll border" dangerouslySetInnerHTML={{__html: formattedCooked}}/>
                             </a>
                         </div>
 

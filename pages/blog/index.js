@@ -25,7 +25,7 @@ const Blog = (props) => {
 
             <div className="relative pt-4 pb-6 px-4 sm:px-6 lg:pt-10 lg:pb-10 lg:px-8">
 
-                <div className="relative max-w-7xl mx-auto">
+                <div className="relative max-w-7xl mx-auto bg-blue-100">
 
                     {/*Page title and subtitle*/}
                     <div className="text-center">
@@ -37,21 +37,7 @@ const Blog = (props) => {
 
                     {/*Card grid*/}
                     <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-
-                        {/*Cards: title, imageUrl, category.href, category.name, description, datetime, date*/}
-                        {posts.map(({card}) => {
-
-                            /**
-                             * BLOG TODO :
-                             * create little thumbnail maps for posts without pictures
-                             * add spaces between <p> tags in cooked
-                             * fix the card sizes, show popup if larger than card
-                             * instagram posts?
-                             * 1SE videos?
-                             */
-
-                            return card
-                        })}
+                        {posts.map(({card}) => card)}
                     </div>
 
                 </div>
