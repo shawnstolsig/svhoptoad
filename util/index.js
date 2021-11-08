@@ -52,7 +52,8 @@ export function formatPredictWindPosts(data) {
 
                             {/*Post type*/}
                             <p className="text-sm font-medium text-cyan-600">
-                                {postType}
+                                <time dateTime={new Date(created_at).toDateString()}>{new Date(created_at).toLocaleString()}</time>
+
                             </p>
 
                             {/*Post title and text content*/}
@@ -63,9 +64,9 @@ export function formatPredictWindPosts(data) {
                         </div>
 
                         {/*Post date*/}
-                        <div className="flex space-x-1 text-sm text-gray-500 mt-6">
-                            <time dateTime={new Date(created_at).toDateString()}>{new Date(created_at).toLocaleString()}</time>
-                        </div>
+                        <p className="flex space-x-1 text-sm text-gray-400 mt-4">
+                            {postType}
+                        </p>
 
                         {/*author section, not using*/}
                         {/*<div className="mt-6 flex items-center">*/}

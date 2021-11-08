@@ -66,43 +66,6 @@ function Gallery({files, className}){
                 ))}
             </ul>
 
-            {/*Image overlay*/}
-            {/*<Transition*/}
-            {/*    show={isOpen}*/}
-            {/*    enter="transition duration-100 ease-out"*/}
-            {/*    enterFrom="transform scale-95 opacity-0"*/}
-            {/*    enterTo="transform scale-100 opacity-100"*/}
-            {/*    leave="transition duration-75 ease-out"*/}
-            {/*    leaveFrom="transform scale-100 opacity-100"*/}
-            {/*    leaveTo="transform scale-95 opacity-0"*/}
-            {/*>*/}
-            {/*    <Dialog*/}
-            {/*        as={`div`}*/}
-            {/*        className={`fixed inset-0 overflow-y-auto`}*/}
-            {/*        onClose={closeModal}*/}
-            {/*    >*/}
-            {/*        <div className="text-center flex flex-col">*/}
-
-            {/*            <Dialog.Overlay className={`fixed inset-0 z-10 bg-black opacity-50`}/>*/}
-
-            {/*            <div className={`m-auto w-full sm:w-5/6 lg:w-4/6 sm:h-4/6 bg-cyan-200 rounded p-4 z-20 sm:mt-4`}>*/}
-            {/*                <div className={`flex justify-between items-center mb-4`}>*/}
-            {/*                    <div className={`flex items-end`}>*/}
-            {/*                        <Dialog.Title className={`hidden`}>{files[selectedPhotoIndex].title}</Dialog.Title>*/}
-            {/*                        <Dialog.Description className={`text-xl font-cooperBlack`}>{files[selectedPhotoIndex].subtitle}</Dialog.Description>*/}
-            {/*                    </div>*/}
-            {/*                    <button onClick={closeModal} className={'button h-10 w-10'}>*/}
-            {/*                        <XIcon className={`h-5 w-5`} />*/}
-            {/*                    </button>*/}
-            {/*                </div>*/}
-            {/*                <div className={`text-center`}>*/}
-            {/*                    <Image src={files[selectedPhotoIndex].source} layout={'fill'}}/>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-
-            {/*        </div>*/}
-            {/*    </Dialog>*/}
-            {/*</Transition>*/}
             <Transition.Root show={isOpen} as={Fragment}>
                 <Dialog as="div" auto-reopen="true" className="fixed z-10 inset-0 overflow-y-auto" onClose={closeModal}>
                     <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">

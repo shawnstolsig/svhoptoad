@@ -63,6 +63,9 @@ const Blog = (props) => {
 
 export async function getServerSideProps(context) {
     // Fetch blog posts from PredictWind's API
+    /*
+    *
+     */
     const res = await fetch(`https://forecast.predictwind.com/tracking/blog/Hoptoad?_=1636170664690`)
     const { posts = [] } = await res.json()
 

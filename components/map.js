@@ -87,6 +87,11 @@ export function TripMap({initLng, initLat, initZoom, route}){
     );
 }
 
+/**
+ * TODO: finish implementation of this pin map...use in place of an image on the blog post cards
+ * whenever the blog post doesn't have an image.  How do we get lat/long from PredictWind?  Use timestamp
+ * of blogpost and pick the closest GPS fix?
+ */
 export function PinMap({pinLng, pinLat, initZoom}){
     const mapContainer = useRef(null);
     const map = useRef(null);
