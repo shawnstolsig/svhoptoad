@@ -27,7 +27,7 @@ export function formatPredictWindPosts(data) {
         formattedCooked = formattedCooked.replace(/<\/p>/g,'<\/p><br/>')
 
         return {
-            key: topic_id,
+            key: `blog-${topic_id}`,
             title,
             htmlContent: formattedCooked,
             date: new Date(created_at),

@@ -10,7 +10,7 @@ export const blog = {
         //     type: 'One Second Everyday'
         // },
         {
-            key: 2,
+            key: `1se-2`,
             date: new Date('2021-11-1 00:00:00'),
             title: 'One Second Everyday: October 2021',
             videoContent: 'https://res.cloudinary.com/svhoptoad/video/upload/v1636433247/blog/one-second-everyday/oct-2021_r3bnu9.mp4',
