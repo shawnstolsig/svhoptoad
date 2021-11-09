@@ -23,10 +23,13 @@ export function formatPredictWindPosts(data) {
             formattedCooked = cooked.replace(cookedPhotoMatches[0], '')
         }
 
+        // add some spaceing between paragraphs
+        formattedCooked = formattedCooked.replace(/<\/p>/g,'<\/p><br/>')
+
         return {
             key: topic_id,
             title,
-            content: formattedCooked,
+            htmlContent: formattedCooked,
             date: new Date(created_at),
             image: cardImageUrl,
             type: 'Satellite Update'

@@ -5,14 +5,14 @@ import {formatPredictWindPosts} from "../../util";
 import {PinMap} from "../../components/map";
 
 const Blog = (props) => {
-    const { title, subtitle } = blog
+    const { title, subtitle, oneSecondEverydayVideos } = blog
     const { predictWindPosts } = props
 
     // re-structure/format Predict Wind blog posts
     const formattedPredictWindsPosts = formatPredictWindPosts(predictWindPosts)
 
     // combine formatted posts from different sources together
-    const posts = formattedPredictWindsPosts
+    const posts = formattedPredictWindsPosts.concat(oneSecondEverydayVideos)
 
     // sort by recent - oldest
     posts.sort((a,b) => b.date - a.date)
@@ -25,7 +25,7 @@ const Blog = (props) => {
 
             <div className="relative pt-4 pb-6 px-4 sm:px-6 lg:pt-10 lg:pb-10 lg:px-8">
 
-                <div className="relative max-w-7xl mx-auto bg-blue-100">
+                <div className="relative max-w-7xl mx-auto">
 
                     {/*Page title and subtitle*/}
                     <div className="text-center">
@@ -41,14 +41,15 @@ const Blog = (props) => {
                             const {
                                 key,
                                 title,
-                                content,
+                                htmlContent,
+                                videoContent,
                                 date,
                                 image,
                                 type
                             } = card
 
                             return (
-                                <div className="flex flex-col rounded-lg shadow-lg overflow-hidden" key={key}>
+                                <div className="flex flex-col rounded-lg shadow-xl overflow-hidden" key={key}>
 
                                     {/*Image*/}
                                     {image &&
@@ -70,12 +71,20 @@ const Blog = (props) => {
                                             {/*Post title and text content*/}
                                             <a href={'#'} className="block mt-2">
                                                 <p className="text-xl font-semibold text-gray-900">{title}</p>
-                                                <p className="mt-3 text-base text-gray-500 max-h-80 overflow-y-scroll border" dangerouslySetInnerHTML={{__html: content}}/>
+                                                { htmlContent &&
+                                                    <p className="mt-3 text-base text-gray-500 max-h-80 overflow-y-scroll" dangerouslySetInnerHTML={{__html: htmlContent}}/>
+                                                }
+                                                { videoContent &&
+                                                    <video className="mt-3 max-h-80 h-100 overflow-y-scroll rounded" controls  >
+                                                        <source src={videoContent} type="video/mp4" />
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                }
                                             </a>
                                         </div>
 
                                         {/*Post date*/}
-                                        <p className="flex space-x-1 text-sm text-gray-400 mt-4">
+                                        <p className="text-sm text-gray-400 mt-4">
                                             {type}
                                         </p>
 
