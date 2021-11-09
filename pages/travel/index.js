@@ -9,9 +9,11 @@ import {
 import {
     aboardHoptoadArticles,
     trips,
-
+    circumnavigationMap
 } from "../../content/travel";
-import Map from '../../components/map'
+import {
+    TripMap
+} from '../../components/map'
 
 function AboardHoptoadArticle({title,imageSource,pageCount}) {
     const [isOpen, setIsOpen] = useState(false)
@@ -242,7 +244,12 @@ const Travel = () => {
                     </div>
                     <div className="mt-6 prose prose-cyan prose-lg text-gray-500 mx-auto">
                         <figure>
-                            <Map />
+                            <TripMap
+                                initLng={circumnavigationMap.initLng}
+                                initLat={circumnavigationMap.initLat}
+                                initZoom={circumnavigationMap.initZoom}
+                                route={circumnavigationMap.route}
+                            />
                             <figcaption>{trips.mapCaption}</figcaption>
                         </figure>
                         <p>{trips.previousTrip.paragraphs[0]}</p>

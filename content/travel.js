@@ -1,3 +1,5 @@
+import circumnavigationRoute from './circumnavigation.json'
+
 export const aboardHoptoadArticles = {
     title: 'Aboard Hoptoad',
     description: 'A series of newsletters written by our kids (Jeff and Shawn) during our circumnavigation, between the ages 10 and 15.',
@@ -85,4 +87,11 @@ export const trips = {
             ],
         }
     }
+}
+
+export const circumnavigationMap = {
+    initLng: -106.5,
+    initLat: 23.2,
+    initZoom: .2,
+    route: circumnavigationRoute
 }

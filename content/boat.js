@@ -20,7 +20,7 @@ export const boats = [
         },
         photos: [
             {
-                url: `https://res.cloudinary.com/svhoptoad/image/upload/v1628738602/boat/boats/moody46-portrait_vmy5oq.jpg`,
+                url: `https://res.cloudinary.com/svhoptoad/image/upload/ar_37:43,c_fill/c_scale,w_auto/dpr_auto/v1628738602/boat/boats/moody46-portrait_vmy5oq.jpg`,
                 title: `Cruising the Puget Sound`,
                 alt: `Portrait photo of Hoptoad: Moody 46`
             },
@@ -182,7 +182,7 @@ export const boats = [
         },
         photos: [
             {
-                url: `https://res.cloudinary.com/svhoptoad/image/upload/v1628742741/boat/boats/roberts-38-portrait_jdpvba.jpg`,
+                url: `https://res.cloudinary.com/svhoptoad/image/upload/ar_37:43,c_fill/c_scale,w_auto/dpr_auto/v1628742741/boat/boats/roberts-38-portrait_jdpvba.jpg`,
                 title: `Sailing under spinnaker`,
                 alt: `Portrait photo of Hoptoad: Roberts 38`
             },
@@ -238,7 +238,7 @@ export const boats = [
         },
         photos: [
             {
-                url: `https://res.cloudinary.com/svhoptoad/image/upload/v1628740903/boat/boats/cal-3-30-portrait_vttckq.jpg`,
+                url: `https://res.cloudinary.com/svhoptoad/image/upload/ar_37:43,c_fill/c_scale,w_auto/dpr_auto/v1628740903/boat/boats/cal-3-30-portrait_vttckq.jpg`,
                 title: `Summer vacation in the San Juans`,
                 alt: `Portrait photo of Hoptoad: Cal 3-30`
             },
@@ -270,7 +270,7 @@ export const boats = [
         },
         photos: [
             {
-                url: `https://res.cloudinary.com/svhoptoad/image/upload/v1628740977/boat/boats/san-juan-portrait_au79dz.jpg`,
+                url: `https://res.cloudinary.com/svhoptoad/image/upload/ar_37:43,c_fill/c_scale,w_auto/dpr_auto/v1628740977/boat/boats/san-juan-portrait_au79dz.jpg`,
                 title: `Keeping out of trouble in Elliott Bay, Seattle`,
                 alt: `Portrait photo of Hoptoad: San Juan 23`
             },
