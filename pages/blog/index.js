@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image"
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 
@@ -28,7 +28,11 @@ const Blog = (props) => {
                 title: `Post not found`,
                 errorText: 'Sorry about that, please try another post.'
             })
-        } else {
+        }
+        else if(detailPost.type === 'One Second Everyday'){
+            return
+        }
+        else {
             setDetailedPost(detailPost)
         }
         setOpen(true)
@@ -37,12 +41,15 @@ const Blog = (props) => {
     // closes post details modal
     const closePostDetails = () => {
         setOpen(false)
-        setDetailedPost({
-            key: null,
-            title: null,
-            date: null,
-            type: null
-        })
+
+            setTimeout(() => {
+                setDetailedPost({
+                    key: null,
+                    title: null,
+                    date: null,
+                    type: null
+                })
+            }, 500)
     }
 
     // re-structure/format Predict Wind blog posts
@@ -89,7 +96,7 @@ const Blog = (props) => {
                             return (
                                 // Card
                                 <div
-                                    className="flex flex-col rounded-lg shadow-xl overflow-hidden cursor-pointer"
+                                    className={`flex flex-col rounded-lg shadow-xl overflow-hidden ${type === 'One Second Everyday' ? '' : 'cursor-pointer'}`}
                                     key={key}
                                     onClick={() => openPostDetails(key)}
                                 >
@@ -112,48 +119,22 @@ const Blog = (props) => {
                                             </p>
 
                                             {/*Post title and text content*/}
-
                                             <p className="text-xl font-semibold text-gray-900">{title}</p>
                                             { htmlContent &&
-                                            <p className="mt-3 text-base text-gray-500 max-h-80 overflow-y-scroll" dangerouslySetInnerHTML={{__html: htmlContent}}/>
+                                                <p className="mt-3 text-base text-gray-500 max-h-80 overflow-y-scroll" dangerouslySetInnerHTML={{__html: htmlContent}}/>
                                             }
                                             { videoContent &&
-                                            <video className="mt-3 max-h-80 h-100 overflow-y-scroll rounded" controls  >
-                                                <source src={videoContent} type="video/mp4" />
-                                                Your browser does not support the video tag.
-                                            </video>
+                                                <video className="mt-3 max-h-80 h-100 overflow-y-scroll rounded" controls  >
+                                                    <source src={videoContent} type="video/mp4" />
+                                                    Your browser does not support the video tag.
+                                                </video>
                                             }
-                                            {/*<a href={'#'} className="block mt-2">*/}
-                                            {/*    */}
-                                            {/*</a>*/}
                                         </div>
 
                                         {/*Post date*/}
                                         <p className="text-sm text-gray-400 mt-4">
                                             {type}
                                         </p>
-
-                                        {/*author section, not using*/}
-                                        {/*<div className="mt-6 flex items-center">*/}
-                                        {/*    <div className="flex-shrink-0">*/}
-                                        {/*        <a href={post.author.href}>*/}
-                                        {/*            <span className="sr-only">{post.author.name}</span>*/}
-                                        {/*            <img className="h-10 w-10 rounded-full" src={post.author.imageUrl} alt="" />*/}
-                                        {/*        </a>*/}
-                                        {/*    </div>*/}
-                                        {/*    <div className="ml-3">*/}
-                                        {/*        <p className="text-sm font-medium text-gray-900">*/}
-                                        {/*            <a href={post.author.href} className="hover:underline">*/}
-                                        {/*                {post.author.name}*/}
-                                        {/*            </a>*/}
-                                        {/*        </p>*/}
-                                        {/*        <div className="flex space-x-1 text-sm text-gray-500">*/}
-                                        {/*            <time dateTime={post.datetime}>{post.date}</time>*/}
-                                        {/*            <span aria-hidden="true">&middot;</span>*/}
-                                        {/*            <span>{post.readingTime} read</span>*/}
-                                        {/*        </div>*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
 
                                     </div>
                                 </div>
@@ -167,7 +148,9 @@ const Blog = (props) => {
             {/*Post details modal*/}
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={closePostDetails}>
-                    <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                    <div className="flex items-end justify-center min-h-screen text-center sm:block">
+
+                        {/*Dialog background dimmer*/}
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -185,6 +168,7 @@ const Blog = (props) => {
                             &#8203;
                         </span>
 
+                        {/*Modal content*/}
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -194,10 +178,14 @@ const Blog = (props) => {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
+
                             {/*PICKUP HERE....STYLING FOR MODAL, ADD DATE AND BLOG POST TYPE*/}
-                            {/*Modal content*/}
-                            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 align-middle sm:max-w-sm sm:w-full sm:p-6">
-                                <div>
+
+                            <div className="inline-block bg-white rounded-lg p-4 text-left overflow-hidden shadow-xl transform transition-all align-middle max-w-5xl ">
+                                <button onClick={closePostDetails} className={'absolute button h-8 w-8 z-50 top-1 right-1'}>
+                                    <XIcon className={`h-5 w-5`} />
+                                </button>
+                                <div className={'mt-6'}>
                                     { detailedPost.errorText &&
                                         <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
                                             <XIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
@@ -207,7 +195,7 @@ const Blog = (props) => {
                                         <img className="h-48 w-full object-cover" src={detailedPost.image} alt={`${detailedPost.type} image`}/>
                                     }
 
-                                    <div className="mt-3 text-center sm:mt-5">
+                                    <div className="mt-3 text-left sm:mt-5">
                                         <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
                                             {detailedPost.title}
                                         </Dialog.Title>
@@ -221,7 +209,7 @@ const Blog = (props) => {
                                 <div className="mt-5 sm:mt-6">
                                     <button
                                         type="button"
-                                        className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                                        className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-cyan-600 text-base font-medium text-white hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 sm:text-sm"
                                         onClick={closePostDetails}
                                     >
                                         Back to blog...
