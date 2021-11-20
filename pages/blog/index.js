@@ -96,7 +96,7 @@ const Blog = (props) => {
                             return (
                                 // Card
                                 <div
-                                    className="flex flex-col rounded-lg shadow-xl overflow-hidden cursor-pointer"
+                                    className={`flex flex-col rounded-lg shadow-xl overflow-hidden ${type === 'One Second Everyday' ? '' : 'cursor-pointer'}`}
                                     key={key}
                                     onClick={() => openPostDetails(key)}
                                 >
@@ -119,48 +119,22 @@ const Blog = (props) => {
                                             </p>
 
                                             {/*Post title and text content*/}
-
                                             <p className="text-xl font-semibold text-gray-900">{title}</p>
                                             { htmlContent &&
-                                            <p className="mt-3 text-base text-gray-500 max-h-80 overflow-y-scroll" dangerouslySetInnerHTML={{__html: htmlContent}}/>
+                                                <p className="mt-3 text-base text-gray-500 max-h-80 overflow-y-scroll" dangerouslySetInnerHTML={{__html: htmlContent}}/>
                                             }
                                             { videoContent &&
-                                            <video className="mt-3 max-h-80 h-100 overflow-y-scroll rounded" controls  >
-                                                <source src={videoContent} type="video/mp4" />
-                                                Your browser does not support the video tag.
-                                            </video>
+                                                <video className="mt-3 max-h-80 h-100 overflow-y-scroll rounded" controls  >
+                                                    <source src={videoContent} type="video/mp4" />
+                                                    Your browser does not support the video tag.
+                                                </video>
                                             }
-                                            {/*<a href={'#'} className="block mt-2">*/}
-                                            {/*    */}
-                                            {/*</a>*/}
                                         </div>
 
                                         {/*Post date*/}
                                         <p className="text-sm text-gray-400 mt-4">
                                             {type}
                                         </p>
-
-                                        {/*author section, not using*/}
-                                        {/*<div className="mt-6 flex items-center">*/}
-                                        {/*    <div className="flex-shrink-0">*/}
-                                        {/*        <a href={post.author.href}>*/}
-                                        {/*            <span className="sr-only">{post.author.name}</span>*/}
-                                        {/*            <img className="h-10 w-10 rounded-full" src={post.author.imageUrl} alt="" />*/}
-                                        {/*        </a>*/}
-                                        {/*    </div>*/}
-                                        {/*    <div className="ml-3">*/}
-                                        {/*        <p className="text-sm font-medium text-gray-900">*/}
-                                        {/*            <a href={post.author.href} className="hover:underline">*/}
-                                        {/*                {post.author.name}*/}
-                                        {/*            </a>*/}
-                                        {/*        </p>*/}
-                                        {/*        <div className="flex space-x-1 text-sm text-gray-500">*/}
-                                        {/*            <time dateTime={post.datetime}>{post.date}</time>*/}
-                                        {/*            <span aria-hidden="true">&middot;</span>*/}
-                                        {/*            <span>{post.readingTime} read</span>*/}
-                                        {/*        </div>*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
 
                                     </div>
                                 </div>
