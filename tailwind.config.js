@@ -24,6 +24,11 @@ module.exports = {
                 cooperBlack: ['cooper-black-std'],
                 // sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
+            maxHeight: {
+                '112': '28rem',
+                '128': '32rem',
+                '160': '40rem'
+            }
         }
     },
     variants: {

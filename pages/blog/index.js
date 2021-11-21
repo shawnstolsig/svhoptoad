@@ -121,14 +121,15 @@ const Blog = (props) => {
                                             {/*Post title and text content*/}
                                             <p className="text-xl font-semibold text-gray-900">{title}</p>
                                             { htmlContent &&
-                                                <p className="mt-3 text-base text-gray-500 max-h-80 overflow-y-scroll" dangerouslySetInnerHTML={{__html: htmlContent}}/>
+                                                <p className={`mt-3 text-base text-gray-500 overflow-y-scroll ${image ? 'max-h-60' : 'max-h-112'}`} dangerouslySetInnerHTML={{__html: htmlContent}}/>
                                             }
                                             { videoContent &&
-                                                <video className="mt-3 max-h-80 h-100 overflow-y-scroll rounded" controls  >
+                                                <video className="mt-3 h-100 overflow-y-scroll rounded" controls  >
                                                     <source src={videoContent} type="video/mp4" />
                                                     Your browser does not support the video tag.
                                                 </video>
                                             }
+
                                         </div>
 
                                         {/*Post date*/}
@@ -208,7 +209,7 @@ const Blog = (props) => {
                                             </p>
                                             }
                                             {detailedPost.type &&
-                                            <p className="text-sm text-gray-400">
+                                            <p className="text-sm text-gray-400 ml-4">
                                                 {detailedPost.type}
                                             </p>
                                             }
