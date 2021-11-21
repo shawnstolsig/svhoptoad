@@ -99,3 +99,7 @@ export function formatPredictWindPosts(data) {
         // }
     })
 }
+
+export function cloudfrontLoader({src, width, quality}){
+    return src
+}

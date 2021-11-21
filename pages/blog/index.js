@@ -5,7 +5,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 
 import {blog} from '../../content/blog'
-import {formatPredictWindPosts} from "../../util";
+import {cloudfrontLoader, formatPredictWindPosts} from "../../util";
 import {PinMap} from "../../components/map";
 
 const Blog = (props) => {
@@ -49,7 +49,7 @@ const Blog = (props) => {
                     date: null,
                     type: null
                 })
-            }, 500)
+            }, 200)
     }
 
     // re-structure/format Predict Wind blog posts
@@ -121,14 +121,15 @@ const Blog = (props) => {
                                             {/*Post title and text content*/}
                                             <p className="text-xl font-semibold text-gray-900">{title}</p>
                                             { htmlContent &&
-                                                <p className="mt-3 text-base text-gray-500 max-h-80 overflow-y-scroll" dangerouslySetInnerHTML={{__html: htmlContent}}/>
+                                                <p className={`mt-3 text-base text-gray-500 overflow-y-scroll ${image ? 'max-h-60' : 'max-h-112'}`} dangerouslySetInnerHTML={{__html: htmlContent}}/>
                                             }
                                             { videoContent &&
-                                                <video className="mt-3 max-h-80 h-100 overflow-y-scroll rounded" controls  >
+                                                <video className="mt-3 h-100 overflow-y-scroll rounded" controls  >
                                                     <source src={videoContent} type="video/mp4" />
                                                     Your browser does not support the video tag.
                                                 </video>
                                             }
+
                                         </div>
 
                                         {/*Post date*/}
@@ -191,19 +192,33 @@ const Blog = (props) => {
                                             <XIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
                                         </div>
                                     }
-                                    { detailedPost.image &&
-                                        <img className="h-48 w-full object-cover" src={detailedPost.image} alt={`${detailedPost.type} image`}/>
-                                    }
+                                    <div className={`relative ${detailedPost.image && 'h-96'}`}>
+                                        { detailedPost.image &&
+                                            <Image src={detailedPost.image} layout={"fill"} objectFit={'contain'} loader={cloudfrontLoader} />
+                                        }
+                                    </div>
 
                                     <div className="mt-3 text-left sm:mt-5">
-                                        <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+                                        <Dialog.Title as="h3" className="text-xl leading-6 font-medium text-gray-900">
                                             {detailedPost.title}
                                         </Dialog.Title>
-                                        <div className="mt-2">
-                                            { detailedPost.htmlContent &&
-                                            <p className="text-base text-gray-500 overflow-y-scroll" dangerouslySetInnerHTML={{__html: detailedPost.htmlContent}}/>
+                                        <div className={'flex items-center justify-between my-1'}>
+                                            {detailedPost.date &&
+                                            <p className="text-sm text-cyan-600">
+                                                <time dateTime={detailedPost.date.toDateString()}>{detailedPost.date.toLocaleString()}</time>
+                                            </p>
+                                            }
+                                            {detailedPost.type &&
+                                            <p className="text-sm text-gray-400 ml-4">
+                                                {detailedPost.type}
+                                            </p>
                                             }
                                         </div>
+                                        { detailedPost.htmlContent &&
+                                            <div className="mt-2">
+                                                <p className="text-base text-gray-500 overflow-y-scroll" dangerouslySetInnerHTML={{__html: detailedPost.htmlContent}}/>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                                 <div className="mt-5 sm:mt-6">
