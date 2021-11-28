@@ -5,12 +5,13 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 
 import {blog} from '../../content/blog'
-import {cloudfrontLoader, formatPredictWindPosts} from "../../util";
+import {cloudfrontLoader} from "../../util";
 import {PinMap} from "../../components/map";
+import sanity from '../../lib/sanity';
 
 const Blog = (props) => {
     const { title, subtitle, oneSecondEverydayVideos } = blog
-    const { predictWindPosts } = props
+    const { blogPosts } = props
     const [detailedPost, setDetailedPost] = useState({
         key: null,
         title: null,
@@ -42,6 +43,7 @@ const Blog = (props) => {
     const closePostDetails = () => {
         setOpen(false)
 
+            // a slight delay before updating state to allow animation time to run
             setTimeout(() => {
                 setDetailedPost({
                     key: null,
@@ -53,7 +55,17 @@ const Blog = (props) => {
     }
 
     // re-structure/format Predict Wind blog posts
-    const formattedPredictWindsPosts = formatPredictWindPosts(predictWindPosts)
+    const formattedPredictWindsPosts = blogPosts.map(({id, title, type, date, content, photos, location}) =>  ({
+            key: `blog-${id}`,
+            title,
+            textContent: content,
+            date: new Date(date),
+            image: photos.length ? photos[0].src : null,
+            photos,
+            location,
+            type
+        })
+    )
 
     // combine formatted posts from different sources together
     const posts = formattedPredictWindsPosts.concat(oneSecondEverydayVideos)
@@ -86,7 +98,7 @@ const Blog = (props) => {
                             const {
                                 key,
                                 title,
-                                htmlContent,
+                                textContent,
                                 videoContent,
                                 date,
                                 image,
@@ -103,8 +115,8 @@ const Blog = (props) => {
 
                                     {/*Image*/}
                                     {image &&
-                                        <div className="flex-shrink-0">
-                                            <img className="h-48 w-full object-cover" src={image} alt={`${type} image`}/>
+                                        <div className="flex-shrink-0 h-48 relative w-full">
+                                            <Image src={image} layout={"fill"} objectFit={'cover'} loader={cloudfrontLoader}/>
                                         </div>
                                     }
 
@@ -120,8 +132,10 @@ const Blog = (props) => {
 
                                             {/*Post title and text content*/}
                                             <p className="text-xl font-semibold text-gray-900">{title}</p>
-                                            { htmlContent &&
-                                                <p className={`mt-3 text-base text-gray-500 overflow-y-scroll ${image ? 'max-h-60' : 'max-h-112'}`} dangerouslySetInnerHTML={{__html: htmlContent}}/>
+                                            { textContent &&
+                                                <p className={`mt-3 text-base text-gray-500 overflow-y-scroll ${image ? 'max-h-60' : 'max-h-112'} whitespace-pre-line`}>
+                                                    {textContent}
+                                                </p>
                                             }
                                             { videoContent &&
                                                 <video className="mt-3 h-100 overflow-y-scroll rounded" controls  >
@@ -179,9 +193,7 @@ const Blog = (props) => {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-
-                            {/*PICKUP HERE....STYLING FOR MODAL, ADD DATE AND BLOG POST TYPE*/}
-
+                            {/*Modal card*/}
                             <div className="inline-block bg-white rounded-lg p-4 text-left overflow-hidden shadow-xl transform transition-all align-middle max-w-5xl ">
                                 <button onClick={closePostDetails} className={'absolute button h-8 w-8 z-50 top-1 right-1'}>
                                     <XIcon className={`h-5 w-5`} />
@@ -192,33 +204,43 @@ const Blog = (props) => {
                                             <XIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
                                         </div>
                                     }
-                                    <div className={`relative ${detailedPost.image && 'h-96'}`}>
+                                    <div className={`relative ${detailedPost.image && 'h-112'}`}>
                                         { detailedPost.image &&
                                             <Image src={detailedPost.image} layout={"fill"} objectFit={'contain'} loader={cloudfrontLoader} />
                                         }
                                     </div>
 
-                                    <div className="mt-3 text-left sm:mt-5">
+                                    <div className="mt-3 text-left sm:mt-5 px-4">
                                         <Dialog.Title as="h3" className="text-xl leading-6 font-medium text-gray-900">
                                             {detailedPost.title}
                                         </Dialog.Title>
                                         <div className={'flex items-center justify-between my-1'}>
                                             {detailedPost.date &&
-                                            <p className="text-sm text-cyan-600">
-                                                <time dateTime={detailedPost.date.toDateString()}>{detailedPost.date.toLocaleString()}</time>
-                                            </p>
+                                                <p className="text-sm text-cyan-600">
+                                                    <time dateTime={detailedPost.date.toDateString()}>{detailedPost.date.toLocaleString()}</time>
+                                                </p>
                                             }
                                             {detailedPost.type &&
-                                            <p className="text-sm text-gray-400 ml-4">
-                                                {detailedPost.type}
-                                            </p>
+                                                <p className="text-sm text-gray-400 ml-4">
+                                                    {detailedPost.type}
+                                                </p>
                                             }
                                         </div>
-                                        { detailedPost.htmlContent &&
+                                        { detailedPost.textContent &&
                                             <div className="mt-2">
-                                                <p className="text-base text-gray-500 overflow-y-scroll" dangerouslySetInnerHTML={{__html: detailedPost.htmlContent}}/>
+                                                <p className={`text-base text-gray-500 overflow-y-scroll whitespace-pre-line`}>
+                                                    {detailedPost.textContent}
+                                                </p>
                                             </div>
                                         }
+                                        { detailedPost.photos && detailedPost.photos.length > 1 && detailedPost.photos.map((photo,i) => {
+                                            if(i === 0) return  // don't render the first image, since it's already displayed
+                                            return (
+                                                <div className="mt-2 relative h-160" key={photo.id}>
+                                                    <Image src={photo.src} layout={"fill"} objectFit={'contain'} loader={cloudfrontLoader}/>
+                                                </div>
+                                            )
+                                        })}
                                     </div>
                                 </div>
                                 <div className="mt-5 sm:mt-6">
@@ -242,13 +264,24 @@ const Blog = (props) => {
 }
 
 export async function getServerSideProps(context) {
-    // Fetch blog posts from PredictWind's API
-    const res = await fetch(`https://forecast.predictwind.com/tracking/blog/Hoptoad?_=1636170664690`)
-    const { posts = [] } = await res.json()
+
+    // TODO: Optimize this down from 500 posts....do this dynamically, based on date from frontend?
+    const blogPosts = await sanity.fetch(`
+        *[_type == 'post'] | order(date desc) {
+          id, 
+          title, 
+          date,
+          type,
+          content,
+          htmlContent,
+          location,
+          "photos": *[_type == "photo" && references(^._id)]{id, src, height, width, alt}
+        }[0...500]
+        `)
 
     return {
         props: {
-            predictWindPosts: posts
+            blogPosts
         },
     }
 }

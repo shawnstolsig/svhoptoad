@@ -28,7 +28,12 @@ module.exports = {
                 '112': '28rem',
                 '128': '32rem',
                 '160': '40rem'
-            }
+            },
+            height: {
+                '112': '28rem',
+                '128': '32rem',
+                '160': '40rem'
+            },
         }
     },
     variants: {
