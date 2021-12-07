@@ -53,3 +53,24 @@ export function formatPredictWindPostsOld(data) {
 export function cloudfrontLoader({src, width, quality}){
     return src
 }
+
+/**
+ * For use by SWR
+ * @param url
+ * @returns {Promise<any>}
+ */
+export function fetcher(url) {
+    return fetch(url).then(res => res.json())
+}
+
+/**
+ * Helper function for dates
+ * @param date
+ * @param days
+ * @returns {Date}
+ */
+export function addDays(date, days) {
+    let result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}

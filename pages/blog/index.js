@@ -5,13 +5,14 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 
 import {blog} from '../../content/blog'
-import {cloudfrontLoader} from "../../util";
+import {cloudfrontLoader, addDays} from "../../util";
 import {PinMap} from "../../components/map";
 import sanity from '../../lib/sanity';
 
-const Blog = (props) => {
+const URL_LAST_36_POSTS = `https://sq8huxry.api.sanity.io/v1/data/query/production?query=*%5B_type%20%3D%3D%20'post'%5D%20%7C%20order(date%20desc)%20%7B%0A%20%20id%2C%20%0A%20%20title%2C%20%0A%20%20date%2C%0A%20%20type%2C%0A%20%20content%2C%0A%20%20htmlContent%2C%0A%20%20location%2C%0A%20%20%22photos%22%3A%20*%5B_type%20%3D%3D%20%22photo%22%20%26%26%20references(%5E._id)%5D%7Bid%2C%20src%2C%20height%2C%20width%2C%20alt%7D%0A%7D%5B0...36%5D`
+
+const Blog = ({ blogPosts }) => {
     const { title, subtitle, oneSecondEverydayVideos } = blog
-    const { blogPosts } = props
     const [detailedPost, setDetailedPost] = useState({
         key: null,
         title: null,
@@ -20,9 +21,33 @@ const Blog = (props) => {
     })
     const [open, setOpen] = useState(false)
 
+    const [pw, setPw] = useState(blogPosts)
+    useEffect(() => {
+        setPw(blogPosts);
+    }, [blogPosts])
+
+    const [startDate, setStartDate] = useState(new Date(blogPosts[blogPosts.length - 1].date))
+    const [endDate, setEndDate] = useState(addDays(new Date(blogPosts[0].date),1))
+    useEffect(async () => {
+        console.log(endDate, startDate)
+        const posts = await sanity.fetch(`
+            *[_type == 'post' && date >= "${startDate.toISOString()}" && date <= "${endDate.toISOString()}"] | order(date desc) {
+              id,
+              title,
+              date,
+              type,
+              content,  
+              htmlContent,
+              location,
+              "photos": *[_type == "photo" && references(^._id)]{id, src, height, width, alt}
+            }[0...100]
+        `)
+        setPw(posts)
+    }, [startDate, endDate])
+
     // opens post details modal
     const openPostDetails = (key) => {
-        const detailPost = posts.find(post => post.key === key)
+        const detailPost = originalPosts.find(post => post.key === key)
         if(!detailPost){
             setDetailedPost({
                 ...detailedPost,
@@ -54,8 +79,16 @@ const Blog = (props) => {
             }, 200)
     }
 
+    // grab next month of posts
+    const backOneMonth = () => {
+        const end = startDate
+        setStartDate(addDays(startDate, -30))
+        setEndDate(end)
+        // PICKUP HERE....FIGURE OUT HOW TO ADD THESE TO START RATHER THAN REPLACING ALL POSTS
+    }
+
     // re-structure/format Predict Wind blog posts
-    const formattedPredictWindsPosts = blogPosts.map(({id, title, type, date, content, photos, location}) =>  ({
+    const formattedPredictWindsPosts = pw.map(({id, title, type, date, content, photos, location}) =>  ({
             key: `blog-${id}`,
             title,
             textContent: content,
@@ -68,13 +101,16 @@ const Blog = (props) => {
     )
 
     // combine formatted posts from different sources together
-    const posts = formattedPredictWindsPosts.concat(oneSecondEverydayVideos)
+    const originalPosts = formattedPredictWindsPosts.concat(oneSecondEverydayVideos)
 
     // sort by recent - oldest
-    posts.sort((a,b) => b.date - a.date)
+    originalPosts.sort((a,b) => b.date - a.date)
+
+    // ADD DATE RANGE PICKER SO THAT START DATE AND END DATE CAN BE UPDATED
 
     return (
         <>
+
             <Head>
                 <title>SV Hoptoad | Blog</title>
             </Head>
@@ -94,7 +130,7 @@ const Blog = (props) => {
 
                     {/*Card grid*/}
                     <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-                        {posts.map(card => {
+                        {originalPosts.map(card => {
                             const {
                                 key,
                                 title,
@@ -157,7 +193,17 @@ const Blog = (props) => {
                         })}
                     </div>
 
+                    {/*Load more posts button*/}
+                    <div className={'flex justify-center'}>
+                        <button type="button"
+                                onClick={backOneMonth}
+                                className="my-4 inline-flex items-center px-3.5 py-2 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
+                            Load another month...
+                        </button>
+                    </div>
+
                 </div>
+
             </div>
 
             {/*Post details modal*/}
@@ -264,19 +310,17 @@ const Blog = (props) => {
 }
 
 export async function getServerSideProps(context) {
-
-    // TODO: Optimize this down from 500 posts....do this dynamically, based on date from frontend?
     const blogPosts = await sanity.fetch(`
         *[_type == 'post'] | order(date desc) {
-          id, 
-          title, 
+          id,
+          title,
           date,
           type,
           content,
           htmlContent,
           location,
           "photos": *[_type == "photo" && references(^._id)]{id, src, height, width, alt}
-        }[0...500]
+        }[0...24]
         `)
 
     return {
