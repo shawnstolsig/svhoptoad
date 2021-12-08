@@ -1,4 +1,10 @@
-export function formatPredictWindPosts(data) {
+/**
+ * This was the old version that'd parse posts directly from predict wind's API...
+ * ...keeping this around in case we remove sanity.io
+ * @param data
+ * @returns {*}
+ */
+export function formatPredictWindPostsOld(data) {
     return data.map(({topic_id, title, raw, created_at, cooked}) => {
 
         const postType = 'Satellite Update'
@@ -23,7 +29,7 @@ export function formatPredictWindPosts(data) {
             formattedCooked = cooked.replace(cookedPhotoMatches[0], '')
         }
 
-        // add some spaceing between paragraphs
+        // add some spacing between paragraphs
         formattedCooked = formattedCooked.replace(/<\/p>/g,'<\/p><br/>')
 
         return {
@@ -34,72 +40,37 @@ export function formatPredictWindPosts(data) {
             image: cardImageUrl,
             type: 'Satellite Update'
         }
-
-
-        // return {
-        //     date: new Date(created_at),
-        //     card: (
-        //         <div className="flex flex-col rounded-lg shadow-lg overflow-hidden" key={topic_id}>
-        //
-        //             {/*Image*/}
-        //             {cardImageUrl &&
-        //                 <div className="flex-shrink-0">
-        //                     <img className="h-48 w-full object-cover" src={cardImageUrl} alt={`${postType} image`}/>
-        //                 </div>
-        //             }
-        //
-        //             {/*Card content*/}
-        //             <div className="flex-1 bg-white p-6 flex flex-col justify-between">
-        //
-        //                 <div className="flex-1">
-        //
-        //                     {/*Post type*/}
-        //                     <p className="text-sm font-medium text-cyan-600">
-        //                         <time dateTime={new Date(created_at).toDateString()}>{new Date(created_at).toLocaleString()}</time>
-        //
-        //                     </p>
-        //
-        //                     {/*Post title and text content*/}
-        //                     <a href={'#'} className="block mt-2">
-        //                         <p className="text-xl font-semibold text-gray-900">{title}</p>
-        //                         <p className="mt-3 text-base text-gray-500 h-80 overflow-y-scroll border" dangerouslySetInnerHTML={{__html: formattedCooked}}/>
-        //                     </a>
-        //                 </div>
-        //
-        //                 {/*Post date*/}
-        //                 <p className="flex space-x-1 text-sm text-gray-400 mt-4">
-        //                     {postType}
-        //                 </p>
-        //
-        //                 {/*author section, not using*/}
-        //                 {/*<div className="mt-6 flex items-center">*/}
-        //                 {/*    <div className="flex-shrink-0">*/}
-        //                 {/*        <a href={post.author.href}>*/}
-        //                 {/*            <span className="sr-only">{post.author.name}</span>*/}
-        //                 {/*            <img className="h-10 w-10 rounded-full" src={post.author.imageUrl} alt="" />*/}
-        //                 {/*        </a>*/}
-        //                 {/*    </div>*/}
-        //                 {/*    <div className="ml-3">*/}
-        //                 {/*        <p className="text-sm font-medium text-gray-900">*/}
-        //                 {/*            <a href={post.author.href} className="hover:underline">*/}
-        //                 {/*                {post.author.name}*/}
-        //                 {/*            </a>*/}
-        //                 {/*        </p>*/}
-        //                 {/*        <div className="flex space-x-1 text-sm text-gray-500">*/}
-        //                 {/*            <time dateTime={post.datetime}>{post.date}</time>*/}
-        //                 {/*            <span aria-hidden="true">&middot;</span>*/}
-        //                 {/*            <span>{post.readingTime} read</span>*/}
-        //                 {/*        </div>*/}
-        //                 {/*    </div>*/}
-        //                 {/*</div>*/}
-        //
-        //             </div>
-        //         </div>
-        //     )
-        // }
     })
 }
 
+/**
+ * Used by Next.js so that PredictWind images work with the <Image> component
+ * @param src
+ * @param width
+ * @param quality
+ * @returns {*}
+ */
 export function cloudfrontLoader({src, width, quality}){
     return src
+}
+
+/**
+ * For use by SWR
+ * @param url
+ * @returns {Promise<any>}
+ */
+export function fetcher(url) {
+    return fetch(url).then(res => res.json())
+}
+
+/**
+ * Helper function for dates
+ * @param date
+ * @param days
+ * @returns {Date}
+ */
+export function addDays(date, days) {
+    let result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
 }
