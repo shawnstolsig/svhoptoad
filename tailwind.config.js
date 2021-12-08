@@ -41,6 +41,7 @@ module.exports = {
             backgroundColor: ['disabled'],
             cursor: ['disabled'],
             textColor: ['disabled'],
+            display: ['disabled']
         }
     },
 };

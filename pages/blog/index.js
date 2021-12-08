@@ -8,9 +8,6 @@ import {blog} from '../../content/blog'
 import {cloudfrontLoader, addDays} from "../../util";
 import {PinMap} from "../../components/map";
 import sanity from '../../lib/sanity';
-
-const URL_LAST_36_POSTS = `https://sq8huxry.api.sanity.io/v1/data/query/production?query=*%5B_type%20%3D%3D%20'post'%5D%20%7C%20order(date%20desc)%20%7B%0A%20%20id%2C%20%0A%20%20title%2C%20%0A%20%20date%2C%0A%20%20type%2C%0A%20%20content%2C%0A%20%20htmlContent%2C%0A%20%20location%2C%0A%20%20%22photos%22%3A%20*%5B_type%20%3D%3D%20%22photo%22%20%26%26%20references(%5E._id)%5D%7Bid%2C%20src%2C%20height%2C%20width%2C%20alt%7D%0A%7D%5B0...36%5D`
-
 const Blog = ({ blogPosts }) => {
     const { title, subtitle, oneSecondEverydayVideos } = blog
     const [detailedPost, setDetailedPost] = useState({
@@ -28,8 +25,9 @@ const Blog = ({ blogPosts }) => {
 
     const [startDate, setStartDate] = useState(new Date(blogPosts[blogPosts.length - 1].date))
     const [endDate, setEndDate] = useState(addDays(new Date(blogPosts[0].date),1))
+
     useEffect(async () => {
-        console.log(endDate, startDate)
+        // fetch posts based on updated start/end dates
         const posts = await sanity.fetch(`
             *[_type == 'post' && date >= "${startDate.toISOString()}" && date <= "${endDate.toISOString()}"] | order(date desc) {
               id,
@@ -42,7 +40,15 @@ const Blog = ({ blogPosts }) => {
               "photos": *[_type == "photo" && references(^._id)]{id, src, height, width, alt}
             }[0...100]
         `)
-        setPw(posts)
+
+        // add new posts to state
+        const existingPosts = [...pw]
+        posts.forEach(newPost => {
+            if(!existingPosts.map(({id}) => id).includes(newPost.id)){
+                existingPosts.push(newPost)
+            }
+        })
+        setPw(existingPosts)
     }, [startDate, endDate])
 
     // opens post details modal
@@ -86,6 +92,9 @@ const Blog = ({ blogPosts }) => {
         setEndDate(end)
         // PICKUP HERE....FIGURE OUT HOW TO ADD THESE TO START RATHER THAN REPLACING ALL POSTS
     }
+
+    // used to hide the Load more button once the date of the first post is reached (Aug 29 5:34pm 2021)
+    const endReached = () => startDate.getTime() < 1630283640000
 
     // re-structure/format Predict Wind blog posts
     const formattedPredictWindsPosts = pw.map(({id, title, type, date, content, photos, location}) =>  ({
@@ -197,8 +206,9 @@ const Blog = ({ blogPosts }) => {
                     <div className={'flex justify-center'}>
                         <button type="button"
                                 onClick={backOneMonth}
-                                className="my-4 inline-flex items-center px-3.5 py-2 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
-                            Load another month...
+                                disabled={endReached()}
+                                className={`disabled:hidden my-6 inline-flex items-center px-3.5 py-2 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500`}>
+                            {`Load another 30 days...`}
                         </button>
                     </div>
 
