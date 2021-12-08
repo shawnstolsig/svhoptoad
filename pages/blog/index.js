@@ -27,7 +27,7 @@ const Blog = ({ blogPosts }) => {
     const [endDate, setEndDate] = useState(addDays(new Date(blogPosts[0].date),1))
 
     useEffect(async () => {
-        // fetch posts based on updated start/end dates
+        // fetch posts based on updated start/end dates.  Limiting to 100 posts max to prevent the page from bogging down
         const posts = await sanity.fetch(`
             *[_type == 'post' && date >= "${startDate.toISOString()}" && date <= "${endDate.toISOString()}"] | order(date desc) {
               id,
