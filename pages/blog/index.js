@@ -1,13 +1,47 @@
 import Head from "next/head";
 import Image from "next/image"
-import { Fragment, useState, useEffect } from 'react'
+import { Fragment, useState, useEffect, forwardRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import getDaysInMonth from "date-fns/getDaysInMonth";
 
 import {blog} from '../../content/blog'
 import {cloudfrontLoader, addDays} from "../../util";
 import {PinMap} from "../../components/map";
 import sanity from '../../lib/sanity';
+import Loader from "../../components/loader";
+
+const MonthPicker = ({endDate, setPw, setDateRange, maxDate}) => {
+    const CustomInput = forwardRef(({ value, onClick }, ref) => (
+        <button
+            onClick={onClick}
+            ref={ref}
+            type="button"
+            className="w-full bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-md leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
+            {value}
+        </button>
+    ));
+    return (
+        <DatePicker
+            selected={endDate}
+            onChange={(date) => {
+                date.setHours(0)
+                date.setMinutes(0)
+                const daysInMonth = getDaysInMonth(date)
+                setPw([])
+                setDateRange([date,addDays(date, daysInMonth-1)])
+            }}
+            minDate={new Date('2021-08-02')}
+            maxDate={maxDate}
+            dateFormat="MMMM yyyy"
+            showMonthYearPicker
+            customInput={<CustomInput />}
+        />
+    );
+};
+
 const Blog = ({ blogPosts }) => {
     const { title, subtitle, oneSecondEverydayVideos } = blog
     const [detailedPost, setDetailedPost] = useState({
@@ -23,8 +57,9 @@ const Blog = ({ blogPosts }) => {
         setPw(blogPosts);
     }, [blogPosts])
 
-    const [startDate, setStartDate] = useState(new Date(blogPosts[blogPosts.length - 1].date))
-    const [endDate, setEndDate] = useState(addDays(new Date(blogPosts[0].date),1))
+    const [dateRange, setDateRange] = useState([new Date(blogPosts[blogPosts.length - 1].date),addDays(new Date(blogPosts[0].date),1)])
+    const [startDate, endDate] = dateRange
+    const maxDate = addDays(new Date(), getDaysInMonth(new Date()))
 
     useEffect(async () => {
         // fetch posts based on updated start/end dates.  Limiting to 100 posts max to prevent the page from bogging down
@@ -88,9 +123,7 @@ const Blog = ({ blogPosts }) => {
     // grab next month of posts
     const backOneMonth = () => {
         const end = startDate
-        setStartDate(addDays(startDate, -30))
-        setEndDate(end)
-        // PICKUP HERE....FIGURE OUT HOW TO ADD THESE TO START RATHER THAN REPLACING ALL POSTS
+        setDateRange([addDays(startDate, -30),end])
     }
 
     // used to hide the Load more button once the date of the first post is reached (Aug 29 5:34pm 2021)
@@ -110,12 +143,10 @@ const Blog = ({ blogPosts }) => {
     )
 
     // combine formatted posts from different sources together
-    const originalPosts = formattedPredictWindsPosts.concat(oneSecondEverydayVideos)
+    const originalPosts = formattedPredictWindsPosts.concat(oneSecondEverydayVideos.filter(video => video.date >= startDate && video.date <= endDate))
 
     // sort by recent - oldest
     originalPosts.sort((a,b) => b.date - a.date)
-
-    // ADD DATE RANGE PICKER SO THAT START DATE AND END DATE CAN BE UPDATED
 
     return (
         <>
@@ -137,83 +168,97 @@ const Blog = ({ blogPosts }) => {
                         </p>
                     </div>
 
+                    {/*Blog posts date picker*/}
+                    <div className={'my-4 flex justify-center'}>
+                        <div>
+                            <p className={'ml-1 text-xs text-gray-400'}>Jump to...</p>
+                            <MonthPicker endDate={endDate} maxDate={maxDate} setDateRange={setDateRange} setPw={setPw} />
+                        </div>
+                    </div>
+
                     {/*Card grid*/}
-                    <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-                        {originalPosts.map(card => {
-                            const {
-                                key,
-                                title,
-                                textContent,
-                                videoContent,
-                                date,
-                                image,
-                                type
-                            } = card
+                    {originalPosts.filter(({type}) => type === 'Satellite Update').length
+                        ? (
+                            <>
+                                <div className="max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
+                                    {originalPosts.map(card => {
+                                        const {
+                                            key,
+                                            title,
+                                            textContent,
+                                            videoContent,
+                                            date,
+                                            image,
+                                            type
+                                        } = card
 
-                            return (
-                                // Card
-                                <div
-                                    className={`flex flex-col rounded-lg shadow-xl overflow-hidden ${type === 'One Second Everyday' ? '' : 'cursor-pointer'}`}
-                                    key={key}
-                                    onClick={() => openPostDetails(key)}
-                                >
+                                        return (
+                                            // Card
+                                            <div
+                                                className={`flex flex-col rounded-lg shadow-xl overflow-hidden ${type === 'One Second Everyday' ? '' : 'cursor-pointer'}`}
+                                                key={key}
+                                                onClick={() => openPostDetails(key)}
+                                            >
 
-                                    {/*Image*/}
-                                    {image &&
-                                        <div className="flex-shrink-0 h-48 relative w-full">
-                                            <Image src={image} layout={"fill"} objectFit={'cover'} loader={cloudfrontLoader}/>
-                                        </div>
-                                    }
+                                                {/*Image*/}
+                                                {image &&
+                                                    <div className="flex-shrink-0 h-48 relative w-full">
+                                                        <Image src={image} layout={"fill"} objectFit={'cover'} loader={cloudfrontLoader}/>
+                                                    </div>
+                                                }
 
-                                    {/*Card content*/}
-                                    <div className="flex-1 bg-white p-6 flex flex-col justify-between">
+                                                {/*Card content*/}
+                                                <div className="flex-1 bg-white p-6 flex flex-col justify-between">
 
-                                        <div className="flex-1">
+                                                    <div className="flex-1">
 
-                                            {/*Post type*/}
-                                            <p className="text-sm font-medium text-cyan-600 mb-2">
-                                                <time dateTime={date.toDateString()}>{date.toLocaleString()}</time>
-                                            </p>
+                                                        {/*Post type*/}
+                                                        <p className="text-sm font-medium text-cyan-600 mb-2">
+                                                            <time dateTime={date.toDateString()}>{date.toLocaleString()}</time>
+                                                        </p>
 
-                                            {/*Post title and text content*/}
-                                            <p className="text-xl font-semibold text-gray-900">{title}</p>
-                                            { textContent &&
-                                                <p className={`mt-3 text-base text-gray-500 overflow-y-scroll ${image ? 'max-h-60' : 'max-h-112'} whitespace-pre-line`}>
-                                                    {textContent}
-                                                </p>
-                                            }
-                                            { videoContent &&
-                                                <video className="mt-3 h-100 overflow-y-scroll rounded" controls  >
-                                                    <source src={videoContent} type="video/mp4" />
-                                                    Your browser does not support the video tag.
-                                                </video>
-                                            }
+                                                        {/*Post title and text content*/}
+                                                        <p className="text-xl font-semibold text-gray-900">{title}</p>
+                                                        { textContent &&
+                                                            <p className={`mt-3 text-base text-gray-500 overflow-y-scroll ${image ? 'max-h-60' : 'max-h-112'} whitespace-pre-line`}>
+                                                                {textContent}
+                                                            </p>
+                                                        }
+                                                        { videoContent &&
+                                                            <video className="mt-3 h-100 overflow-y-scroll rounded" controls  >
+                                                                <source src={videoContent} type="video/mp4" />
+                                                                Your browser does not support the video tag.
+                                                            </video>
+                                                        }
 
-                                        </div>
+                                                    </div>
 
-                                        {/*Post date*/}
-                                        <p className="text-sm text-gray-400 mt-4">
-                                            {type}
-                                        </p>
+                                                    {/*Post date*/}
+                                                    <p className="text-sm text-gray-400 mt-4">
+                                                        {type}
+                                                    </p>
 
-                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
-                            )
-                        })}
-                    </div>
 
-                    {/*Load more posts button*/}
-                    <div className={'flex justify-center'}>
-                        <button type="button"
-                                onClick={backOneMonth}
-                                disabled={endReached()}
-                                className={`disabled:hidden my-6 inline-flex items-center px-3.5 py-2 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500`}>
-                            {`Load another 30 days...`}
-                        </button>
-                    </div>
-
+                                {/*Load more posts button*/}
+                                <div className={'flex justify-center'}>
+                                    <button type="button"
+                                            onClick={backOneMonth}
+                                            disabled={endReached()}
+                                            className={`disabled:hidden my-6 inline-flex items-center px-3.5 py-2 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500`}>
+                                            {`Load another 30 days...`}
+                                    </button>
+                                </div>
+                            </>
+                        ) : (
+                            <Loader />
+                        )
+                    }
                 </div>
-
             </div>
 
             {/*Post details modal*/}
