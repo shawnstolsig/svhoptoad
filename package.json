@@ -20,6 +20,7 @@
     "mapbox-gl": "^2.4.1",
     "next": "10.0.9",
     "next-images": "^1.7.0",
+    "nprogress": "^0.2.0",
     "postcss-preset-env": "^6.7.0",
     "react": "17.0.1",
     "react-datepicker": "^4.5.0",
