@@ -1,11 +1,21 @@
 import '../styles/index.css'
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
+import NProgress from 'nprogress';
 
 import * as ga from '../lib/google-analytics'
 import Layout from '../components/layout'
 import VisitedContext from '../context/visted'
 import BlogPostContext from "../context/blog";
+
+// show Nprogress page loader
+NProgress.configure({ showSpinner: false });
+Router.events.on('routeChangeStart', (url) => {
+    console.log(`Loading: ${url}`);
+    NProgress.start();
+});
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({Component, pageProps}) {
 
