@@ -81,7 +81,7 @@ export const blog = {
         },
         {
             key: 11,
-            date: new Date('2022-8-7 00:00:00'),
+            date: new Date('2022-8-9 00:00:00'),
             title: 'One Second Everyday: Mexico City #1 (August 2022)',
             videoContent: 'https://res.cloudinary.com/svhoptoad/video/upload/v1670565370/blog/one-second-everyday/aug-2022-a_uembyh.3gp',
             type: 'One Second Everyday'
@@ -95,16 +95,16 @@ export const blog = {
         },
         {
             key: 13,
-            date: new Date('2022-8-21 00:00:00'),
-            title: 'One Second Everyday: Cholula (August 2022)',
-            videoContent: 'https://res.cloudinary.com/svhoptoad/video/upload/v1670565032/blog/one-second-everyday/aug-2022-c_heky3j.mp4',
+            date: new Date('2022-8-22 00:00:00'),
+            title: 'One Second Everyday: Taxco (August 2022)',
+            videoContent: 'https://res.cloudinary.com/svhoptoad/video/upload/v1670565252/blog/one-second-everyday/aug-2022-d_puczkn.3gp',
             type: 'One Second Everyday'
         },
         {
             key: 14,
-            date: new Date('2022-8-28 00:00:00'),
-            title: 'One Second Everyday: Taxco (August 2022)',
-            videoContent: 'https://res.cloudinary.com/svhoptoad/video/upload/v1670565252/blog/one-second-everyday/aug-2022-d_puczkn.3gp',
+            date: new Date('2022-8-31 00:00:00'),
+            title: 'One Second Everyday: Cholula (August 2022)',
+            videoContent: 'https://res.cloudinary.com/svhoptoad/video/upload/v1670565032/blog/one-second-everyday/aug-2022-c_heky3j.mp4',
             type: 'One Second Everyday'
         },
         {
