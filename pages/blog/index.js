@@ -44,6 +44,10 @@ const MonthPicker = ({endDate, setPw, setDateRange, maxDate}) => {
 
 const Blog = ({ blogPosts }) => {
     const { title, subtitle, oneSecondEverydayVideos } = blog
+    const newestOneSecondEveryDayVideoDate = oneSecondEverydayVideos.at(-1).date
+    const newestBlogPost = new Date(blogPosts[0].date)
+    const newestPost = newestOneSecondEveryDayVideoDate > newestBlogPost ? newestOneSecondEveryDayVideoDate : newestOneSecondEveryDayVideoDate
+
     const [detailedPost, setDetailedPost] = useState({
         key: null,
         title: null,
@@ -57,7 +61,7 @@ const Blog = ({ blogPosts }) => {
         setPw(blogPosts);
     }, [blogPosts])
 
-    const [dateRange, setDateRange] = useState([new Date(blogPosts[blogPosts.length - 1].date),addDays(new Date(blogPosts[0].date),1)])
+    const [dateRange, setDateRange] = useState([new Date(blogPosts.at(-1).date),addDays(newestPost,1)])
     const [startDate, endDate] = dateRange
     const maxDate = addDays(new Date(), getDaysInMonth(new Date()))
 
@@ -84,6 +88,7 @@ const Blog = ({ blogPosts }) => {
             }
         })
         setPw(existingPosts)
+        // console.log(`startDate: ${startDate} \nendDate: ${endDate}`)
     }, [startDate, endDate])
 
     // opens post details modal
@@ -177,7 +182,7 @@ const Blog = ({ blogPosts }) => {
                     </div>
 
                     {/*Card grid*/}
-                    {originalPosts.filter(({type}) => type === 'Satellite Update').length
+                    {originalPosts.filter(({type}) => type === 'Satellite Update' || type === 'One Second Everyday').length
                         ? (
                             <>
                                 <div className="max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
