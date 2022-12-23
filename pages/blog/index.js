@@ -370,7 +370,9 @@ const Blog = ({ blogPosts }) => {
 }
 
 export async function getServerSideProps(context) {
-    const blogPosts = await sanity.fetch(`
+    try {
+
+        const blogPosts = await sanity.fetch(`
         *[_type == 'post'] | order(date desc) {
           id,
           title,
@@ -383,11 +385,23 @@ export async function getServerSideProps(context) {
         }[0...24]
         `)
 
-    return {
-        props: {
-            blogPosts
-        },
+        return {
+            props: {
+                blogPosts
+            },
+        }
+
+    } catch (e) {
+
+        console.log(e)
+
+        return {
+            props: {
+                blogPosts: []
+            },
+        }
     }
+
 }
 
 export default Blog;
