@@ -27,5 +27,8 @@
     "react-datepicker": "^4.5.0",
     "react-dom": "17.0.1",
     "tailwindcss": "^2.2.4"
+  },
+  "devDependencies": {
+    "vercel": "^28.10.3"
   }
 }
