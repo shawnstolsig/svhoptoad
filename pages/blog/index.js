@@ -45,9 +45,9 @@ const MonthPicker = ({endDate, setPw, setDateRange, maxDate}) => {
 const Blog = ({blogPosts = []}) => {
 
     const { title, subtitle, oneSecondEverydayVideos } = blog
-    const newestOneSecondEveryDayVideoDate = oneSecondEverydayVideos.at(-1).date
-    const newestBlogPost = blogPosts[0]?.date ? new Date(blogPosts[0].date) : new Date()
-    const newestPost = newestOneSecondEveryDayVideoDate > newestBlogPost ? newestOneSecondEveryDayVideoDate : newestOneSecondEveryDayVideoDate
+    // const newestOneSecondEveryDayVideoDate = oneSecondEverydayVideos.at(-1).date
+    // const newestBlogPost = blogPosts[0]?.date ? new Date(blogPosts[0].date) : new Date()
+    // const newestPost = newestOneSecondEveryDayVideoDate > newestBlogPost ? newestOneSecondEveryDayVideoDate : newestOneSecondEveryDayVideoDate
 
     const [detailedPost, setDetailedPost] = useState({
         key: null,
@@ -62,7 +62,8 @@ const Blog = ({blogPosts = []}) => {
         setPw(blogPosts);
     }, [blogPosts])
 
-    const [dateRange, setDateRange] = useState([new Date(blogPosts.at(-1).date),addDays(newestPost,1)])
+    // const [dateRange, setDateRange] = useState([new Date(blogPosts.at(-1).date),addDays(newestPost,1)])
+    const [dateRange, setDateRange] = useState([addDays(new Date(), -90),new Date()])
     const [startDate, endDate] = dateRange
     const maxDate = addDays(new Date(), getDaysInMonth(new Date()))
 
@@ -386,7 +387,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            blogPosts
+            blogPosts: []
         }
     }
 
