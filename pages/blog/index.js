@@ -48,6 +48,15 @@ const Blog = ({ blogPosts }) => {
     const newestBlogPost = new Date(blogPosts[0].date)
     const newestPost = newestOneSecondEveryDayVideoDate > newestBlogPost ? newestOneSecondEveryDayVideoDate : newestOneSecondEveryDayVideoDate
 
+    if(!blogPosts) return (
+        <>
+            <Head>
+                <title>SV Hoptoad | Blog</title>
+            </Head>
+            <p>Loading...</p>
+        </>
+    )
+
     const [detailedPost, setDetailedPost] = useState({
         key: null,
         title: null,
