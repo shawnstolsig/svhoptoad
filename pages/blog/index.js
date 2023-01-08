@@ -396,9 +396,10 @@ export async function getServerSideProps(context) {
         console.log(e)
 
         return {
-            props: {
-                blogPosts: []
-            },
+            redirect: {
+                destination: '/',
+                statusCode: 307
+            }
         }
     }
 
