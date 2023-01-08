@@ -30,13 +30,13 @@ export const blog = {
             videoContent: 'https://res.cloudinary.com/svhoptoad/video/upload/v1647304672/blog/one-second-everyday/dec-2021_udfqcl.mp4',
             type: 'One Second Everyday'
         },
-        // {
-        //     key: 5,
-        //     date: new Date('2022-2-1 00:00:00'),
-        //     title: 'One Second Everyday: January 2022',
-        //     videoContent: '',
-        //     type: 'One Second Everyday'
-        // },
+        {
+            key: 5,
+            date: new Date('2022-2-1 00:00:00'),
+            title: 'One Second Everyday: January 2022',
+            videoContent: 'https://res.cloudinary.com/svhoptoad/video/upload/v1673160783/blog/one-second-everyday/jan-2022_uztdak.mp4',
+            type: 'One Second Everyday'
+        },
         {
             key: 6,
             date: new Date('2022-3-1 00:00:00'),
