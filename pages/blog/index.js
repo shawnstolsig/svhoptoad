@@ -42,14 +42,11 @@ const MonthPicker = ({endDate, setPw, setDateRange, maxDate}) => {
     );
 };
 
-const Blog = ({blogPosts}) => {
-
-    console.log(blogPosts)
-    console.log(blog)
+const Blog = ({blogPosts = []}) => {
 
     const { title, subtitle, oneSecondEverydayVideos } = blog
     const newestOneSecondEveryDayVideoDate = oneSecondEverydayVideos.at(-1).date
-    const newestBlogPost = new Date(blogPosts[0].date)
+    const newestBlogPost = blogPosts[0]?.date ? new Date(blogPosts[0].date) : new Date()
     const newestPost = newestOneSecondEveryDayVideoDate > newestBlogPost ? newestOneSecondEveryDayVideoDate : newestOneSecondEveryDayVideoDate
 
     const [detailedPost, setDetailedPost] = useState({
@@ -374,9 +371,7 @@ const Blog = ({blogPosts}) => {
 }
 
 export async function getServerSideProps(context) {
-    try {
-
-        const blogPosts = await sanity.fetch(`
+    const blogPosts = await sanity.fetch(`
         *[_type == 'post'] | order(date desc) {
           id,
           title,
@@ -389,21 +384,9 @@ export async function getServerSideProps(context) {
         }[0...24]
         `)
 
-        return {
-            props: {
-                blogPosts
-            },
-        }
-
-    } catch (e) {
-
-        console.log(e)
-
-        return {
-            redirect: {
-                destination: '/',
-                statusCode: 307
-            }
+    return {
+        props: {
+            blogPosts
         }
     }
 
