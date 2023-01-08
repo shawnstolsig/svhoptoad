@@ -42,7 +42,7 @@ const MonthPicker = ({endDate, setPw, setDateRange, maxDate}) => {
     );
 };
 
-const Blog = (props) => {
+const Blog = ({blogPosts}) => {
 
 
     const { title, subtitle, oneSecondEverydayVideos } = {
