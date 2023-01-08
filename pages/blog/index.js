@@ -43,11 +43,6 @@ const MonthPicker = ({endDate, setPw, setDateRange, maxDate}) => {
 };
 
 const Blog = ({ blogPosts }) => {
-    const { title, subtitle, oneSecondEverydayVideos } = blog
-    const newestOneSecondEveryDayVideoDate = oneSecondEverydayVideos.at(-1).date
-    const newestBlogPost = new Date(blogPosts[0].date)
-    const newestPost = newestOneSecondEveryDayVideoDate > newestBlogPost ? newestOneSecondEveryDayVideoDate : newestOneSecondEveryDayVideoDate
-
     if(!blogPosts) return (
         <>
             <Head>
@@ -56,6 +51,11 @@ const Blog = ({ blogPosts }) => {
             <p>Loading...</p>
         </>
     )
+
+    const { title, subtitle, oneSecondEverydayVideos } = blog
+    const newestOneSecondEveryDayVideoDate = oneSecondEverydayVideos.at(-1).date
+    const newestBlogPost = new Date(blogPosts[0].date)
+    const newestPost = newestOneSecondEveryDayVideoDate > newestBlogPost ? newestOneSecondEveryDayVideoDate : newestOneSecondEveryDayVideoDate
 
     const [detailedPost, setDetailedPost] = useState({
         key: null,
