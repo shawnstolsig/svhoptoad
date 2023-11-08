@@ -313,7 +313,7 @@ function Boat({headers, content, gear}){
 export async function getStaticProps(context) {
     const [gear, data] = await Promise.all([
         sanity.fetch(`
-        *[_type == 'gear']
+        *[_type == 'gear'] | order(type asc)
         `),
         sanity.fetch(`
         *[identifier in [
