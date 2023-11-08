@@ -10,10 +10,14 @@ import {
     ExternalLinkIcon
 } from '@heroicons/react/outline'
 import { CameraIcon } from '@heroicons/react/solid'
+import {PortableText} from "@portabletext/react";
+
 
 import { boats } from "../../content/boat"
 import Gallery from "../../components/gallery"
 import * as ga from '../../lib/google-analytics'
+import sanity from "../../lib/sanity";
+import {ptComponents} from "../../lib/portable-text";
 
 function BoatSelector({ boat, setBoat }) {
     // const router = useRouter()
@@ -173,9 +177,10 @@ function BoatGear({gear}){
     )
 }
 
-function BoatDetails({boat}){
+function BoatDetails({boat, headers, content, gear}){
     const {
         header,
+        href,
         description,
         photos,
         gallery,
@@ -189,7 +194,7 @@ function BoatDetails({boat}){
             <div className="relative max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
 
                 {/*Gray rectangle behind photo*/}
-                <div className="hidden lg:block bg-gray-50 absolute top-0 bottom-0 left-3/4 w-screen" />
+                {/*<div className="hidden lg:block bg-gray-50 absolute top-0 bottom-0 left-3/4 w-screen" />*/}
 
                 {/*Description text and photo*/}
                 <div className="sm:mt-6 lg:grid lg:grid-cols-2 lg:gap-8">
@@ -198,36 +203,36 @@ function BoatDetails({boat}){
                     <div className="text-base max-w-prose ">
                         <div>
                             <h2 className="text-2xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl uppercase">
-                                {header}
+                                {headers[`boat-${href}-main`]}
                             </h2>
-                            <h3 className="text-lg text-cyan-600 font-semibold tracking-wide uppercase">{start} - {end}</h3>
+                            <h3 className="text-lg text-cyan-600 font-semibold tracking-wide uppercase">{headers[`boat-${href}-sub`]}</h3>
                         </div>
                     </div>
 
                     {/*Photo*/}
                     <div className="relative lg:row-start-1 lg:row-span-5 lg:col-start-2">
-                        <svg
-                            className="hidden lg:block absolute top-0 right-0 -mt-20 -mr-20"
-                            width={404}
-                            height={384}
-                            fill="none"
-                            viewBox="0 0 404 384"
-                            aria-hidden="true"
-                        >
-                            <defs>
-                                <pattern
-                                    id="de316486-4a29-4312-bdfc-fbce2132a2c1"
-                                    x={0}
-                                    y={0}
-                                    width={20}
-                                    height={20}
-                                    patternUnits="userSpaceOnUse"
-                                >
-                                    <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />
-                                </pattern>
-                            </defs>
-                            <rect width={404} height={384} fill="url(#de316486-4a29-4312-bdfc-fbce2132a2c1)" />
-                        </svg>
+                        {/*<svg*/}
+                        {/*    className="hidden lg:block absolute top-0 right-0 -mt-20 -mr-20"*/}
+                        {/*    width={404}*/}
+                        {/*    height={384}*/}
+                        {/*    fill="none"*/}
+                        {/*    viewBox="0 0 404 384"*/}
+                        {/*    aria-hidden="true"*/}
+                        {/*>*/}
+                        {/*    <defs>*/}
+                        {/*        <pattern*/}
+                        {/*            id="de316486-4a29-4312-bdfc-fbce2132a2c1"*/}
+                        {/*            x={0}*/}
+                        {/*            y={0}*/}
+                        {/*            width={20}*/}
+                        {/*            height={20}*/}
+                        {/*            patternUnits="userSpaceOnUse"*/}
+                        {/*        >*/}
+                        {/*            <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />*/}
+                        {/*        </pattern>*/}
+                        {/*    </defs>*/}
+                        {/*    <rect width={404} height={384} fill="url(#de316486-4a29-4312-bdfc-fbce2132a2c1)" />*/}
+                        {/*</svg>*/}
 
                         <div className="relative text-base mx-auto max-w-prose lg:max-w-none">
                             <figure>
@@ -262,15 +267,11 @@ function BoatDetails({boat}){
                     </div>
 
                     {/*Description Text Paragraphs*/}
-                    <div className="mt-8 lg:mt-0">
-                        <div className="mt-5 prose prose-cyan text-gray-500 mx-auto lg:max-w-none lg:row-start-2 lg:col-start-1 ">
-                            {description.map((paragraph,index) => (
-                                <p key={index}>
-                                    {paragraph}
-                                </p>
-                            ))}
-                        </div>
-
+                    <div className={'prose prose-stone lg:prose-lg mx-auto mt-8 md:mt-18 prose-img:m-auto prose-img:rounded'}>
+                        <PortableText
+                            value={content[`boat-${href}`]}
+                            components={ptComponents}
+                        />
                     </div>
                 </div>
             </div>
@@ -285,15 +286,17 @@ function BoatDetails({boat}){
 
             {/*Gear (if available)*/}
             <div className={`mx-auto my-4`}>
-                {boat.gear && <BoatGear gear={boat.gear} />}
+                {boat.href === 'moody46' && <BoatGear gear={gear} />}
             </div>
         </div>
     )
 }
 
-function Boat(){
+function Boat({headers, content, gear}){
+    // console.log('headers', headers, 'content', content, 'gear', gear)
     const router = useRouter()
     const [boat, setBoat] = useState(router.query.boat ? router.query.boat : boats[0].href)
+    console.log(boat)
     return (
         <>
             <Head>
@@ -301,10 +304,49 @@ function Boat(){
             </Head>
             <div className={'mt-3'}>
                 <BoatSelector boat={boat} setBoat={setBoat} />
-                <BoatDetails boat={boats.find(({ href }) => href === boat)} />
+                <BoatDetails boat={boats.find(({ href }) => href === boat)} headers={headers} content={content} gear={gear}/>
             </div>
         </>
     );
+}
+
+export async function getStaticProps(context) {
+    const [gear, data] = await Promise.all([
+        sanity.fetch(`
+        *[_type == 'gear']
+        `),
+        sanity.fetch(`
+        *[identifier in [
+            "boat-moody46", 
+            "boat-roberts38",
+            "boat-cal330",
+            "boat-sanjuan23",
+            "boat-moody46-main",
+            "boat-moody46-sub",
+            "boat-roberts38-main",
+            "boat-roberts38-sub",
+            "boat-cal330-main",
+            "boat-cal330-sub",
+            "boat-sanjuan23-main",
+            "boat-sanjuan23-sub",
+            ]]
+        `)
+    ])
+
+    const headers = {}
+    const content = {}
+
+    data.filter(d => d._type === 'headers').forEach(h => headers[h.identifier] = h.header)
+    data.filter(d => d._type === 'content').forEach(c => content[c.identifier] = c.body)
+
+    return {
+        props: {
+            gear,
+            headers,
+            content
+        },
+        revalidate: 60
+    }
 }
 
 export default Boat;

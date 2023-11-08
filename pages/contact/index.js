@@ -8,8 +8,9 @@ import {
     contactForm
 } from '../../content/contact'
 import * as ga from '../../lib/google-analytics'
+import sanity from "../../lib/sanity";
 
-function ContactForm() {
+function ContactForm({headers, content}) {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
@@ -180,7 +181,7 @@ function ContactForm() {
                             {contactForm.sidebarTitle}
                         </h3>
                         <p className="mt-6 text-base text-cyan-50 max-w-3xl">
-                            {contactForm.sidebarDescription}
+                            {headers['contact']}
                         </p>
                         <dl className="mt-8 space-y-6">
                             <dt>
@@ -382,15 +383,35 @@ function ContactForm() {
     )
 }
 
-const Contact = () => {
+const Contact = ({ headers, content}) => {
+    // console.log('headers', headers, 'content', content)
+
     return (
         <>
             <Head>
                 <title>SV Hoptoad | Contact</title>
             </Head>
-            <ContactForm />
+            <ContactForm headers={headers} content={content}/>
         </>
     )
 }
+export async function getStaticProps(context) {
+    const data = await sanity.fetch(`
+        *[identifier in ["contact"]]
+        `)
 
+    const headers = {}
+    const content = {}
+
+    data.filter(d => d._type === 'headers').forEach(h => headers[h.identifier] = h.header)
+    data.filter(d => d._type === 'content').forEach(c => content[c.identifier] = c.body)
+
+    return {
+        props: {
+            headers,
+            content
+        },
+        revalidate: 60
+    }
+}
 export default Contact

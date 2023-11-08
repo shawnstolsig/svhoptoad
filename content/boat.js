@@ -2,7 +2,7 @@ export const boats = [
     {
         name: `Hoptoad`,
         design: `Moody 46`,
-        href: `moody-46`,
+        href: `moody46`,
         header: `Our current boat`,
         length: 46,
         beam: 12.5,
@@ -28,7 +28,7 @@ export const boats = [
         description: [
             `Our Moody 46 was designed by Laurent Giles. Originally Giles’s design was a 44' sailing yacht, later extended by 2 feet. A total of 32 Carbineers (44s and 46s) were built in Southampton, England by the Moody Brothers in the early to mid 70s.`,
             `We carry 230 gallons of diesel, 200 gallons of fresh water powered by a 356 Perkins. She weighs approximately 40,000 pounds loaded and is ready to go cruising.`,
-            `She is our 3rd sailboat by this name which comes from the children’s story book Pippi Longstock, by Astrid Lindgren. The Pippi stories were a popular favorite back when the boys were young sailors.`,
+            `She is our 3rd sailboat by this name which comes from the children’s story book Pippi Longstocking, by Astrid Lindgren. The Pippi stories were a popular favorite back when the boys were young sailors.`,
         ],
         gallery: [
             {
@@ -164,7 +164,7 @@ export const boats = [
     {
         name: `Hoptoad`,
         design: `Roberts 38`,
-        href: `roberts-38`,
+        href: `roberts38`,
         header: `A veteran circumnavigator`,
         length: 38,
         beam: 12,
@@ -220,7 +220,7 @@ export const boats = [
     {
         name: `Hoptoad`,
         design: `Cal 3-30`,
-        href: `cal-3-30`,
+        href: `cal330`,
         header: `The original Hoptoad`,
         length: 30,
         beam: 10,
@@ -252,7 +252,7 @@ export const boats = [
     {
         name: `Air Freight`,
         design: `San Juan 23`,
-        href: `san-juan-23`,
+        href: `sanjuan23`,
         header: `First family sailboat`,
         length: 23,
         beam: 8,

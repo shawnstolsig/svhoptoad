@@ -7,6 +7,8 @@ import {
     GlobeIcon,
     IdentificationIcon,
     NewspaperIcon,
+    FireIcon,
+    PhotoIcon,
     AtSymbolIcon
 } from '@heroicons/react/outline';
 
@@ -36,9 +38,11 @@ const StyledLink = ({text, path, icon: Icon}) => {
 const Navbar = () => {
     const links = [
         {text: 'Home', path: '/', icon: HomeIcon},
+        {text: 'Blog', path: '/blog', icon: NewspaperIcon},
+        // {text: 'Gallery', path: '/gallery', icon: PhotoIcon},
+        {text: 'Recipes', path: '/recipes', icon: FireIcon},
         {text: 'Boat', path: '/boat', icon: IdentificationIcon},
         {text: 'Travel', path: '/travel', icon: GlobeIcon},
-        {text: 'Blog', path: '/blog', icon: NewspaperIcon},
         {text: 'Contact', path: '/contact', icon: AtSymbolIcon},
     ];
 

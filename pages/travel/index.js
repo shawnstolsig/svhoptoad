@@ -14,6 +14,9 @@ import {
 import {
     TripMap
 } from '../../components/map'
+import sanity from "../../lib/sanity";
+import {PortableText} from "@portabletext/react";
+import {ptComponents} from "../../lib/portable-text";
 
 function AboardHoptoadArticle({title,imageSource,pageCount}) {
     const [isOpen, setIsOpen] = useState(false)
@@ -129,7 +132,9 @@ function CountryList() {
     )
 }
 
-const Travel = () => {
+const Travel = ({headers, content}) => {
+    // console.log('headers', headers, 'content', content)
+
     return (
         <>
             <Head>
@@ -139,73 +144,73 @@ const Travel = () => {
             <div className="relative lg:py-10 bg-white overflow-hidden mt-3">
 
                 {/*Gray background graphics*/}
-                <div className="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
-                    <div className="relative h-full text-lg max-w-prose mx-auto" aria-hidden="true">
-                        <svg
-                            className="absolute top-12 left-full transform translate-x-32"
-                            width={404}
-                            height={384}
-                            fill="none"
-                            viewBox="0 0 404 384"
-                        >
-                            <defs>
-                                <pattern
-                                    id="74b3fd99-0a6f-4271-bef2-e80eeafdf357"
-                                    x={0}
-                                    y={0}
-                                    width={20}
-                                    height={20}
-                                    patternUnits="userSpaceOnUse"
-                                >
-                                    <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />
-                                </pattern>
-                            </defs>
-                            <rect width={404} height={384} fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
-                        </svg>
-                        <svg
-                            className="absolute top-1/2 right-full transform -translate-y-1/2 -translate-x-32"
-                            width={404}
-                            height={384}
-                            fill="none"
-                            viewBox="0 0 404 384"
-                        >
-                            <defs>
-                                <pattern
-                                    id="f210dbf6-a58d-4871-961e-36d5016a0f49"
-                                    x={0}
-                                    y={0}
-                                    width={20}
-                                    height={20}
-                                    patternUnits="userSpaceOnUse"
-                                >
-                                    <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />
-                                </pattern>
-                            </defs>
-                            <rect width={404} height={384} fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)" />
-                        </svg>
-                        <svg
-                            className="absolute bottom-12 left-full transform translate-x-32"
-                            width={404}
-                            height={384}
-                            fill="none"
-                            viewBox="0 0 404 384"
-                        >
-                            <defs>
-                                <pattern
-                                    id="d3eb07ae-5182-43e6-857d-35c643af9034"
-                                    x={0}
-                                    y={0}
-                                    width={20}
-                                    height={20}
-                                    patternUnits="userSpaceOnUse"
-                                >
-                                    <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />
-                                </pattern>
-                            </defs>
-                            <rect width={404} height={384} fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)" />
-                        </svg>
-                    </div>
-                </div>
+                {/*<div className="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">*/}
+                {/*    <div className="relative h-full text-lg max-w-prose mx-auto" aria-hidden="true">*/}
+                {/*        <svg*/}
+                {/*            className="absolute top-12 left-full transform translate-x-32"*/}
+                {/*            width={404}*/}
+                {/*            height={384}*/}
+                {/*            fill="none"*/}
+                {/*            viewBox="0 0 404 384"*/}
+                {/*        >*/}
+                {/*            <defs>*/}
+                {/*                <pattern*/}
+                {/*                    id="74b3fd99-0a6f-4271-bef2-e80eeafdf357"*/}
+                {/*                    x={0}*/}
+                {/*                    y={0}*/}
+                {/*                    width={20}*/}
+                {/*                    height={20}*/}
+                {/*                    patternUnits="userSpaceOnUse"*/}
+                {/*                >*/}
+                {/*                    <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />*/}
+                {/*                </pattern>*/}
+                {/*            </defs>*/}
+                {/*            <rect width={404} height={384} fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />*/}
+                {/*        </svg>*/}
+                {/*        <svg*/}
+                {/*            className="absolute top-1/2 right-full transform -translate-y-1/2 -translate-x-32"*/}
+                {/*            width={404}*/}
+                {/*            height={384}*/}
+                {/*            fill="none"*/}
+                {/*            viewBox="0 0 404 384"*/}
+                {/*        >*/}
+                {/*            <defs>*/}
+                {/*                <pattern*/}
+                {/*                    id="f210dbf6-a58d-4871-961e-36d5016a0f49"*/}
+                {/*                    x={0}*/}
+                {/*                    y={0}*/}
+                {/*                    width={20}*/}
+                {/*                    height={20}*/}
+                {/*                    patternUnits="userSpaceOnUse"*/}
+                {/*                >*/}
+                {/*                    <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />*/}
+                {/*                </pattern>*/}
+                {/*            </defs>*/}
+                {/*            <rect width={404} height={384} fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)" />*/}
+                {/*        </svg>*/}
+                {/*        <svg*/}
+                {/*            className="absolute bottom-12 left-full transform translate-x-32"*/}
+                {/*            width={404}*/}
+                {/*            height={384}*/}
+                {/*            fill="none"*/}
+                {/*            viewBox="0 0 404 384"*/}
+                {/*        >*/}
+                {/*            <defs>*/}
+                {/*                <pattern*/}
+                {/*                    id="d3eb07ae-5182-43e6-857d-35c643af9034"*/}
+                {/*                    x={0}*/}
+                {/*                    y={0}*/}
+                {/*                    width={20}*/}
+                {/*                    height={20}*/}
+                {/*                    patternUnits="userSpaceOnUse"*/}
+                {/*                >*/}
+                {/*                    <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />*/}
+                {/*                </pattern>*/}
+                {/*            </defs>*/}
+                {/*            <rect width={404} height={384} fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)" />*/}
+                {/*        </svg>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
 
                 <div className="relative px-4 sm:px-6 lg:px-8">
 
@@ -213,32 +218,28 @@ const Travel = () => {
                     <div className="text-lg max-w-prose mx-auto">
                         <h1>
                             <span className="block text-base text-center text-cyan-600 font-semibold tracking-wide uppercase">
-                                {trips.currentTrip.subtitle}
+                                {headers['travel-current-trip-sub']}
                             </span>
                             <span className="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                                {trips.currentTrip.title}
+                                {headers['travel-current-trip-main']}
                             </span>
                         </h1>
                     </div>
-                    <div className="mt-6 prose prose-cyan prose-lg text-gray-500 mx-auto">
-                        <p>{trips.currentTrip.paragraphs[0]}</p>
-                        <p>{trips.currentTrip.paragraphs[1]}</p>
-                        <p>{trips.currentTrip.paragraphs[2]}</p>
-                        <p>{trips.currentTrip.paragraphs[3]}</p>
-                        <p>{trips.currentTrip.paragraphs[4]}</p>
-                        <h3>The Plan</h3>
-                        <p>{trips.currentTrip.paragraphs[5]}</p>
-                        <p>{trips.currentTrip.paragraphs[6]}</p>
+                    <div className={'prose prose-stone lg:prose-lg mx-auto mt-8 md:mt-18 prose-img:m-auto prose-img:rounded'}>
+                        <PortableText
+                            value={content[`travel-current-trip`]}
+                            components={ptComponents}
+                        />
                     </div>
 
                     {/*Previous trip content*/}
                     <div className="text-lg max-w-prose mx-auto mt-4">
                         <h1>
                             <span className="block text-base text-center text-cyan-600 font-semibold tracking-wide uppercase">
-                                {trips.previousTrip.subtitle}
+                                {headers["travel-old-trip-sub"]}
                             </span>
                             <span className="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                                {trips.previousTrip.title}
+                                {headers["travel-old-trip-main"]}
                             </span>
                         </h1>
                     </div>
@@ -252,10 +253,15 @@ const Travel = () => {
                             />
                             <figcaption>{trips.mapCaption}</figcaption>
                         </figure>
-                        <p>{trips.previousTrip.paragraphs[0]}</p>
-                        <p>{trips.previousTrip.paragraphs[1]}</p>
-                        <p>{trips.previousTrip.paragraphs[2]}</p>
+                        <div className={'prose prose-stone lg:prose-lg mx-auto mt-8 md:mt-18 prose-img:m-auto prose-img:rounded'}>
+                            <PortableText
+                                value={content[`travel-old-trip`]}
+                                components={ptComponents}
+                            />
+                        </div>
                     </div>
+                    {/*todo: fix styling for aboard hoptoads*/}
+                    {/*<AboardHoptoadCard/>*/}
                     <h5 className={'mx-auto text-center text-gray-500 mt-2'}>Country List</h5>
                     <div className={'w-80 h-80 mx-auto rounded border overflow-y-scroll shadow'}>
                         <CountryList />
@@ -267,3 +273,23 @@ const Travel = () => {
 };
 
 export default Travel;
+
+export async function getStaticProps(context) {
+    const data = await sanity.fetch(`
+        *[identifier in ["travel-current-trip", "travel-old-trip", "travel-current-trip-main", "travel-current-trip-sub", "travel-old-trip-main", "travel-old-trip-sub"]]
+        `)
+
+    const headers = {}
+    const content = {}
+
+    data.filter(d => d._type === 'headers').forEach(h => headers[h.identifier] = h.header)
+    data.filter(d => d._type === 'content').forEach(c => content[c.identifier] = c.body)
+
+    return {
+        props: {
+            headers,
+            content
+        },
+        revalidate: 60
+    }
+}

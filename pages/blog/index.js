@@ -42,7 +42,8 @@ const MonthPicker = ({endDate, setPw, setDateRange, maxDate}) => {
     );
 };
 
-const Blog = ({blogPosts = []}) => {
+const Blog = ({headers, content, blogPosts = []}) => {
+    // console.log('headers', headers, 'content', content)
 
     const { title, subtitle, oneSecondEverydayVideos } = blog
     // const newestOneSecondEveryDayVideoDate = oneSecondEverydayVideos.at(-1).date
@@ -169,10 +170,8 @@ const Blog = ({blogPosts = []}) => {
 
                     {/*Page title and subtitle*/}
                     <div className="text-center">
-                        <h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">{title}</h2>
-                        <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
-                            {subtitle}
-                        </p>
+                        <h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">{headers["blog-main"]}</h2>
+                        <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">{headers["blog-sub"]}</p>
                     </div>
 
                     {/*Blog posts date picker*/}
@@ -371,26 +370,47 @@ const Blog = ({blogPosts = []}) => {
     );
 }
 
-export async function getServerSideProps(context) {
-    const blogPosts = await sanity.fetch(`
-        *[_type == 'post'] | order(date desc) {
-          id,
-          title,
-          date,
-          type,
-          content,
-          htmlContent,
-          location,
-          "photos": *[_type == "photo" && references(^._id)]{id, src, height, width, alt}
-        }[0...24]
+// export async function getServerSideProps(context) {
+//     const blogPosts = await sanity.fetch(`
+//         *[_type == 'post'] | order(date desc) {
+//           id,
+//           title,
+//           date,
+//           type,
+//           content,
+//           htmlContent,
+//           location,
+//           "photos": *[_type == "photo" && references(^._id)]{id, src, height, width, alt}
+//         }[0...24]
+//         `)
+//
+//     return {
+//         props: {
+//             blogPosts: []
+//         }
+//     }
+//
+// }
+
+export async function getStaticProps(context) {
+    const data = await sanity.fetch(`
+        *[identifier in ["blog-main", "blog-sub"]]
         `)
+
+    const headers = {}
+    const content = {}
+
+    data.filter(d => d._type === 'headers').forEach(h => headers[h.identifier] = h.header)
+    data.filter(d => d._type === 'content').forEach(c => content[c.identifier] = c.body)
 
     return {
         props: {
-            blogPosts: []
-        }
+            headers,
+            content,
+            blogPosts: []  // this is needed to prevent infinite useEffect loop, after removing getServerSideProps (???)
+        },
+        revalidate: 60
     }
-
 }
 
 export default Blog;
