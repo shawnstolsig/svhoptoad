@@ -17,7 +17,7 @@ import { boats } from "../../content/boat"
 import Gallery from "../../components/gallery"
 import * as ga from '../../lib/google-analytics'
 import sanity from "../../lib/sanity";
-import {ptComponents} from "../../lib/portable-text";
+import {urlFor,ptComponents} from "../../lib/portable-text";
 
 function BoatSelector({ boat, setBoat }) {
     // const router = useRouter()
@@ -123,7 +123,7 @@ function BoatGear({gear}){
 
             {/*Gear accordions*/}
             <div className="border-t divide-y divide-gray-200">
-                {gear.map(({type, name, description, url, image}) => (
+                {gear.map(({type, name, description, url, mainImage}) => (
                     <Disclosure as="div" key={type}>
                         {({ open }) => (
                             <>
@@ -154,7 +154,7 @@ function BoatGear({gear}){
                                 </h3>
                                 <Disclosure.Panel as="div" className={"mx-auto"}>
                                     <div className="flex justify-center p-2">
-                                       <Image src={image} className={'rounded'} height={300} width={300} objectFit={'contain'}/>
+                                       <Image src={urlFor(mainImage).url()} className={'rounded'} height={300} width={300} objectFit={'contain'}/>
                                         <div className={'flex flex-col justify-center ml-4'}>
                                             <h4 className="text-xl font-bold mt-0">{name}</h4>
                                             <p>
@@ -177,18 +177,23 @@ function BoatGear({gear}){
     )
 }
 
-function BoatDetails({boat, headers, content, gear}){
+function BoatDetails({boat, headers, content, gear, images}){
     const {
         header,
         href,
         description,
         photos,
-        gallery,
+        // gallery,
         years: {
             start,
             end
         }
     } = boat
+    const gallery = Object.values(images).filter(i => !i.identifier.includes('main') && i.identifier.includes(href)).map(i => ({
+        title: i.caption,
+        subtitle: i.location,
+        source: urlFor(i.mainImage).url()
+    }))
     return (
         <div className="bg-white overflow-hidden mt-4">
             <div className="relative max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
@@ -240,8 +245,9 @@ function BoatDetails({boat, headers, content, gear}){
                                 {/*<div className="aspect-w-12 aspect-h-7 lg:aspect-none">*/}
                                     <img
                                         className="rounded-lg shadow-lg object-cover object-center"
-                                        src={photos[0].url}
-                                        alt={photos[0].alt}
+                                        // src={photos[0].url}
+                                        src={urlFor(images[`boat-${href}-main`].mainImage).url()}
+                                        alt={images[`boat-${href}-main`].caption}
                                         width={1184}
                                         height={1376}
                                     />
@@ -260,7 +266,7 @@ function BoatDetails({boat, headers, content, gear}){
                                 </div>
                                 <figcaption className="mt-3 flex text-sm text-gray-500">
                                     <CameraIcon className="flex-none w-5 h-5 text-gray-400" aria-hidden="true" />
-                                    <span className="ml-2">{photos[0].title}</span>
+                                    <span className="ml-2">{images[`boat-${href}-main`].caption}</span>
                                 </figcaption>
                             </figure>
                         </div>
@@ -277,7 +283,7 @@ function BoatDetails({boat, headers, content, gear}){
             </div>
 
             {/*Gallery*/}
-            {gallery && <Gallery files={gallery} className={'px-4'}/>}
+            {gallery.length > 0 && <Gallery files={gallery} className={'px-4'}/>}
 
             {/*Boat specs*/}
             <div className={`max-w-xl mx-auto my-4`}>
@@ -292,8 +298,8 @@ function BoatDetails({boat, headers, content, gear}){
     )
 }
 
-function Boat({headers, content, gear}){
-    // console.log('headers', headers, 'content', content, 'gear', gear)
+function Boat({headers, content, gear, images}){
+    console.log('headers', headers, 'content', content, 'gear', gear, 'images', images)
     const router = useRouter()
     const [boat, setBoat] = useState(router.query.boat ? router.query.boat : boats[0].href)
     console.log(boat)
@@ -304,16 +310,22 @@ function Boat({headers, content, gear}){
             </Head>
             <div className={'mt-3'}>
                 <BoatSelector boat={boat} setBoat={setBoat} />
-                <BoatDetails boat={boats.find(({ href }) => href === boat)} headers={headers} content={content} gear={gear}/>
+                <BoatDetails boat={boats.find(({ href }) => href === boat)} headers={headers} content={content} gear={gear} images={images} />
             </div>
         </>
     );
 }
 
 export async function getStaticProps(context) {
-    const [gear, data] = await Promise.all([
+    const [gear, data, pics] = await Promise.all([
         sanity.fetch(`
-        *[_type == 'gear'] | order(type asc)
+        *[_type == 'gear'] | order(type asc){
+          type,
+          name,
+          "mainImage": mainImage.asset->,
+          description,
+          url
+        }
         `),
         sanity.fetch(`
         *[identifier in [
@@ -330,20 +342,31 @@ export async function getStaticProps(context) {
             "boat-sanjuan23-main",
             "boat-sanjuan23-sub",
             ]]
+        `),
+        sanity.fetch(`
+        *[_type == 'images' && identifier match "boat" ] {
+          identifier,
+          caption,
+          "mainImage": mainImage.asset->,
+          location
+        }
         `)
     ])
 
     const headers = {}
     const content = {}
+    const images = {}
 
     data.filter(d => d._type === 'headers').forEach(h => headers[h.identifier] = h.header)
     data.filter(d => d._type === 'content').forEach(c => content[c.identifier] = c.body)
+    pics.forEach(p => images[p.identifier] = p)
 
     return {
         props: {
             gear,
             headers,
-            content
+            content,
+            images
         },
         revalidate: 60
     }

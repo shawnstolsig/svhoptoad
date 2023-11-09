@@ -23,8 +23,8 @@ function NavButton({path, title}){
     )
 }
 
-export default function Home({headers, content}) {
-    // console.log('headers', headers, 'content', content)
+export default function Home({headers, content, images}) {
+    // console.log('headers', headers, 'content', content, 'images', images)
     const {visited} = useContext(VisitedContext)
 
     return (
@@ -67,8 +67,8 @@ export default function Home({headers, content}) {
                         <div
                             className="relative w-full h-64 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
                             <img
-                                className="absolute inset-0 w-full h-full object-cover"
-                                src={intro.sonnyAndMargiePhoto}
+                                className="absolute inset-0 w-full h-full object-cover rounded"
+                                src={urlFor(images[0].mainImage).url()}
                                 alt=""
                             />
                         </div>
@@ -90,9 +90,20 @@ export default function Home({headers, content}) {
 
 
 export async function getStaticProps(context) {
-    const data = await sanity.fetch(`
+
+    const [ data, images ] = await Promise.all([
+        sanity.fetch(`
         *[identifier in ["homepage", "home-main", "home-sub"]]
+        `),
+        sanity.fetch(`
+        *[_type == 'images' && identifier in ["homepage"]] {
+          identifier,
+          caption,
+          "mainImage": mainImage.asset->,
+          location
+        }
         `)
+    ])
 
     const headers = {}
     const content = {}
@@ -103,7 +114,8 @@ export async function getStaticProps(context) {
     return {
         props: {
             headers,
-            content
+            content,
+            images
         },
         revalidate: 60
     }
