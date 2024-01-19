@@ -154,7 +154,8 @@ function BoatGear({gear}){
                                 </h3>
                                 <Disclosure.Panel as="div" className={"mx-auto"}>
                                     <div className="flex justify-center p-2">
-                                       <Image src={urlFor(mainImage).url()} className={'rounded'} height={300} width={300} objectFit={'contain'}/>
+                                        {mainImage && <Image src={urlFor(mainImage).url()} className={'rounded'} height={300}
+                                                width={300} objectFit={'contain'}/>}
                                         <div className={'flex flex-col justify-center ml-4'}>
                                             <h4 className="text-xl font-bold mt-0">{name}</h4>
                                             <p>
@@ -299,10 +300,10 @@ function BoatDetails({boat, headers, content, gear, images}){
 }
 
 function Boat({headers, content, gear, images}){
-    console.log('headers', headers, 'content', content, 'gear', gear, 'images', images)
+    // console.log('headers', headers, 'content', content, 'gear', gear, 'images', images)
+    // console.log(gear)
     const router = useRouter()
     const [boat, setBoat] = useState(router.query.boat ? router.query.boat : boats[0].href)
-    console.log(boat)
     return (
         <>
             <Head>
