@@ -13,7 +13,7 @@ import {urlFor,ptComponents} from "../lib/portable-text";
 
 function NavButton({path, title}){
     return (
-        <div className="rounded-md shadow ml-2">
+        <div className="rounded-md shadow m-2">
             <Link href={path}>
                 <a className="w-full flex items-center justify-center px-4 py-1.5 border border-transparent text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 md:py-2 md:text-lg md:px-5">
                     {title}
@@ -50,7 +50,7 @@ export default function Home({headers, content, images}) {
                                         components={ptComponents}
                                     />
                                 </div>
-                                <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
+                                <div className="mt-2 sm:mt-6 md:mt-10 flex flex-wrap justify-center lg:justify-start">
                                     {
                                         [
                                             { path: '/blog', title: 'Blog'},
